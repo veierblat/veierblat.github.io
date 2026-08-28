@@ -42,7 +42,7 @@ const campings = [
     url: "https://www.ashburtondc.govt.nz/community-facilities/facilities%2C-venues-and-room-bookings/council-campgrounds",
 
     guideNumber: 64,
-    guidePage: null
+    guidePage: 58
   },
 
 
@@ -68,7 +68,7 @@ const campings = [
     url: "https://www.doc.govt.nz/",
 
     guideNumber: 67,
-    guidePage: null
+    guidePage: 61
   },
 
 
@@ -93,7 +93,8 @@ const campings = [
 
     url: "https://lakesedgeholidaypark.co.nz/",
 
-    guidePage: null
+    guideNumber: 71,
+    guidePage: 64
   },
 
 
@@ -119,7 +120,8 @@ const campings = [
     url:
       "https://www.mackenzie.govt.nz/services/parks-venues-and-recreation/camping",
 
-    guidePage: null
+    guideNumber: 72,
+    guidePage: 66
   },
 
 
@@ -147,7 +149,8 @@ const campings = [
     url:
       "https://www.doc.govt.nz/parks-and-recreation/places-to-go/canterbury/places/aoraki-mount-cook-national-park/things-to-do/white-horse-hill-campground/",
 
-    guidePage: null
+    guideNumber: 76,
+    guidePage: 72
   },
 
 
@@ -173,7 +176,8 @@ const campings = [
     url:
       "https://top10.co.nz/park/omarama-top-10-holiday-park/",
 
-    guidePage: null
+    guideNumber: 121,
+    guidePage: 101
   },
 
 
@@ -198,7 +202,8 @@ const campings = [
 
     url: "https://www.camp.co.nz/",
 
-    guidePage: null
+    guideNumber: 244,
+    guidePage: 175
   },
 
 
@@ -252,7 +257,8 @@ const campings = [
     url:
       "https://www.doc.govt.nz/parks-and-recreation/places-to-go/otago/places/mount-aspiring-national-park/things-to-do/campsites/cameron-flat-campsite/",
 
-    guidePage: null
+    guideNumber: 259,
+    guidePage: 189
   },
 
 
@@ -278,7 +284,7 @@ const campings = [
     url: "https://www.fghp.co.nz/",
 
     guideNumber: 273,
-    guidePage: null
+    guidePage: 200
   },
 
 
@@ -303,7 +309,8 @@ const campings = [
 
     url: "https://rainforest.nz/",
 
-    guidePage: null
+    guideNumber: 274,
+    guidePage: 203
   },
 
 
@@ -328,7 +335,8 @@ const campings = [
 
     url: "https://www.pjl.nz/",
 
-    guidePage: null
+    guideNumber: 282,
+    guidePage: 214
   },
 
 
@@ -353,7 +361,8 @@ const campings = [
 
     url: "https://www.murchisonmotorhomepark.co.nz/",
 
-    guidePage: null
+    guideNumber: 393,
+    guidePage: 270
   },
 
 
@@ -379,7 +388,8 @@ const campings = [
     url:
       "https://www.visitmurchison.nz/riverside-holiday-park.html",
 
-    guidePage: null
+    guideNumber: 392,
+    guidePage: 270
   },
 
 
@@ -429,7 +439,8 @@ const campings = [
 
     url: "https://kaiteriteri.co.nz/",
 
-    guidePage: null
+    guideNumber: 424,
+    guidePage: 280
   },
 
 
@@ -454,7 +465,8 @@ const campings = [
 
     url: "https://www.havelockholidaypark.kiwi/",
 
-    guidePage: null
+    guideNumber: 458,
+    guidePage: 308
   },
 
 
@@ -505,7 +517,8 @@ const campings = [
     url:
       "https://www.southbrightonholidaypark.co.nz/",
 
-    guidePage: null
+    guideNumber: 33,
+    guidePage: 40
   }
 
 ];
