@@ -380,8 +380,6 @@ const campingIcon =
 
   });
 
-
-
 /*
  * Alle Campingplätze auf die Karte setzen
  */
@@ -390,10 +388,12 @@ campings.forEach(camp => {
 
 
   /*
-   * Popup für Campingplatz
+   * ----------------------------------------------------------
+   * POPUP FÜR CAMPINGPLATZ
+   * ----------------------------------------------------------
    */
 
-  const popup = `
+  let popup = `
 
     <div style="
       font-size:16px;
@@ -408,7 +408,7 @@ campings.forEach(camp => {
 
     <div>
 
-      ${camp.date}
+      📅 ${camp.date}
 
     </div>
 
@@ -422,32 +422,124 @@ campings.forEach(camp => {
 
     </div>
 
-
-    ${
-      camp.note
-
-      ? `
-
-        <div style="margin-top:8px;">
-
-          <b>Bemerkung</b>
-          <br>
-
-          ${camp.note}
-
-        </div>
-
-      `
-
-      : ""
-    }
-
   `;
 
 
 
   /*
-   * Camping-Marker erzeugen
+   * ----------------------------------------------------------
+   * TELEFONNUMMER
+   * ----------------------------------------------------------
+   *
+   * Wird nur angezeigt, wenn in campings.js
+   * das Feld "phone" vorhanden ist.
+   *
+   * Durch href="tel:..." kann die Nummer auf
+   * iPhone und anderen Smartphones direkt
+   * angetippt werden.
+   *
+   * ----------------------------------------------------------
+   */
+
+  if (camp.phone) {
+
+    const phoneLink =
+      camp.phone.replace(/\s/g, "");
+
+
+    popup += `
+
+      <div style="margin-top:8px;">
+
+        ☎️
+
+        <a href="tel:${phoneLink}">
+
+          ${camp.phone}
+
+        </a>
+
+      </div>
+
+    `;
+
+  }
+
+
+
+  /*
+   * ----------------------------------------------------------
+   * WEBSEITE
+   * ----------------------------------------------------------
+   *
+   * Wird nur angezeigt, wenn in campings.js
+   * ein "url"-Eintrag vorhanden ist.
+   *
+   * target="_blank"
+   * öffnet die Webseite in einem neuen Tab.
+   *
+   * ----------------------------------------------------------
+   */
+
+  if (camp.url) {
+
+    popup += `
+
+      <div style="margin-top:6px;">
+
+        🌐
+
+        <a
+          href="${camp.url}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+
+          Webseite des Campingplatzes
+
+        </a>
+
+      </div>
+
+    `;
+
+  }
+
+
+
+  /*
+   * ----------------------------------------------------------
+   * BEMERKUNG
+   * ----------------------------------------------------------
+   */
+
+  if (camp.note) {
+
+    popup += `
+
+      <div style="
+        margin-top:8px;
+        padding-top:6px;
+        border-top:1px solid #ccc;
+      ">
+
+        <b>Bemerkung</b>
+        <br>
+
+        ${camp.note}
+
+      </div>
+
+    `;
+
+  }
+
+
+
+  /*
+   * ----------------------------------------------------------
+   * CAMPING-MARKER ERZEUGEN
+   * ----------------------------------------------------------
    */
 
   L.marker(
@@ -473,7 +565,6 @@ campings.forEach(camp => {
   );
 
 });
-
 
 
 /*
