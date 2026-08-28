@@ -3,15 +3,16 @@
  * CAMPINGPLÄTZE – NEUSEELAND 2026
  * ============================================================
  *
- * Optionale Felder:
+ * Zusätzliche Angaben zum WoMo-Reiseführer:
  *
- * phone = Telefonnummer
- * url   = Webseite
- * note  = Bemerkung
+ * guideNumber = Campingnummer im Reiseführer
+ * guidePage   = Seite im Reiseführer
  *
- * Bei DOC-Campsites ist als Telefonnummer die Nummer des
- * zuständigen DOC Visitor Centres angegeben, da die Campsites
- * selbst keine Rezeption haben.
+ * guidePage ist zunächst überall null.
+ * Die Seitenzahlen können später einfach ergänzt werden.
+ *
+ * Hat ein Camping keine bekannte Campingnummer,
+ * wird guideNumber weggelassen.
  *
  * ============================================================
  */
@@ -38,7 +39,36 @@ const campings = [
 
     phone: "+64 3 302 9353",
 
-    url: "https://www.ashburtondc.govt.nz/community-facilities/facilities%2C-venues-and-room-bookings/council-campgrounds"
+    url: "https://www.ashburtondc.govt.nz/community-facilities/facilities%2C-venues-and-room-bookings/council-campgrounds",
+
+    guideNumber: 64,
+    guidePage: null
+  },
+
+
+  /*
+   * Backup zu Rakaia Gorge
+   *
+   * BUP = Backup
+   * WoMo-Reiseführer Nr. 67
+   */
+
+  {
+    name: "Peel Forest DOC Campsite",
+
+    date: "08.11.–09.11.2026",
+
+    lat: -43.897,
+    lon: 171.253,
+
+    facilities: "DOC Campsite",
+
+    note: "Backup für Rakaia Gorge Camp.",
+
+    url: "https://www.doc.govt.nz/",
+
+    guideNumber: 67,
+    guidePage: null
   },
 
 
@@ -61,7 +91,9 @@ const campings = [
 
     phone: "+64 3 680 6825",
 
-    url: "https://lakesedgeholidaypark.co.nz/"
+    url: "https://lakesedgeholidaypark.co.nz/",
+
+    guidePage: null
   },
 
 
@@ -82,11 +114,12 @@ const campings = [
 
     note:
       "Einfache Alternative bei Lake Tekapo. " +
-      "Keine verlässlich publizierte direkte " +
-      "Campingplatz-Telefonnummer.",
+      "Keine verlässlich publizierte direkte Campingplatz-Telefonnummer.",
 
     url:
-      "https://www.mackenzie.govt.nz/services/parks-venues-and-recreation/camping"
+      "https://www.mackenzie.govt.nz/services/parks-venues-and-recreation/camping",
+
+    guidePage: null
   },
 
 
@@ -112,7 +145,9 @@ const campings = [
     phone: "+64 3 435 1186",
 
     url:
-      "https://www.doc.govt.nz/parks-and-recreation/places-to-go/canterbury/places/aoraki-mount-cook-national-park/things-to-do/white-horse-hill-campground/"
+      "https://www.doc.govt.nz/parks-and-recreation/places-to-go/canterbury/places/aoraki-mount-cook-national-park/things-to-do/white-horse-hill-campground/",
+
+    guidePage: null
   },
 
 
@@ -136,7 +171,9 @@ const campings = [
     phone: "+64 3 438 9875",
 
     url:
-      "https://top10.co.nz/park/omarama-top-10-holiday-park/"
+      "https://top10.co.nz/park/omarama-top-10-holiday-park/",
+
+    guidePage: null
   },
 
 
@@ -159,7 +196,9 @@ const campings = [
 
     phone: "+64 3 442 9447",
 
-    url: "https://www.camp.co.nz/"
+    url: "https://www.camp.co.nz/",
+
+    guidePage: null
   },
 
 
@@ -183,7 +222,9 @@ const campings = [
     phone: "+64 3 443 7766",
 
     url:
-      "https://tasmanholidayparks.com/south-island/otago/wanaka/"
+      "https://tasmanholidayparks.com/south-island/otago/wanaka/",
+
+    guidePage: null
   },
 
 
@@ -209,13 +250,15 @@ const campings = [
     phone: "+64 3 443 7660",
 
     url:
-      "https://www.doc.govt.nz/parks-and-recreation/places-to-go/otago/places/mount-aspiring-national-park/things-to-do/campsites/cameron-flat-campsite/"
+      "https://www.doc.govt.nz/parks-and-recreation/places-to-go/otago/places/mount-aspiring-national-park/things-to-do/campsites/cameron-flat-campsite/",
+
+    guidePage: null
   },
 
 
   /*
    * ----------------------------------------------------------
-   * FOX GLACIER – OPTION 1
+   * FOX GLACIER
    * ----------------------------------------------------------
    */
 
@@ -232,13 +275,16 @@ const campings = [
 
     phone: "+64 3 751 0821",
 
-    url: "https://www.fghp.co.nz/"
+    url: "https://www.fghp.co.nz/",
+
+    guideNumber: 273,
+    guidePage: null
   },
 
 
   /*
    * ----------------------------------------------------------
-   * FRANZ JOSEF – OPTION 2
+   * FRANZ JOSEF – ALTERNATIVE
    * ----------------------------------------------------------
    */
 
@@ -255,7 +301,9 @@ const campings = [
 
     phone: "+64 3 752 0220",
 
-    url: "https://rainforest.nz/"
+    url: "https://rainforest.nz/",
+
+    guidePage: null
   },
 
 
@@ -278,7 +326,9 @@ const campings = [
 
     phone: "+64 3 755 8921",
 
-    url: "https://www.pjl.nz/"
+    url: "https://www.pjl.nz/",
+
+    guidePage: null
   },
 
 
@@ -301,7 +351,9 @@ const campings = [
 
     phone: "+64 27 539 9666",
 
-    url: "https://www.murchisonmotorhomepark.co.nz/"
+    url: "https://www.murchisonmotorhomepark.co.nz/",
+
+    guidePage: null
   },
 
 
@@ -320,14 +372,14 @@ const campings = [
 
     facilities: "RES, EL, DS, CW, WM, WC, HS",
 
-    note:
-      "Alternative; nach deiner Planung eventuell " +
-      "weniger Sandflies.",
+    note: "Alternative.",
 
     phone: "+64 3 523 9591",
 
     url:
-      "https://www.visitmurchison.nz/riverside-holiday-park.html"
+      "https://www.visitmurchison.nz/riverside-holiday-park.html",
+
+    guidePage: null
   },
 
 
@@ -350,7 +402,9 @@ const campings = [
 
     phone: "+64 3 527 8014",
 
-    url: "https://www.bethanypark.co.nz/"
+    url: "https://www.bethanypark.co.nz/",
+
+    guidePage: null
   },
 
 
@@ -373,7 +427,9 @@ const campings = [
 
     phone: "+64 3 527 8010",
 
-    url: "https://kaiteriteri.co.nz/"
+    url: "https://kaiteriteri.co.nz/",
+
+    guidePage: null
   },
 
 
@@ -396,7 +452,9 @@ const campings = [
 
     phone: "+64 3 574 2339",
 
-    url: "https://www.havelockholidaypark.kiwi/"
+    url: "https://www.havelockholidaypark.kiwi/",
+
+    guidePage: null
   },
 
 
@@ -419,7 +477,9 @@ const campings = [
 
     phone: "+64 3 574 2129",
 
-    url: "https://www.wavescampsite.co.nz/"
+    url: "https://www.wavescampsite.co.nz/",
+
+    guidePage: null
   },
 
 
@@ -443,7 +503,9 @@ const campings = [
     phone: "+64 3 388 9844",
 
     url:
-      "https://www.southbrightonholidaypark.co.nz/"
+      "https://www.southbrightonholidaypark.co.nz/",
+
+    guidePage: null
   }
 
 ];
