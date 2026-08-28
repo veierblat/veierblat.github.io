@@ -103,7 +103,7 @@ const activities = [
     distance: "ca. 2 km",
     duration: "ca. 1 h",
     note: ""
-  }
+  },
 
   // -------------------------
   // KAITERITERI
