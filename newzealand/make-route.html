@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
   <meta charset="UTF-8">
   <title>Neuseeland Route erzeugen</title>
@@ -19,22 +20,141 @@
 
 <script>
 
-const waypoints = [
-  [172.6362, -43.5321], // Christchurch
-  [171.6520, -43.5205], // Rakaia Gorge / Highbank
-  [170.4771, -44.0047], // Lake Tekapo
-  [170.0960, -43.7340], // Mount Cook
-  [169.9650, -44.4886], // Omarama
-  [168.6626, -45.0312], // Queenstown
-  [169.1321, -44.6967], // Wanaka
-  [169.2780, -44.1620], // Cameron Flat / Blue Pools
-  [170.0173, -43.4645], // Fox Glacier
-  [170.9665, -42.7174], // Hokitika
-  [172.3277, -41.8008], // Murchison
-  [173.0172, -41.0367], // Kaiteriteri
-  [173.7687, -41.2804], // Havelock
-  [172.6362, -43.5321]  // Christchurch
+/*
+ * Übernachtungsorte und tatsächlich für die
+ * Route verwendete Campingplätze.
+ *
+ * Bei mehreren Campingmöglichkeiten wird
+ * momentan jeweils die erste Wahl verwendet.
+ */
+
+const stops = [
+
+  {
+    place: "Christchurch",
+    camping: "Start Christchurch",
+    lon: 172.6362,
+    lat: -43.5321
+  },
+
+  {
+    place: "Rakaia Gorge / Highbank",
+    camping: "Rakaia Gorge Camp",
+    lon: 171.651,
+    lat: -43.519
+  },
+
+  {
+    place: "Lake Tekapo",
+    camping: "Lakes Edge Holiday Park",
+    lon: 170.46466,
+    lat: -44.00084
+  },
+
+  {
+    place: "Aoraki / Mount Cook",
+    camping: "DOC White Horse Hill Campground",
+    lon: 170.09244,
+    lat: -43.71819
+  },
+
+  {
+    place: "Omarama",
+    camping: "Omarama TOP 10 Holiday Park",
+    lon: 169.96226,
+    lat: -44.48776
+  },
+
+  {
+    place: "Queenstown",
+    camping: "Queenstown Holiday Park Creeksyde",
+    lon: 168.66007,
+    lat: -45.02553
+  },
+
+  {
+    place: "Wānaka",
+    camping: "Wānaka Tasman Holiday Park",
+    lon: 169.10950,
+    lat: -44.70514
+  },
+
+  {
+    place: "Blue Pools / Cameron Flat",
+    camping: "DOC Cameron Flat Campsite",
+    lon: 169.28729,
+    lat: -44.16122
+  },
+
+  {
+    place: "Fox Glacier",
+    camping: "Fox Glacier TOP 10 Holiday Park",
+    lon: 170.00806,
+    lat: -43.46476
+  },
+
+  {
+    place: "Hokitika",
+    camping: "Shining Star Beachfront Accommodation",
+    lon: 170.97370,
+    lat: -42.70817
+  },
+
+  {
+    place: "Murchison",
+    camping: "Murchison Motorhome Park",
+    lon: 172.39140,
+    lat: -41.75560
+  },
+
+  {
+    place: "Kaiteriteri",
+    camping: "Bethany Park",
+    lon: 173.00522,
+    lat: -41.03774
+  },
+
+  {
+    place: "Havelock",
+    camping: "Havelock Holiday Park",
+    lon: 173.76841,
+    lat: -41.27765
+  },
+
+  {
+    place: "Christchurch",
+    camping: "South Brighton Holiday Park",
+    lon: 172.73591,
+    lat: -43.53468
+  }
+
 ];
+
+
+/*
+ * Distanzen aus deiner Reiseplanung.
+ *
+ * Element 0 = Stop 0 → Stop 1
+ * Element 1 = Stop 1 → Stop 2
+ * usw.
+ */
+
+const distances = [
+   88,   // Christchurch → Rakaia
+  179,   // Rakaia → Tekapo
+  111,   // Tekapo → Mount Cook
+   94,   // Mount Cook → Omarama
+  170,   // Omarama → Queenstown
+   70,   // Queenstown → Wanaka
+  138,   // Wanaka → Blue Pools
+  190,   // Blue Pools → Fox Glacier
+  157,   // Fox Glacier → Hokitika
+  236,   // Hokitika → Murchison
+  138,   // Murchison → Kaiteriteri
+  133,   // Kaiteriteri → Havelock
+  350    // Havelock → Christchurch
+];
+
 
 document
   .getElementById("download")
@@ -43,85 +163,141 @@ document
     const status =
       document.getElementById("status");
 
-    status.textContent =
-      "Route wird berechnet …";
-
-
-    const coordinates =
-      waypoints
-        .map(p => p.join(","))
-        .join(";");
-
-
-    const url =
-      "https://router.project-osrm.org/route/v1/driving/" +
-      coordinates +
-      "?overview=full&geometries=geojson&steps=false";
-
+    const features = [];
 
     try {
 
-      const response = await fetch(url);
+      /*
+       * Jede Etappe einzeln von OSRM berechnen.
+       */
 
-      if (!response.ok) {
-        throw new Error(
-          "HTTP Fehler " + response.status
+      for (let i = 0; i < stops.length - 1; i++) {
+
+        const from = stops[i];
+        const to   = stops[i + 1];
+
+        status.textContent =
+          "Berechne Etappe " +
+          (i + 1) +
+          " von " +
+          (stops.length - 1) +
+          ": " +
+          from.place +
+          " → " +
+          to.place;
+
+
+        const coordinates =
+          `${from.lon},${from.lat};${to.lon},${to.lat}`;
+
+
+        const url =
+          "https://router.project-osrm.org/route/v1/driving/" +
+          coordinates +
+          "?overview=full&geometries=geojson&steps=false";
+
+
+        const response =
+          await fetch(url);
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            "HTTP Fehler " +
+            response.status +
+            " bei " +
+            from.place +
+            " → " +
+            to.place
+          );
+
+        }
+
+
+        const data =
+          await response.json();
+
+
+        if (
+          data.code !== "Ok" ||
+          !data.routes ||
+          !data.routes.length
+        ) {
+
+          throw new Error(
+            "OSRM konnte keine Route berechnen: " +
+            from.place +
+            " → " +
+            to.place
+          );
+
+        }
+
+
+        /*
+         * Eine GeoJSON-Feature pro Etappe.
+         */
+
+        features.push({
+
+          type: "Feature",
+
+          properties: {
+
+            from: from.place,
+            to: to.place,
+
+            fromCamping: from.camping,
+            toCamping: to.camping,
+
+            distance: distances[i],
+
+            /*
+             * Zusätzlich speichern wir zum Vergleich
+             * die von OSRM berechnete Distanz.
+             */
+
+            osrmDistance:
+              Math.round(
+                data.routes[0].distance / 1000
+              )
+
+          },
+
+          geometry:
+            data.routes[0].geometry
+
+        });
+
+
+        /*
+         * Öffentlichen OSRM-Server nicht mit
+         * Anfragen bombardieren.
+         */
+
+        await new Promise(
+          resolve => setTimeout(resolve, 500)
         );
-      }
 
-      const data = await response.json();
-
-
-      if (
-        data.code !== "Ok" ||
-        !data.routes ||
-        !data.routes.length
-      ) {
-        throw new Error(
-          "OSRM konnte keine Route berechnen."
-        );
       }
 
 
       /*
-       * Aus der OSRM-Antwort eine
-       * echte GeoJSON-Datei erzeugen.
+       * Alle 13 Etappen in eine GeoJSON-Datei.
        */
 
       const geojson = {
 
         type: "FeatureCollection",
 
-        features: [
-
-          {
-            type: "Feature",
-
-            properties: {
-              name: "Neuseeland 2026",
-              distance_km:
-                Math.round(
-                  data.routes[0].distance / 1000
-                ),
-
-              duration_hours:
-                Math.round(
-                  data.routes[0].duration /
-                  3600 * 10
-                ) / 10
-            },
-
-            geometry:
-              data.routes[0].geometry
-          }
-
-        ]
+        features: features
 
       };
 
 
       /*
-       * Datei herunterladen
+       * Datei erzeugen.
        */
 
       const blob =
@@ -134,8 +310,7 @@ document
             )
           ],
           {
-            type:
-              "application/geo+json"
+            type: "application/geo+json"
           }
         );
 
@@ -161,7 +336,7 @@ document
 
 
       status.textContent =
-        "Fertig – roadroute.geojson wurde erzeugt.";
+        "Fertig – 13 Etappen wurden erzeugt.";
 
     }
 
@@ -179,4 +354,5 @@ document
 </script>
 
 </body>
+
 </html>
