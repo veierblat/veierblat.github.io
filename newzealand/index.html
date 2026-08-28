@@ -424,7 +424,64 @@ campings.forEach(camp => {
 
   `;
 
-
+  /*
+   * ----------------------------------------------------------
+   * WOMO-REISEFÜHRER
+   * ----------------------------------------------------------
+   *
+   * guideNumber = Campingnummer im Reiseführer
+   * guidePage   = Seitennummer im Reiseführer
+   *
+   * Beide Angaben sind optional.
+   * ----------------------------------------------------------
+   */
+  
+  if (camp.guideNumber || camp.guidePage) {
+  
+    popup += `
+  
+      <div style="
+        margin-top:8px;
+        padding-top:6px;
+        border-top:1px solid #ccc;
+      ">
+  
+        <b>📖 WoMo-Reiseführer</b>
+  
+    `;
+  
+  
+    if (camp.guideNumber) {
+  
+      popup += `
+  
+        <br>
+        Camping Nr. ${camp.guideNumber}
+  
+      `;
+  
+    }
+  
+  
+    if (camp.guidePage) {
+  
+      popup += `
+  
+        <br>
+        Seite ${camp.guidePage}
+  
+      `;
+  
+    }
+  
+  
+    popup += `
+  
+      </div>
+  
+    `;
+  
+  }
 
   /*
    * ----------------------------------------------------------
