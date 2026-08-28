@@ -121,13 +121,20 @@
   });
 
 
-  const routeLine = L.polyline(
-    routeCoordinates,
-    {
-      weight: 4,
-      opacity: 0.8
-    }
-  ).addTo(map);
+fetch("./data/roadroute.geojson")
+  .then(response => response.json())
+  .then(data => {
+    const roadRoute = L.geoJSON(data, {
+      style: {
+        weight: 4,
+        opacity: 0.8
+      }
+    }).addTo(map);
+
+    map.fitBounds(roadRoute.getBounds(), {
+      padding: [30, 30]
+    });
+  });
 
 
   map.fitBounds(
