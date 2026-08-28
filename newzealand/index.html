@@ -1,17 +1,36 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
   <title>Neuseeland 2026</title>
 
+
+  <!--
+  ============================================================
+  LEAFLET CSS
+  ============================================================
+  -->
+
   <link
-  rel="stylesheet"
-  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
   >
 
+
+  <!--
+  ============================================================
+  SEITENLAYOUT
+  ============================================================
+  -->
+
   <style>
+
     html,
     body {
       margin: 0;
@@ -20,9 +39,15 @@
       height: 100%;
     }
 
+
     body {
       font-family: Arial, Helvetica, sans-serif;
     }
+
+
+    /*
+     * Karte über das gesamte Browserfenster
+     */
 
     #map {
       position: absolute;
@@ -32,6 +57,11 @@
       height: 100%;
     }
 
+
+    /*
+     * Titel oben links
+     */
+
     #title {
       position: absolute;
       top: 10px;
@@ -39,299 +69,1080 @@
       z-index: 1000;
 
       background: white;
+
       padding: 8px 14px;
+
       border-radius: 6px;
 
       font-size: 18px;
       font-weight: bold;
 
-      box-shadow: 0 1px 5px rgba(0,0,0,0.35);
+      box-shadow:
+        0 1px 5px rgba(0,0,0,0.35);
     }
+
   </style>
+
 </head>
+
+
 
 <body>
 
-<div id="map"></div>
-<div id="title">Neuseeland 2026</div>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!--
+============================================================
+KARTE
+============================================================
+-->
+
+<div id="map"></div>
+
+
+<!--
+============================================================
+TITEL
+============================================================
+-->
+
+<div id="title">
+  Neuseeland 2026
+</div>
+
+
+
+<!--
+============================================================
+JAVASCRIPT-DATEIEN LADEN
+============================================================
+
+Leaflet:
+  Bibliothek für die interaktive Karte
+
+route.js:
+  Reiseorte / Übernachtungsorte
+
+campings.js:
+  Campingplätze
+
+activities.js:
+  Wanderungen, Besichtigungen usw.
+============================================================
+-->
+
+<script
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
 <script src="./data/route.js"></script>
+
 <script src="./data/campings.js"></script>
+
 <script src="./data/activities.js"></script>
 
+
+
 <script>
-  const map = L.map("map");
-
-  L.tileLayer(
-    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-    {
-      maxZoom: 19,
-      attribution: "&copy; OpenStreetMap contributors"
-    }
-  ).addTo(map);
 
 
-  const routeCoordinates = [];
+/*
+ * ============================================================
+ * 1. KARTE ERZEUGEN
+ * ============================================================
+ */
+
+const map =
+  L.map("map");
 
 
-  tripStops.forEach((stop, index) => {
 
-    routeCoordinates.push([stop.lat, stop.lon]);
+/*
+ * ============================================================
+ * 2. OPENSTREETMAP ALS HINTERGRUNDKARTE
+ * ============================================================
+ */
 
-    let popup = `
-      <div style="font-size:16px;font-weight:bold;margin-bottom:6px;">
-        ${index + 1}. ${stop.name}
-      </div>
+L.tileLayer(
 
-      <div>
-        ${stop.date}
-        ${
-          stop.nights > 0
-          ? `<br><b>${stop.nights} Nacht${stop.nights === 1 ? "" : "e"}</b>`
-          : ""
-        }
-      </div>
-    `;
+  "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
 
+  {
+    maxZoom: 19,
 
-    if (stop.camping) {
-      popup += `
-        <div style="margin-top:10px;">
-          <b>Camping</b><br>
-          ${stop.camping}
-        </div>
-      `;
-    }
+    attribution:
+      "&copy; OpenStreetMap contributors"
+  }
+
+).addTo(map);
 
 
-    if (stop.notes) {
-      popup += `
-        <div style="margin-top:10px;">
-          <b>Programm / Bemerkungen</b><br>
-          ${stop.notes}
-        </div>
-      `;
-    }
+
+/*
+ * ============================================================
+ * 3. REISEORTE / ÜBERNACHTUNGSORTE
+ * ============================================================
+ *
+ * Die Daten kommen aus:
+ *
+ *     data/route.js
+ *
+ * Für jeden Eintrag in tripStops wird ein normaler
+ * Leaflet-Marker erzeugt.
+ *
+ * Im Popup erscheinen:
+ *
+ * - Nummer der Etappe
+ * - Ort
+ * - Datum
+ * - Anzahl der Nächte
+ * - Camping
+ * - Programm / Bemerkungen
+ *
+ * ============================================================
+ */
 
 
-    L.marker([stop.lat, stop.lon])
-      .addTo(map)
-      .bindPopup(popup, { maxWidth: 350 });
-
-  });
-
-const campingIcon = L.divIcon({
-  className: "",
-  html: `
-    <div style="
-      background:#238636;
-      width:30px;
-      height:30px;
-      border-radius:50%;
-      border:2px solid white;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:17px;
-      box-shadow:0 1px 5px rgba(0,0,0,0.5);
-    ">
-      ⛺
-    </div>
-  `,
-  iconSize: [30, 30],
-  iconAnchor: [15, 15],
-  popupAnchor: [0, -15]
-});
+tripStops.forEach((stop, index) => {
 
 
-campings.forEach(camp => {
+  /*
+   * Popup für den Reiseort erzeugen
+   */
 
-  const popup = `
+  let popup = `
+
     <div style="
       font-size:16px;
       font-weight:bold;
       margin-bottom:6px;
     ">
-      ⛺ ${camp.name}
+
+      ${index + 1}. ${stop.name}
+
     </div>
+
 
     <div>
-      ${camp.date}
+
+      ${stop.date}
+
+      ${
+        stop.nights > 0
+
+        ? `
+          <br>
+
+          <b>
+            ${stop.nights}
+            Nacht${stop.nights === 1 ? "" : "e"}
+          </b>
+        `
+
+        : ""
+      }
+
     </div>
 
-    <div style="margin-top:8px;">
-      <b>Ausstattung</b><br>
-      ${camp.facilities}
-    </div>
-
-    ${
-      camp.note
-      ? `
-        <div style="margin-top:8px;">
-          <b>Bemerkung</b><br>
-          ${camp.note}
-        </div>
-      `
-      : ""
-    }
   `;
 
 
+
+  /*
+   * Camping anzeigen,
+   * falls in route.js vorhanden
+   */
+
+  if (stop.camping) {
+
+    popup += `
+
+      <div style="margin-top:10px;">
+
+        <b>Camping</b>
+        <br>
+
+        ${stop.camping}
+
+      </div>
+
+    `;
+
+  }
+
+
+
+  /*
+   * Programm / Bemerkungen anzeigen,
+   * falls vorhanden
+   */
+
+  if (stop.notes) {
+
+    popup += `
+
+      <div style="margin-top:10px;">
+
+        <b>Programm / Bemerkungen</b>
+        <br>
+
+        ${stop.notes}
+
+      </div>
+
+    `;
+
+  }
+
+
+
+  /*
+   * Marker auf die Karte setzen
+   */
+
   L.marker(
-    [camp.lat, camp.lon],
-    {
-      icon: campingIcon
-    }
+    [stop.lat, stop.lon]
   )
+
   .addTo(map)
+
   .bindPopup(
     popup,
     {
-      maxWidth: 320
+      maxWidth: 350
     }
   );
 
 });
-  
-fetch("./data/roadroute.geojson")
-  .then(response => response.json())
-  .then(data => {
-
-    function formatTime(minutes) {
-      const hours = Math.floor(minutes / 60);
-      const mins = minutes % 60;
-
-      return `${hours} h ${String(mins).padStart(2, "0")} min`;
-    }
 
 
-    const roadRoute = L.geoJSON(data, {
 
-      style: {
-        weight: 5,
-        opacity: 0.8
-      },
-
-      onEachFeature: function(feature, layer) {
-
-        const p = feature.properties;
-
-        const distance = p.distance;
-
-        // Fahrzeit bei durchschnittlich 50 km/h
-        const drivingMinutes =
-          Math.round(distance / 50 * 60);
-
-        // 15 Minuten Pause pro Fahrstunde
-        const rawBreakMinutes =
-          drivingMinutes / 4;
-
-        // Pausen auf die nächsten 15 Minuten aufrunden
-        const breakMinutes =
-          Math.ceil(rawBreakMinutes / 15) * 15;
-
-        const totalMinutes =
-          drivingMinutes + breakMinutes;
+/*
+ * ============================================================
+ * 4. CAMPINGPLÄTZE
+ * ============================================================
+ *
+ * Die Campingdaten kommen aus:
+ *
+ *     data/campings.js
+ *
+ * Campingplätze erhalten einen grünen Marker
+ * mit einem Zelt-Symbol.
+ *
+ * ============================================================
+ */
 
 
-        const popup = `
+/*
+ * Eigenes Symbol für Campingplätze
+ */
 
-          <div style="
-            font-size:17px;
-            font-weight:bold;
-            margin-bottom:8px;
-          ">
-            ${p.from} → ${p.to}
-          </div>
-          
-          <div style="
-            margin-bottom:8px;
-            font-weight:bold;
-          ">
-            Fahrt am ${p.date}
-          </div>
-          
-          <div style="margin-bottom:8px;">
-            ${p.fromCamping}<br>
-            ↓<br>
-            ${p.toCamping}
-          </div>
+const campingIcon =
+  L.divIcon({
 
-          <div>
-            Distanz:
-            <b>${distance} km</b>
-          </div>
+    className: "",
 
-          <div>
-            Fahrzeit bei 50 km/h:
-            <b>${formatTime(drivingMinutes)}</b>
-          </div>
+    html: `
 
-          <div>
-            Pausen:
-            <b>${formatTime(breakMinutes)}</b>
-          </div>
+      <div style="
 
-          <div style="
-            margin-top:6px;
-            padding-top:6px;
-            border-top:1px solid #aaa;
-          ">
-            Total:
-            <b>${formatTime(totalMinutes)}</b>
-          </div>
+        background:#238636;
 
-        `;
+        width:30px;
+        height:30px;
 
+        border-radius:50%;
 
-        layer.bindPopup(popup, {
-          maxWidth: 350
-        });
+        border:2px solid white;
 
+        display:flex;
 
-        // Beim Darüberfahren Route hervorheben
+        align-items:center;
+        justify-content:center;
 
-        layer.on("mouseover", function() {
-          this.setStyle({
-            weight: 9
-          });
-        });
+        font-size:17px;
 
-        layer.on("mouseout", function() {
-          this.setStyle({
-            weight: 5
-          });
-        });
+        box-shadow:
+          0 1px 5px rgba(0,0,0,0.5);
 
-      }
+      ">
 
-    }).addTo(map);
+        ⛺
 
+      </div>
 
-    map.fitBounds(
-      roadRoute.getBounds(),
-      {
-        padding: [30, 30]
-      }
-    );
+    `,
 
-  })
-  .catch(error => {
-    console.error(
-      "Fehler beim Laden der Straßenroute:",
-      error
-    );
+    iconSize: [30, 30],
+
+    iconAnchor: [15, 15],
+
+    popupAnchor: [0, -15]
+
   });
 
 
-  map.fitBounds(
-    routeLine.getBounds(),
-    {
-      padding: [30, 30]
+
+/*
+ * Alle Campingplätze auf die Karte setzen
+ */
+
+campings.forEach(camp => {
+
+
+  /*
+   * Popup für Campingplatz
+   */
+
+  const popup = `
+
+    <div style="
+      font-size:16px;
+      font-weight:bold;
+      margin-bottom:6px;
+    ">
+
+      ⛺ ${camp.name}
+
+    </div>
+
+
+    <div>
+
+      ${camp.date}
+
+    </div>
+
+
+    <div style="margin-top:8px;">
+
+      <b>Ausstattung</b>
+      <br>
+
+      ${camp.facilities}
+
+    </div>
+
+
+    ${
+      camp.note
+
+      ? `
+
+        <div style="margin-top:8px;">
+
+          <b>Bemerkung</b>
+          <br>
+
+          ${camp.note}
+
+        </div>
+
+      `
+
+      : ""
     }
+
+  `;
+
+
+
+  /*
+   * Camping-Marker erzeugen
+   */
+
+  L.marker(
+
+    [camp.lat, camp.lon],
+
+    {
+      icon: campingIcon
+    }
+
+  )
+
+  .addTo(map)
+
+  .bindPopup(
+
+    popup,
+
+    {
+      maxWidth: 320
+    }
+
   );
+
+});
+
+
+
+/*
+ * ============================================================
+ * 5. AKTIVITÄTEN
+ * ============================================================
+ *
+ * Die Daten kommen aus:
+ *
+ *     data/activities.js
+ *
+ * Beispiele:
+ *
+ * - Wanderungen
+ * - Aussichtspunkte
+ * - Gondelfahrten
+ * - Bootsfahrten
+ * - Sehenswürdigkeiten
+ *
+ * Aktivitäten erhalten momentan einen
+ * orangefarbenen Marker mit ★.
+ *
+ * ============================================================
+ */
+
+
+/*
+ * Eigenes Symbol für Aktivitäten
+ */
+
+const activityIcon =
+  L.divIcon({
+
+    className: "",
+
+    html: `
+
+      <div style="
+
+        background:#e67e22;
+
+        width:30px;
+        height:30px;
+
+        border-radius:50%;
+
+        border:2px solid white;
+
+        display:flex;
+
+        align-items:center;
+        justify-content:center;
+
+        font-size:18px;
+
+        color:white;
+
+        box-shadow:
+          0 1px 5px rgba(0,0,0,0.5);
+
+      ">
+
+        ★
+
+      </div>
+
+    `,
+
+    iconSize: [30, 30],
+
+    iconAnchor: [15, 15],
+
+    popupAnchor: [0, -15]
+
+  });
+
+
+
+/*
+ * Alle Aktivitäten aus activities.js durchgehen
+ */
+
+activities.forEach(activity => {
+
+
+  /*
+   * Name der Aktivität
+   */
+
+  let popup = `
+
+    <div style="
+      font-size:17px;
+      font-weight:bold;
+      margin-bottom:7px;
+    ">
+
+      ★ ${activity.name}
+
+    </div>
+
+  `;
+
+
+
+  /*
+   * Ort
+   *
+   * Wird nur angezeigt,
+   * wenn "place" vorhanden ist.
+   */
+
+  if (activity.place) {
+
+    popup += `
+
+      <div>
+        ${activity.place}
+      </div>
+
+    `;
+
+  }
+
+
+
+  /*
+   * Datum
+   */
+
+  if (activity.date) {
+
+    popup += `
+
+      <div>
+        📅 ${activity.date}
+      </div>
+
+    `;
+
+  }
+
+
+
+  /*
+   * Art der Aktivität
+   *
+   * z.B. Wanderung, Besichtigung,
+   * Gondel, Tagesausflug ...
+   */
+
+  if (activity.type) {
+
+    popup += `
+
+      <div style="margin-top:7px;">
+
+        <b>Aktivität:</b>
+        ${activity.type}
+
+      </div>
+
+    `;
+
+  }
+
+
+
+  /*
+   * Distanz
+   *
+   * Besonders für Wanderungen interessant.
+   *
+   * Wenn in activities.js keine Distanz
+   * angegeben wurde, erscheint diese Zeile
+   * überhaupt nicht.
+   */
+
+  if (activity.distance) {
+
+    popup += `
+
+      <div>
+
+        <b>Distanz:</b>
+        ${activity.distance}
+
+      </div>
+
+    `;
+
+  }
+
+
+
+  /*
+   * Dauer der Aktivität
+   */
+
+  if (activity.duration) {
+
+    popup += `
+
+      <div>
+
+        <b>Dauer:</b>
+        ${activity.duration}
+
+      </div>
+
+    `;
+
+  }
+
+
+
+  /*
+   * Optionale Bemerkung
+   */
+
+  if (activity.note) {
+
+    popup += `
+
+      <div style="
+        margin-top:7px;
+        padding-top:6px;
+        border-top:1px solid #ccc;
+      ">
+
+        ${activity.note}
+
+      </div>
+
+    `;
+
+  }
+
+
+
+  /*
+   * Aktivitätsmarker erzeugen
+   */
+
+  L.marker(
+
+    [activity.lat, activity.lon],
+
+    {
+      icon: activityIcon
+    }
+
+  )
+
+  .addTo(map)
+
+  .bindPopup(
+
+    popup,
+
+    {
+      maxWidth: 320
+    }
+
+  );
+
+});
+
+
+
+/*
+ * ============================================================
+ * 6. STRASSENROUTE LADEN
+ * ============================================================
+ *
+ * Die tatsächliche Straßenroute liegt in:
+ *
+ *     data/roadroute.geojson
+ *
+ * Jede Etappe ist ein eigenes GeoJSON-Feature.
+ *
+ * Dadurch kann jede Fahrstrecke einzeln
+ * angeklickt werden.
+ *
+ * ============================================================
+ */
+
+
+fetch("./data/roadroute.geojson")
+
+  .then(response =>
+    response.json()
+  )
+
+  .then(data => {
+
+
+
+    /*
+     * --------------------------------------------------------
+     * Hilfsfunktion zur Darstellung einer Zeit
+     * --------------------------------------------------------
+     *
+     * Beispiel:
+     *
+     * 283 Minuten
+     *
+     * wird zu:
+     *
+     * 4 h 43 min
+     *
+     * --------------------------------------------------------
+     */
+
+    function formatTime(minutes) {
+
+      const hours =
+        Math.floor(minutes / 60);
+
+      const mins =
+        minutes % 60;
+
+
+      return (
+        `${hours} h ` +
+        `${String(mins).padStart(2, "0")} min`
+      );
+
+    }
+
+
+
+    /*
+     * --------------------------------------------------------
+     * GeoJSON-Straßenroute erzeugen
+     * --------------------------------------------------------
+     */
+
+    const roadRoute =
+      L.geoJSON(
+
+        data,
+
+        {
+
+
+          /*
+           * Darstellung der Route
+           */
+
+          style: {
+
+            weight: 5,
+
+            opacity: 0.8
+
+          },
+
+
+
+          /*
+           * Diese Funktion wird für jede einzelne
+           * Reiseetappe ausgeführt.
+           */
+
+          onEachFeature:
+            function(feature, layer) {
+
+
+              /*
+               * Eigenschaften dieser Etappe
+               */
+
+              const p =
+                feature.properties;
+
+
+              /*
+               * Geplante Distanz aus unserer
+               * roadroute.geojson
+               */
+
+              const distance =
+                p.distance;
+
+
+
+              /*
+               * ------------------------------------------------
+               * FAHRZEIT
+               * ------------------------------------------------
+               *
+               * Wir rechnen mit einer durchschnittlichen
+               * Geschwindigkeit von 50 km/h.
+               *
+               * Beispiel:
+               *
+               * 236 km / 50 km/h
+               * = 4,72 Stunden
+               * = ca. 4 h 43 min
+               *
+               * ------------------------------------------------
+               */
+
+              const drivingMinutes =
+                Math.round(
+                  distance / 50 * 60
+                );
+
+
+
+              /*
+               * ------------------------------------------------
+               * PAUSEN
+               * ------------------------------------------------
+               *
+               * Pro Fahrstunde rechnen wir
+               * 15 Minuten Pause.
+               *
+               * Anschließend wird die Pause auf die
+               * nächsten vollen 15 Minuten aufgerundet.
+               *
+               * Beispiel:
+               *
+               * berechnet: 71 Minuten
+               *
+               * ergibt:
+               *
+               * 75 Minuten = 1 h 15 min
+               *
+               * ------------------------------------------------
+               */
+
+              const rawBreakMinutes =
+                drivingMinutes / 4;
+
+
+              const breakMinutes =
+                Math.ceil(
+                  rawBreakMinutes / 15
+                ) * 15;
+
+
+
+              /*
+               * Gesamtzeit:
+               *
+               * Fahrzeit + Pausen
+               */
+
+              const totalMinutes =
+                drivingMinutes +
+                breakMinutes;
+
+
+
+              /*
+               * ------------------------------------------------
+               * POPUP FÜR DIE FAHRETAPPE
+               * ------------------------------------------------
+               */
+
+              const popup = `
+
+
+                <div style="
+                  font-size:17px;
+                  font-weight:bold;
+                  margin-bottom:8px;
+                ">
+
+                  ${p.from} → ${p.to}
+
+                </div>
+
+
+
+                <div style="
+                  margin-bottom:8px;
+                  font-weight:bold;
+                ">
+
+                  Fahrt am ${p.date}
+
+                </div>
+
+
+
+                <div style="
+                  margin-bottom:8px;
+                ">
+
+                  ${p.fromCamping}
+                  <br>
+
+                  ↓
+                  <br>
+
+                  ${p.toCamping}
+
+                </div>
+
+
+
+                <div>
+
+                  Distanz:
+                  <b>${distance} km</b>
+
+                </div>
+
+
+
+                <div>
+
+                  Fahrzeit bei 50 km/h:
+                  <b>
+                    ${formatTime(drivingMinutes)}
+                  </b>
+
+                </div>
+
+
+
+                <div>
+
+                  Pausen:
+                  <b>
+                    ${formatTime(breakMinutes)}
+                  </b>
+
+                </div>
+
+
+
+                <div style="
+                  margin-top:6px;
+                  padding-top:6px;
+                  border-top:1px solid #aaa;
+                ">
+
+                  Total:
+                  <b>
+                    ${formatTime(totalMinutes)}
+                  </b>
+
+                </div>
+
+              `;
+
+
+
+              /*
+               * Popup mit der Etappe verbinden
+               */
+
+              layer.bindPopup(
+
+                popup,
+
+                {
+                  maxWidth: 350
+                }
+
+              );
+
+
+
+              /*
+               * ------------------------------------------------
+               * ROUTE BEIM DARÜBERFAHREN HERVORHEBEN
+               * ------------------------------------------------
+               *
+               * Normal:
+               * Linienbreite 5
+               *
+               * Maus darüber:
+               * Linienbreite 9
+               *
+               * ------------------------------------------------
+               */
+
+              layer.on(
+
+                "mouseover",
+
+                function() {
+
+                  this.setStyle({
+                    weight: 9
+                  });
+
+                }
+
+              );
+
+
+              layer.on(
+
+                "mouseout",
+
+                function() {
+
+                  this.setStyle({
+                    weight: 5
+                  });
+
+                }
+
+              );
+
+            }
+
+        }
+
+      )
+
+      .addTo(map);
+
+
+
+    /*
+     * ========================================================
+     * KARTE AUTOMATISCH AUF DIE GESAMTE ROUTE ZOOMEN
+     * ========================================================
+     */
+
+    map.fitBounds(
+
+      roadRoute.getBounds(),
+
+      {
+        padding: [30, 30]
+      }
+
+    );
+
+  })
+
+
+
+  /*
+   * ==========================================================
+   * FEHLER BEIM LADEN DER ROUTE
+   * ==========================================================
+   *
+   * Falls roadroute.geojson nicht gefunden oder
+   * beschädigt ist, erscheint der Fehler in der
+   * Browser-Konsole.
+   *
+   * ==========================================================
+   */
+
+  .catch(error => {
+
+    console.error(
+
+      "Fehler beim Laden der Straßenroute:",
+
+      error
+
+    );
+
+  });
+
+
 </script>
 
+
 </body>
+
 </html>
