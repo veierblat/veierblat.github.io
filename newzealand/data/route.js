@@ -199,7 +199,7 @@ const tripStops = [
     date: "03.12.–05.12.2026",
     nights: 2,
     camping: `
-      <b>Tasman Holiday Park Christchurch</b><br>
+      <b>South Brighton Holiday Park</b><br>
       RES, EL, DS, CW, WC, HS
     `,
     notes: "1 Tag Christchurch, Gondel"
