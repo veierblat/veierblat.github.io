@@ -105,4 +105,21 @@ const activities = [
     note: ""
   }
 
+  // -------------------------
+  // KAITERITERI
+  // -------------------------
+
+  {
+    place: "Kaiteriteri",
+    name: "Abel Tasman Wanderung",
+    date: "29.11.2026",
+    lat: -41.037032,
+    lon: 173.017513,
+    type: "Wanderung / Aussicht",
+    distance: "ca. 11-12 km",
+    duration: "ca. 3-4 h",
+    note: "Aquataxi 9:00 op Bark Bay, Wanderung vun BarkBay op Anchorage, Aquataxi zeréck 16:00"
+  }
+
+  
 ];
