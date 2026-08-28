@@ -171,7 +171,7 @@ const tripStops = [
     `,
     notes: `
       Abel Tasman National Park<br>
-      AquaTaxi
+      AquaTaxi nach Bark Bay, Wanderung von BarkBay nach Anchorage, Aquataxi zurück
     `
   },
 
