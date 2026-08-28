@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Neuseeland 2026</title>
+
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    #map {
+      height: 100%;
+      width: 100%;
+    }
+
+    .title {
+      position: absolute;
+      top: 10px;
+      left: 50px;
+      z-index: 1000;
+      background: white;
+      padding: 8px 14px;
+      border-radius: 6px;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="title">Neuseeland 2026</div>
+  <div id="map"></div>
+
+  <!-- Leaflet JavaScript -->
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+  </script>
+
+  <script>
+
+    // Karte erzeugen
+    const map = L.map('map').setView([-44.2, 170.2], 6);
+
+    // OpenStreetMap
+    L.tileLayer(
+      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap contributors'
+      }
+    ).addTo(map);
+
+
+    // Einige erste Testpunkte
+
+    L.marker([-43.5321, 172.6362])
+      .addTo(map)
+      .bindPopup(
+        "<b>Christchurch</b><br>Start unserer Reise"
+      );
+
+    L.marker([-44.0047, 170.4771])
+      .addTo(map)
+      .bindPopup(
+        "<b>Lake Tekapo</b><br>2 Nächte"
+      );
+
+    L.marker([-43.7340, 170.0960])
+      .addTo(map)
+      .bindPopup(
+        "<b>Mount Cook</b><br>3 Nächte"
+      );
+
+    L.marker([-45.0312, 168.6626])
+      .addTo(map)
+      .bindPopup(
+        "<b>Queenstown</b>"
+      );
+
+    L.marker([-44.6967, 169.1321])
+      .addTo(map)
+      .bindPopup(
+        "<b>Wanaka</b>"
+      );
+
+  </script>
+
+</body>
+</html>
