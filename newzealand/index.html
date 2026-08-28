@@ -196,16 +196,124 @@ campings.forEach(camp => {
 fetch("./data/roadroute.geojson")
   .then(response => response.json())
   .then(data => {
+
+    function formatTime(minutes) {
+      const hours = Math.floor(minutes / 60);
+      const mins = minutes % 60;
+
+      return `${hours} h ${String(mins).padStart(2, "0")} min`;
+    }
+
+
     const roadRoute = L.geoJSON(data, {
+
       style: {
-        weight: 4,
+        weight: 5,
         opacity: 0.8
+      },
+
+      onEachFeature: function(feature, layer) {
+
+        const p = feature.properties;
+
+        const distance = p.distance;
+
+        // Fahrzeit bei durchschnittlich 50 km/h
+        const drivingMinutes =
+          Math.round(distance / 50 * 60);
+
+        // 15 Minuten Pause pro Fahrstunde
+        const rawBreakMinutes =
+          drivingMinutes / 4;
+
+        // Pausen auf die nächsten 15 Minuten aufrunden
+        const breakMinutes =
+          Math.ceil(rawBreakMinutes / 15) * 15;
+
+        const totalMinutes =
+          drivingMinutes + breakMinutes;
+
+
+        const popup = `
+
+          <div style="
+            font-size:17px;
+            font-weight:bold;
+            margin-bottom:8px;
+          ">
+            ${p.from} → ${p.to}
+          </div>
+
+          <div style="margin-bottom:8px;">
+            ${p.fromCamping}<br>
+            ↓<br>
+            ${p.toCamping}
+          </div>
+
+          <div>
+            Distanz:
+            <b>${distance} km</b>
+          </div>
+
+          <div>
+            Fahrzeit bei 50 km/h:
+            <b>${formatTime(drivingMinutes)}</b>
+          </div>
+
+          <div>
+            Pausen:
+            <b>${formatTime(breakMinutes)}</b>
+          </div>
+
+          <div style="
+            margin-top:6px;
+            padding-top:6px;
+            border-top:1px solid #aaa;
+          ">
+            Total:
+            <b>${formatTime(totalMinutes)}</b>
+          </div>
+
+        `;
+
+
+        layer.bindPopup(popup, {
+          maxWidth: 350
+        });
+
+
+        // Beim Darüberfahren Route hervorheben
+
+        layer.on("mouseover", function() {
+          this.setStyle({
+            weight: 9
+          });
+        });
+
+        layer.on("mouseout", function() {
+          this.setStyle({
+            weight: 5
+          });
+        });
+
       }
+
     }).addTo(map);
 
-    map.fitBounds(roadRoute.getBounds(), {
-      padding: [30, 30]
-    });
+
+    map.fitBounds(
+      roadRoute.getBounds(),
+      {
+        padding: [30, 30]
+      }
+    );
+
+  })
+  .catch(error => {
+    console.error(
+      "Fehler beim Laden der Straßenroute:",
+      error
+    );
   });
 
 
