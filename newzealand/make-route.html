@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Neuseeland Route erzeugen</title>
+</head>
+
+<body>
+
+<h1>Neuseeland Route erzeugen</h1>
+
+<p>
+  <button id="download">
+    roadroute.geojson erzeugen
+  </button>
+</p>
+
+<p id="status"></p>
+
+<script>
+
+const waypoints = [
+  [172.6362, -43.5321], // Christchurch
+  [171.6520, -43.5205], // Rakaia Gorge / Highbank
+  [170.4771, -44.0047], // Lake Tekapo
+  [170.0960, -43.7340], // Mount Cook
+  [169.9650, -44.4886], // Omarama
+  [168.6626, -45.0312], // Queenstown
+  [169.1321, -44.6967], // Wanaka
+  [169.2780, -44.1620], // Cameron Flat / Blue Pools
+  [170.0173, -43.4645], // Fox Glacier
+  [170.9665, -42.7174], // Hokitika
+  [172.3277, -41.8008], // Murchison
+  [173.0172, -41.0367], // Kaiteriteri
+  [173.7687, -41.2804], // Havelock
+  [172.6362, -43.5321]  // Christchurch
+];
+
+document
+  .getElementById("download")
+  .addEventListener("click", async () => {
+
+    const status =
+      document.getElementById("status");
+
+    status.textContent =
+      "Route wird berechnet …";
+
+
+    const coordinates =
+      waypoints
+        .map(p => p.join(","))
+        .join(";");
+
+
+    const url =
+      "https://router.project-osrm.org/route/v1/driving/" +
+      coordinates +
+      "?overview=full&geometries=geojson&steps=false";
+
+
+    try {
+
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error(
+          "HTTP Fehler " + response.status
+        );
+      }
+
+      const data = await response.json();
+
+
+      if (
+        data.code !== "Ok" ||
+        !data.routes ||
+        !data.routes.length
+      ) {
+        throw new Error(
+          "OSRM konnte keine Route berechnen."
+        );
+      }
+
+
+      /*
+       * Aus der OSRM-Antwort eine
+       * echte GeoJSON-Datei erzeugen.
+       */
+
+      const geojson = {
+
+        type: "FeatureCollection",
+
+        features: [
+
+          {
+            type: "Feature",
+
+            properties: {
+              name: "Neuseeland 2026",
+              distance_km:
+                Math.round(
+                  data.routes[0].distance / 1000
+                ),
+
+              duration_hours:
+                Math.round(
+                  data.routes[0].duration /
+                  3600 * 10
+                ) / 10
+            },
+
+            geometry:
+              data.routes[0].geometry
+          }
+
+        ]
+
+      };
+
+
+      /*
+       * Datei herunterladen
+       */
+
+      const blob =
+        new Blob(
+          [
+            JSON.stringify(
+              geojson,
+              null,
+              2
+            )
+          ],
+          {
+            type:
+              "application/geo+json"
+          }
+        );
+
+
+      const downloadURL =
+        URL.createObjectURL(blob);
+
+
+      const link =
+        document.createElement("a");
+
+      link.href = downloadURL;
+
+      link.download =
+        "roadroute.geojson";
+
+      link.click();
+
+
+      URL.revokeObjectURL(
+        downloadURL
+      );
+
+
+      status.textContent =
+        "Fertig – roadroute.geojson wurde erzeugt.";
+
+    }
+
+    catch (error) {
+
+      status.textContent =
+        "Fehler: " + error.message;
+
+      console.error(error);
+
+    }
+
+  });
+
+</script>
+
+</body>
+</html>
