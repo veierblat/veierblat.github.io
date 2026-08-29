@@ -65,7 +65,7 @@ const campings = [
 
     url: "https://www.doc.govt.nz/",
 
-    camperMateUrl: "",
+    camperMateUrl: "https://campermate.com/en/location/new-zealand/can/timaru/paid-campsites/peel-forest-campground/ab5ecdc5-7c5e-4434-937f-b2d2fe72ab70",
 
     guideNumber: 67,
     guidePage: 61
@@ -239,7 +239,7 @@ const campings = [
     url:
       "https://tasmanholidayparks.com/south-island/otago/wanaka/",
 
-    camperMateUrl: "",
+    camperMateUrl: "https://campermate.com/en/location/new-zealand/ota/wanaka/paid-campsites/tasman-holiday-parks-wanaka/ff0848a2-6142-4dd0-9417-186604222138",
 
     guidePage: null
   },
@@ -410,7 +410,7 @@ const campings = [
     url:
       "https://www.riversidemurchison.co.nz",
 
-    camperMateUrl: "",
+    camperMateUrl: "https://campermate.com/en/location/new-zealand/tas/nelson-tasman/paid-campsites/riverside-holiday-park-murchison/f4d17ff5-044a-487c-b6a2-b1f16f152233",
 
     guideNumber: 392,
     guidePage: 270
