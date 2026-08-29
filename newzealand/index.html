@@ -836,11 +836,63 @@ activities.forEach(activity => {
 
   }
 
+/*
+ * ----------------------------------------------------------
+ * REISEFÜHRER
+ * ----------------------------------------------------------
+ */
 
+if (activity.guidePage) {
+
+  popup += `
+
+    <div style="margin-top:7px;">
+
+      📖 <b>WoMo-Reiseführer:</b>
+      Seite ${activity.guidePage}
+
+    </div>
+
+  `;
+
+}
+
+
+/*
+ * ----------------------------------------------------------
+ * WEBSEITE DER AKTIVITÄT
+ * ----------------------------------------------------------
+ */
+
+if (activity.url) {
+
+  popup += `
+
+    <div style="margin-top:7px;">
+
+      🌐
+
+      <a
+        href="${activity.url}"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+
+        Webseite der Aktivität
+
+      </a>
+
+    </div>
+
+  `;
+
+}
 
   /*
-   * Optionale Bemerkung
-   */
+  * ----------------------------------------------------------
+  * Optionale Bemerkung
+  * ----------------------------------------------------------
+  */
 
   if (activity.note) {
 
