@@ -19,9 +19,9 @@ const tripStops = [
       <b>Rakaia Gorge Camp</b><br>
       First come, first served<br>
       CW, WC, HS, DS<br><br>
-      <b>Alternative:</b> BUP 67
+      <b>Alternativ Camping:</b> 67 Peel Forest DOC; WC, Kichen
     `,
-    notes: "Alternativ Camping: 67."
+    notes: ""
   },
 
   {
