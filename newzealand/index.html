@@ -562,7 +562,42 @@ campings.forEach(camp => {
 
   }
 
+/*
+ * ----------------------------------------------------------
+ * CAMPERMATE
+ * ----------------------------------------------------------
+ *
+ * Link zum Campingplatz in CamperMate.
+ *
+ * Wird nur angezeigt, wenn in campings.js
+ * camperMateUrl eingetragen wurde.
+ *
+ * ----------------------------------------------------------
+ */
 
+if (camp.camperMateUrl) {
+
+  popup += `
+
+    <div style="margin-top:6px;">
+
+      📍
+
+      <a
+        href="${camp.camperMateUrl}"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+
+        In CamperMate öffnen
+
+      </a>
+
+    </div>
+
+  `;
+
+}
 
   /*
    * ----------------------------------------------------------
