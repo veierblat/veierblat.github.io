@@ -145,7 +145,7 @@ const campings = [
     facilities: "CW, WC",
 
     note:
-      "DOC-Campsite. Telefon = Aoraki/Mount Cook " +
+      "DOC-Campsite. Telefong = Aoraki/Mount Cook " +
       "National Park Visitor Centre.",
 
     phone: "+64 3 435 1186",
