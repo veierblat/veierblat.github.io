@@ -102,8 +102,8 @@ const activities = [
 
     note: "Nach Ankunft am Cameron Flat Campsite",
 
-    url: "",
-    guidePage: null
+    url: "https://www.doc.govt.nz/parks-and-recreation/places-to-go/otago/places/mount-aspiring-national-park/things-to-do/tracks/blue-pools-track/",
+    guidePage: 190
   },
 
 
