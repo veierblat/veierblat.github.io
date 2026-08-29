@@ -153,7 +153,7 @@ const tripStops = [
       Beim Floss,vill Sandflies.<br><br>
 
     `,
-    notes: ""
+    notes: "Et kann een an de Floss plansche goen"
   },
 
   {
@@ -172,7 +172,7 @@ const tripStops = [
     `,
     notes: `
       Abel Tasman National Park<br>
-      AquaTaxi nach Bark Bay, Wanderung von BarkBay nach Anchorage, Aquataxi zurück
+      AquaTaxi op Bark Bay, Wanderung vun BarkBay op Anchorage, do den Aquataxi zeréck
     `
   },
 
