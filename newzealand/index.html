@@ -149,11 +149,35 @@ activities.js:
  * ============================================================
  * 1. KARTE ERZEUGEN
  * ============================================================
+ * Die Karte bekommt bereits eine Startposition.
+ * Dadurch bleibt die OpenStreetMap-Karte sichtbar,
+ * auch wenn später einmal eine Datendatei einen Fehler enthält.
+ * ============================================================
  */
 
-const map =
-  L.map("map");
+const map = L.map("map").setView(
+  [-43.8, 171.2],
+  6
+);
 
+
+/*
+ * ============================================================
+ * EBENEN
+ * ============================================================
+ *
+ * Jede Gruppe kann später über das Ebenen-Menü
+ * einzeln ein- oder ausgeschaltet werden.
+ * ============================================================
+ */
+
+const routeLayer = L.layerGroup().addTo(map);
+
+const tripStopLayer = L.layerGroup().addTo(map);
+
+const campingLayer = L.layerGroup().addTo(map);
+
+const activityLayer = L.layerGroup().addTo(map);
 
 
 /*
@@ -175,7 +199,32 @@ L.tileLayer(
 
 ).addTo(map);
 
+/*
+ * ============================================================
+ * EBENEN-MENÜ
+ * ============================================================
+ */
 
+const overlays = {
+
+  "🚐 Route": routeLayer,
+
+  "📍 Etappenorte": tripStopLayer,
+
+  "⛺ Campingplätze": campingLayer,
+
+  "★ Aktivitäten": activityLayer
+
+};
+
+
+L.control.layers(
+  null,
+  overlays,
+  {
+    collapsed: true
+  }
+).addTo(map);
 
 /*
  * ============================================================
@@ -303,7 +352,7 @@ tripStops.forEach((stop, index) => {
     [stop.lat, stop.lon]
   )
 
-  .addTo(map)
+  .addTo(tripStopLayer)
 
   .bindPopup(
     popup,
@@ -644,7 +693,7 @@ if (camp.camperMateUrl) {
 
   )
 
-  .addTo(map)
+  .addTo(campingLayer)
 
   .bindPopup(
 
@@ -963,7 +1012,7 @@ if (activity.url) {
 
   )
 
-  .addTo(map)
+  .addTo(activityLayer)
 
   .bindPopup(
 
@@ -1326,7 +1375,7 @@ fetch("./data/roadroute.geojson")
 
       )
 
-      .addTo(map);
+      .addTo(routeLayer);
 
 
 
