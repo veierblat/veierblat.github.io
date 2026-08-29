@@ -111,11 +111,12 @@ const campings = [
     lat: -43.93846,
     lon: 170.46692,
 
-    facilities: "Plumps WC",
+    facilities: "WC",
 
     note:
       "Ganz simpel. " +
-      "Keng Telefonnummer Keng Rezeptioun.",
+      "Keng Telefonnummer Keng Rezeptioun." +
+      "Schéi roueg beim Séi, mä Kräsi, keng Beem." ,
 
     url:
       "https://www.mackenzie.govt.nz/services/parks-venues-and-recreation/camping",
