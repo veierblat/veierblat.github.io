@@ -56,8 +56,8 @@ const campings = [
 
     date: "08.11.–09.11.2026",
 
-    lat: -43.897,
-    lon: 171.253,
+    lat: -43.888816,
+    lon: 171.265215,
 
     facilities: "DOC Campsite",
 
