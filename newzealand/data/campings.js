@@ -38,7 +38,7 @@ const campings = [
 
     url: "https://www.ashburtondc.govt.nz/community-facilities/facilities%2C-venues-and-room-bookings/council-campgrounds",
 
-    camperMateUrl: "",
+    camperMateUrl: "https://campermate.com/en/location/new-zealand/can/christchurch/paid-campsites/rakaia-gorge-camping-ground/7d726278-33c6-406d-bd48-602193f37a29",
 
     guideNumber: 64,
     guidePage: 58
@@ -375,7 +375,7 @@ const campings = [
 
     facilities: "RES, EL, DS, CW, WC, HS",
 
-    note: "Um Floss; Vill Sandflies!",
+    note: "Um Floss; Kann een dra goen. Vill Sandflies!",
 
     phone: "+64 27 539 9666",
 
@@ -403,7 +403,7 @@ const campings = [
 
     facilities: "RES, EL, DS, CW, WM, WC, HS",
 
-    note: "Alternative. Manner Sandflies",
+    note: "Um Floss. Kann een dra goen. Manner Sandflies",
 
     phone: "+64 3 523 9591",
 
