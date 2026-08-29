@@ -144,13 +144,14 @@ const tripStops = [
     date: "26.11.–28.11.2026",
     nights: 2,
     camping: `
-      <b>Murchison Motorhome Park</b><br>
-      RES, EL, DS, CW, WC, HS<br>
-      Nähe Fluss, möglicherweise mehr Sandflies.<br><br>
-
       <b>Alternative: Murchison Riverside Holiday Park</b><br>
       RES, EL, DS, CW, WM, WC, HS<br>
-      Wahrscheinlich weniger Sandflies.
+      Beim Floss, awer manner Sandflies.
+      
+      <b>Murchison Motorhome Park</b><br>
+      RES, EL, DS, CW, WC, HS<br>
+      Beim Floss,vill Sandflies.<br><br>
+
     `,
     notes: ""
   },
@@ -166,7 +167,7 @@ const tripStops = [
       ca. 700 m zum Strand, ruhiger<br>
       RES, EL, DS, CW, WC, HS, WM<br><br>
 
-      <b>Alternative: Kaiteriteri Recreation Reserve</b><br>
+      <b>Alternativ: Kaiteriteri Recreation Reserve</b><br>
       RES, EL, DS, CW, WC, HS, WM
     `,
     notes: `
@@ -185,8 +186,8 @@ const tripStops = [
       <b>Havelock Holiday Park</b><br>
       RES, EL, DS, CW, WC, HS<br><br>
 
-      <b>Alternative: Waves Campsite</b><br>
-      Ruhiger, große Wiese<br>
+      <b>Alternativ: Waves Campsite</b><br>
+      Méi roueg, grouss Wiss<br>
       RES eventuell per Mail, EL, DS, CW, WC, HS
     `,
     notes: "Marlborough Sounds"
@@ -202,6 +203,6 @@ const tripStops = [
       <b>South Brighton Holiday Park</b><br>
       RES, EL, DS, CW, WC, HS
     `,
-    notes: "1 Tag Christchurch, Gondel"
+    notes: "1 Dag Christchurch, Gondel"
   }
 ];
