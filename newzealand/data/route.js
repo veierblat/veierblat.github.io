@@ -21,7 +21,7 @@ const tripStops = [
       CW, WC, HS, DS<br><br>
       <b>Alternative:</b> BUP 67
     `,
-    notes: "Alternative nötig, falls Rakaia Gorge Camp voll ist."
+    notes: "Alternativ Camping: 67."
   },
 
   {
@@ -33,9 +33,9 @@ const tripStops = [
     camping: `
       <b>Lake's Edge Holiday Park Tekapo</b><br>
       EL, RES, HS, WM, DS<br><br>
-      <b>Alternative:</b><br>
-      Lake McGregor Campsite<br>
-      WC (Plumpsklo)
+      <b>Alternativ Camping:</b><br>
+      72 Lake McGregor Campsite<br>
+      just WC
     `,
     notes: ""
   },
