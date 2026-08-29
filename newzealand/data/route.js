@@ -164,10 +164,10 @@ const tripStops = [
     nights: 3,
     camping: `
       <b>Bethany Park</b><br>
-      ca. 700 m zum Strand, ruhiger<br>
+      ca. 700 m zum Strand, awer méi roueg<br>
       RES, EL, DS, CW, WC, HS, WM<br><br>
 
-      <b>Alternativ: Kaiteriteri Recreation Reserve</b><br>
+      <b>Alternativ Camping: Kaiteriteri Recreation Reserve</b><br>
       RES, EL, DS, CW, WC, HS, WM
     `,
     notes: `
