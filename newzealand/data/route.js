@@ -76,7 +76,7 @@ const tripStops = [
       <b>Creeksyde Holiday Park</b><br>
       RES, EL, DS, CW, WM, WC, HS
     `,
-    notes: "Gondel, Schiff, Tagesausflug nach Glenorchy"
+    notes: "Gondel, Schëff, Dagesausflug op Glenorchy"
   },
 
   {
@@ -102,7 +102,7 @@ const tripStops = [
       <b>DOC Cameron Flat Campsite</b><br>
       RES, WC (Plumpsklo)
     `,
-    notes: "Mittags ankommen, Blue Pools besuchen, am folgenden Morgen weiter."
+    notes: "Mëttes ukommen, Blue Pools besichen, Dag duerno weiderfueren."
   },
 
   {
@@ -119,8 +119,8 @@ const tripStops = [
       RES, EL, DS, CW, WM, WC, HS
     `,
     notes: `
-      Unterwegs Ship Creek.<br>
-      Lake Matheson und Ausflug zum Franz Josef Glacier.
+      Ënnerwee Ship Creek.<br>
+      Lake Matheson an Äusflug op den Franz Josef Glacier.
     `
   },
 
@@ -144,11 +144,11 @@ const tripStops = [
     date: "26.11.–28.11.2026",
     nights: 2,
     camping: `
-      <b>Alternative: Murchison Riverside Holiday Park</b><br>
+      <b>Camping: Murchison Riverside Holiday Park</b><br>
       RES, EL, DS, CW, WM, WC, HS<br>
       Beim Floss, awer manner Sandflies.
       
-      <b>Murchison Motorhome Park</b><br>
+      <b>Alternativ Murchison Motorhome Park</b><br>
       RES, EL, DS, CW, WC, HS<br>
       Beim Floss,vill Sandflies.<br><br>
 
