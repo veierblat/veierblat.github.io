@@ -71,6 +71,24 @@ const activities = [
     note: "Nach Ankunft am Cameron Flat Campsite"
   },
 
+  
+
+  // -------------------------
+  // ship creek
+  // -------------------------
+
+  {
+    place: "Ship Creek",
+    name: "Kahikatea Swamp Forest Walk",
+    date: "22.11.2026",
+    lat: -43.758282,
+    lon: 169.147283,
+    type: "Aussicht",
+    distance: "ca. 1 km",
+    duration: "ca. 20 min",
+    note: "Ass e Parking do"
+  },
+
 
   // -------------------------
   // FOX GLACIER
