@@ -5,8 +5,8 @@ const tripStops = [
     lon: 172.6362,
     date: "08.11.2026",
     nights: 0,
-    camping: "Start – Wohnmobilübernahme",
-    notes: "Start der Reise"
+    camping: "Start – WoMo siche goen",
+    notes: "A lass geet et"
   },
 
   {
