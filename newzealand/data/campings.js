@@ -375,7 +375,7 @@ const campings = [
 
     facilities: "RES, EL, DS, CW, WC, HS",
 
-    note: "Am Fluss; Sandflies möglich.",
+    note: "Um Floss; Vill Sandflies!",
 
     phone: "+64 27 539 9666",
 
@@ -403,12 +403,12 @@ const campings = [
 
     facilities: "RES, EL, DS, CW, WM, WC, HS",
 
-    note: "Alternative.",
+    note: "Alternative. Manner Sandflies",
 
     phone: "+64 3 523 9591",
 
     url:
-      "https://www.visitmurchison.nz/riverside-holiday-park.html",
+      "https://www.riversidemurchison.co.nz",
 
     camperMateUrl: "",
 
