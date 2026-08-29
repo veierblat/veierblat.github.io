@@ -16,28 +16,28 @@ const activities = [
 
     duration: "ca. 2–3 h",
 
-    note: "",
+    note: "Uewen: evtl Skyline Restaurant",
 
-    url: "",
-    guidePage: null
+    url: "https://queenstown.skyline.co.nz/things-to-do/queenstown-gondola/",
+    guidePage: 175
   },
 
   {
     place: "Queenstown",
-    name: "Ausflug nach Glenorchy",
+    name: "Ausflug op Glenorchy",
     date: "17.11.2026",
 
-    lat: -44.8506,
-    lon: 168.3880,
+    lat: -44.850022,
+    lon: 168.382371,
 
-    type: "Tagesausflug",
+    type: "Tagesausflug mat klenger Wanderung",
 
-    duration: "ganztägig",
+    duration: "Ganzen Dag",
 
-    note: "",
+    note: "46km bis dohinn. Borchure hei: https://www.doc.govt.nz/globalassets/documents/parks-and-recreation/tracks-and-walks/otago/head-of-lake-wakatipu.pdf. Do gëtt et och de Glenorchy Eco Retreat Camping",
 
-    url: "",
-    guidePage: null
+    url: "https://www.doc.govt.nz/parks-and-recreation/places-to-go/otago/places/glenorchy-area/",
+    guidePage: 177
   },
 
 
@@ -47,20 +47,20 @@ const activities = [
 
   {
     place: "Wānaka",
-    name: "Puzzling World",
+    name: "Puzzling World (oder Great Maze?)",
     date: "19.11.2026",
 
-    lat: -44.6960,
-    lon: 169.1660,
+    lat: -44.696210,
+    lon: 169.162159,
 
-    type: "Besichtigung",
+    type: "Themepark",
 
-    duration: "ca. 1,5–2 h",
+    duration: "ca. 2 h",
 
-    note: "",
+    note: " Do gëtt et och e Labyrinth",
 
-    url: "",
-    guidePage: null
+    url: "https://www.puzzlingworld.co.nz/",
+    guidePage: 184
   },
 
   {
@@ -76,10 +76,29 @@ const activities = [
     distance: "ca. 4,5 km",
     duration: "ca. 1,5–2 h",
 
-    note: "Alternative: Roys Peak Track",
+    note: "Am Uhrzeigersinn. Brochure hei: https://www.doc.govt.nz/globalassets/documents/parks-and-recreation/tracks-and-walks/otago/wanaka-outdoor-pursuits-brochure.pdf",
 
-    url: "",
-    guidePage: null
+    url: "https://www.doc.govt.nz/parks-and-recreation/places-to-go/otago/places/wanaka-area/",
+    guidePage: 184
+  },
+
+   {
+    place: "Wānaka",
+    name: "Diamond Lake Track",
+    date: "20.11.2026",
+
+    lat: -44.684,
+    lon: 169.162,
+
+    type: "Wanderung",
+
+    distance: "ca. 4,5 km",
+    duration: "ca. 1,5–2 h",
+
+    note: "Am Uhrzeigersinn. Brochure hei: https://www.doc.govt.nz/globalassets/documents/parks-and-recreation/tracks-and-walks/otago/wanaka-outdoor-pursuits-brochure.pdf",
+
+    url: "https://www.doc.govt.nz/parks-and-recreation/places-to-go/otago/places/wanaka-area/",
+    guidePage: 184
   },
 
 
@@ -100,7 +119,7 @@ const activities = [
     distance: "ca. 3 km",
     duration: "ca. 1–1,5 h",
 
-    note: "Nach Ankunft am Cameron Flat Campsite",
+    note: "Owes éier d'Sonn ënnergeet",
 
     url: "https://www.doc.govt.nz/parks-and-recreation/places-to-go/otago/places/mount-aspiring-national-park/things-to-do/tracks/blue-pools-track/",
     guidePage: 190
