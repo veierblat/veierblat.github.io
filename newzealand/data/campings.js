@@ -515,7 +515,7 @@ const campings = [
 
     facilities: "RES, EL, DS, CW, WC, HS",
 
-    note: "Ruhiger, große Wiese.",
+    note: "Méi roueg, grouss Wiese.",
 
     phone: "+64 3 574 2129",
 
