@@ -111,11 +111,11 @@ const campings = [
     lat: -43.93846,
     lon: 170.46692,
 
-    facilities: "WC",
+    facilities: "Plumps WC",
 
     note:
-      "Einfache Alternative bei Lake Tekapo. " +
-      "Keine verlässlich publizierte direkte Campingplatz-Telefonnummer.",
+      "Ganz simpel. " +
+      "Keng Telefonnummer Keng Rezeptioun.",
 
     url:
       "https://www.mackenzie.govt.nz/services/parks-venues-and-recreation/camping",
