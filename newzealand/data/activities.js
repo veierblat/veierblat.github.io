@@ -156,21 +156,21 @@ const activities = [
 
   {
     place: "Hokitika",
-    name: "Hokitika Gorge",
+    name: "Hokitika Gorge Walk",
     date: "25.11.2026",
 
-    lat: -42.945,
-    lon: 171.023,
+    lat: -42.956474,
+    lon: 171.019626,
 
     type: "Wanderung / Aussicht",
 
-    distance: "ca. 2 km",
+    distance: "1,6 km",
     duration: "ca. 1 h",
 
-    note: "",
+    note: "Türkis blot Waasser",
 
-    url: "",
-    guidePage: null
+    url: "https://www.doc.govt.nz/parks-and-recreation/places-to-go/west-coast/places/hokitika-gorge-scenic-reserve/things-to-do/tracks/hokitika-gorge-walk/",
+    guidePage: 215
   },
 
 
@@ -195,8 +195,8 @@ const activities = [
       "Aquataxi 9:00 op Bark Bay, Wanderung vun BarkBay " +
       "op Anchorage, Aquataxi zeréck 16:00",
 
-    url: "",
-    guidePage: null
+    url: "https://aquataxi.co.nz",
+    guidePage: 282
   }
 
 ];
