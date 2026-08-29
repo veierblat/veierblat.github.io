@@ -68,8 +68,8 @@ const activities = [
     name: "Mount Iron Track",
     date: "20.11.2026",
 
-    lat: -44.684,
-    lon: 169.162,
+    lat: -44.686123,
+    lon: 169.154879,
 
     type: "Wanderung",
 
@@ -78,7 +78,7 @@ const activities = [
 
     note: "Am Uhrzeigersinn. Brochure hei: https://www.doc.govt.nz/globalassets/documents/parks-and-recreation/tracks-and-walks/otago/wanaka-outdoor-pursuits-brochure.pdf",
 
-    url: "https://www.doc.govt.nz/parks-and-recreation/places-to-go/otago/places/wanaka-area/",
+    url: "https://www.doc.govt.nz/parks-and-recreation/places-to-go/otago/places/wanaka-area/things-to-do/mount-iron-track//",
     guidePage: 184
   },
 
@@ -87,18 +87,18 @@ const activities = [
     name: "Diamond Lake Track",
     date: "20.11.2026",
 
-    lat: -44.684,
-    lon: 169.162,
+    lat: -44.651101,
+    lon: 168.959395,
 
     type: "Wanderung",
 
-    distance: "ca. 4,5 km",
-    duration: "ca. 1,5–2 h",
+    distance: "ca. 2-7 km",
+    duration: "ca. 1-3 h",
 
-    note: "Am Uhrzeigersinn. Brochure hei: https://www.doc.govt.nz/globalassets/documents/parks-and-recreation/tracks-and-walks/otago/wanaka-outdoor-pursuits-brochure.pdf",
+    note: "Brochure hei: https://www.doc.govt.nz/globalassets/documents/parks-and-recreation/tracks-and-walks/otago/wanaka-outdoor-pursuits-brochure.pdf",
 
     url: "https://www.doc.govt.nz/parks-and-recreation/places-to-go/otago/places/wanaka-area/",
-    guidePage: 184
+    guidePage: 185
   },
 
 
@@ -111,8 +111,8 @@ const activities = [
     name: "Blue Pools Track",
     date: "21.11.2026",
 
-    lat: -44.164,
-    lon: 169.278,
+    lat: -44.160503,
+    lon: 169.287279,
 
     type: "Wanderung",
 
@@ -135,18 +135,18 @@ const activities = [
     name: "Lake Matheson",
     date: "23.11.2026",
 
-    lat: -43.443,
-    lon: 169.970,
+    lat: -43.448690,
+    lon: 169.969397,
 
     type: "Wanderung",
 
     distance: "ca. 4,4 km",
     duration: "ca. 1,5 h",
 
-    note: "",
+    note: "Entweder moies fréi oder owes spéit",
 
-    url: "",
-    guidePage: null
+    url: "https://www.doc.govt.nz/parks-and-recreation/places-to-go/west-coast/places/westland-tai-poutini-national-park/things-to-do/tracks/lake-matheson-te-ara-kairaumati-walk/",
+    guidePage: 201
   },
 
 
