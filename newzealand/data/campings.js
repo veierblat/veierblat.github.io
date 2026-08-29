@@ -61,7 +61,7 @@ const campings = [
 
     facilities: "DOC Campsite",
 
-    note: "Backup für Rakaia Gorge Camp.",
+    note: "Backup fir Rakaia Gorge Camp. Huet keng WebSäit",
 
     url: "https://www.doc.govt.nz/",
 
