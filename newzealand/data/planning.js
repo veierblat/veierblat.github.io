@@ -5,12 +5,12 @@
  *
  * Diese Datei wurde aus planning.html exportiert.
  *
- * Version 2
+ * Version 3
  *
  * ============================================================
  */
 
-const PLANNING_VERSION = 2;
+const PLANNING_VERSION = 3;
 
 const planning = [
   {
@@ -41,7 +41,7 @@ const planning = [
     "date": "Sun, 8 Nov 2026",
     "item1": "Pullman Airport Hotel check out",
     "item2": "AKL - CHR",
-    "item3": "Womo siche goen (27 Nuechten)",
+    "item3": "Womo siche goen, ab 10 Auer moies",
     "item4": "",
     "type": "travel"
   },
@@ -151,7 +151,7 @@ const planning = [
   },
   {
     "date": "Sat, 5 Dec 2026",
-    "item1": "Moies Womo ofginn",
+    "item1": "Moies Womo ofginn, bis 14:30",
     "item2": "CHR - AKL",
     "item3": "Pullman Airport Hotel check in",
     "item4": "",
