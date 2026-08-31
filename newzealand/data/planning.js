@@ -5,12 +5,12 @@
  *
  * Diese Datei wurde aus planning.html exportiert.
  *
- * Version 6
+ * Version 7
  *
  * ============================================================
  */
 
-const PLANNING_VERSION = 6;
+const PLANNING_VERSION = 7;
 
 const planning = [
   {
@@ -40,7 +40,7 @@ const planning = [
   {
     "date": "Sun, 8 Nov 2026",
     "item1": "Pullman Airport Hotel check out",
-    "item2": "AKL - 08:00 - 9:25 - CHC (NZ 523)",
+    "item2": "AKL 08:00 -> NZ523 -> CHC 9:25",
     "item3": "Womo siche goen, ab 10 Auer moies",
     "item4": "",
     "type": "travel"
@@ -152,7 +152,7 @@ const planning = [
   {
     "date": "Sat, 5 Dec 2026",
     "item1": "Moies Womo ofginn, bis 14:30",
-    "item2": "CHC - 17:05 - 18:30 AKL (NZ 578)",
+    "item2": "CHC 17:05 -> NZ578 -> AKL 18:30",
     "item3": "Pullman Airport Hotel check in",
     "item4": "",
     "type": "travel"
