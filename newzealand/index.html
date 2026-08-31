@@ -58,116 +58,126 @@
     }
 
 
-    /*
-     * ============================================================
-     * TITEL UND NAVIGATION
-     * ============================================================
-     *
-     * Die Leiste liegt über der Karte.
-     *
-     * Links:
-     *   Neuseeland Pia a Gil
-     *
-     * Rechts:
-     *   Link zur Reiseplanung
-     *
-     * ============================================================
-     */
+ /*
+ * ============================================================
+ * TITEL UND NAVIGATION
+ * ============================================================
+ *
+ * Die Leiste liegt über der Karte.
+ * Titel und beide Buttons haben dieselbe Höhe.
+ * ============================================================
+ */
 
     #topbar {
-
       position: absolute;
-
+    
       top: 10px;
       left: 55px;
-
+    
       z-index: 1000;
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 12px;
-
-    }
-
-
-    /*
-     * Titel
-     */
-
-    #title {
-
-      background: white;
-
-      padding: 8px 14px;
-
-      border-radius: 6px;
-
-      font-size: 18px;
-      font-weight: bold;
-
-      box-shadow:
-        0 1px 5px rgba(0,0,0,0.35);
-
-    }
-
-
-    /*
-     * Button zur Reiseplanung
-     */
-
-      .topbarButton {
+    
       display: flex;
       align-items: center;
     
+      gap: 12px;
+    }
+    
+    
+    /*
+     * ============================================================
+     * GEMEINSAME DARSTELLUNG
+     * ============================================================
+     *
+     * Titel und Navigationsbuttons bekommen dieselbe Höhe.
+     * ============================================================
+     */
+    
+    #title,
+    .topbarButton {
+      height: 46px;
+    
+      box-sizing: border-box;
+    
+      display: flex;
+      align-items: center;
+    
+      padding: 8px 14px;
+    
       background: white;
+    
+      border-radius: 6px;
+    
+      font-weight: bold;
+    
+      box-shadow:
+        0 1px 5px rgba(0,0,0,0.35);
+    
+      white-space: nowrap;
+    }
+    
+    
+    /*
+     * Titel etwas größer
+     */
+    
+    #title {
+      font-size: 18px;
+    }
+    
+    
+    /*
+     * Navigationsbuttons
+     */
+    
+    .topbarButton {
       color: #222;
     
-      padding: 8px 14px;
-    
-      border-radius: 6px;
+      font-size: 16px;
     
       text-decoration: none;
-    
-      font-size: 16px;
-      font-weight: bold;
-    
-      box-shadow:
-        0 1px 5px rgba(0,0,0,0.35);
-    
-      /*
-       * Alle Buttons bekommen exakt dieselbe Höhe.
-       */
-      min-height: 46px;
     }
-
-.topbarButton:hover {
-  background: #f0f0f0;
-}
-
-
+    
+    
     /*
-     * Auf kleinen Bildschirmen etwas kompakter
+     * Maus über einem Button
      */
-
+    
+    .topbarButton:hover {
+      background: #f0f0f0;
+    }
+    
+    
+    /*
+     * ============================================================
+     * KLEINE BILDSCHIRME
+     * ============================================================
+     */
+    
     @media (max-width: 600px) {
-
+    
       #topbar {
         gap: 6px;
       }
-
+    
+    
+      #title,
+      .topbarButton {
+        height: 40px;
+    
+        padding: 7px 9px;
+      }
+    
+    
       #title {
-        padding: 7px 9px;
         font-size: 14px;
       }
-
-      #planningButton {
-        padding: 7px 9px;
+    
+    
+      .topbarButton {
         font-size: 14px;
       }
-
-    }
+    
+    }              
 
   </style>
 
