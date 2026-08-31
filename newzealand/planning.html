@@ -221,6 +221,62 @@
 
     /*
      * ============================================================
+     * PLANUNGSFELDER
+     * ============================================================
+     *
+     * Jedes Reisetages-Feld besitzt immer vier mögliche
+     * Einträge: item1 bis item4.
+     *
+     * Leere Einträge sind in der normalen Ansicht unsichtbar.
+     * Im Editiermodus werden sie sichtbar.
+     * ============================================================
+     */
+
+    .planning-item:empty {
+      display: none;
+    }
+
+
+    /*
+     * Im Editiermodus werden auch leere Felder angezeigt.
+     */
+
+    body.editing .planning-item {
+      display: block;
+      min-height: 28px;
+      margin-bottom: 4px;
+      padding: 4px 6px;
+
+      background: #fffde7;
+
+      outline: 1px dashed #c7a900;
+      outline-offset: -1px;
+
+      cursor: text;
+    }
+
+
+    /*
+     * Letztes Planungsfeld ohne zusätzlichen Abstand.
+     */
+
+    body.editing .planning-item:last-child {
+      margin-bottom: 0;
+    }
+
+
+    /*
+     * Aktuell ausgewähltes Planungsfeld
+     */
+
+    body.editing .planning-item:focus {
+      background: white;
+      outline: 2px solid #777;
+    }
+
+
+    /*
+     * ============================================================
      * SUMMENZEILE
      * ============================================================
      */
@@ -233,7 +289,7 @@
 
     /*
      * ============================================================
-     * EDITIERMODUS
+     * EDITIERMODUS FÜR TABELLENZELLEN
      * ============================================================
      */
 
@@ -524,12 +580,6 @@
      * ============================================================
      * LOKALE DATEN
      * ============================================================
-     *
-     * planning.js enthält die Originaldaten.
-     *
-     * Falls auf diesem Gerät bereits Änderungen gespeichert wurden,
-     * verwenden wir stattdessen die Daten aus localStorage.
-     * ============================================================
      */
 
     const STORAGE_KEY = "newzealandPlanning2026";
@@ -572,30 +622,45 @@
      * ============================================================
      * NORMALE REISETAGE
      * ============================================================
+     *
+     * WICHTIG:
+     *
+     * item1 bis item4 werden jetzt IMMER erzeugt.
+     *
+     * Dadurch können auch bisher leere Felder
+     * im Editiermodus ausgefüllt werden.
+     * ============================================================
      */
 
     function createTravelRow(item, index) {
 
-      const details = [
-        item.item1,
-        item.item2,
-        item.item3,
-        item.item4
-      ]
-      .filter(value => value)
-      .map((value, itemIndex) => {
+      let details = "";
 
-        return `
+
+      /*
+       * Immer vier Planungsfelder erzeugen.
+       */
+
+      for (let itemNumber = 1; itemNumber <= 4; itemNumber++) {
+
+        const field =
+          `item${itemNumber}`;
+
+        const value =
+          item[field] ?? "";
+
+
+        details += `
+
           <div
-            data-field="item${itemIndex + 1}"
+            class="planning-item"
+            data-field="${field}"
             data-index="${index}"
-          >
-            ${escapeHtml(value)}
-          </div>
+          >${escapeHtml(value)}</div>
+
         `;
 
-      })
-      .join("");
+      }
 
 
       return `
@@ -702,12 +767,6 @@
       motorhomeBody.innerHTML = "";
       northIslandBody.innerHTML = "";
 
-
-      /*
-       * Wir benutzen das erste Auftreten einer
-       * Wohnmobil-Etappe als Trennung zwischen
-       * Anreise und Südinsel.
-       */
 
       const firstMotorhome =
         currentPlanning.findIndex(
@@ -823,6 +882,9 @@
 
       /*
        * Alle Datenfelder editierbar machen.
+       *
+       * Dazu gehören jetzt auch die leeren
+       * item1-item4-Felder.
        */
 
       document
@@ -912,6 +974,10 @@
       readChangesFromTable();
 
 
+      /*
+       * Änderungen im Browser speichern.
+       */
+
       localStorage.setItem(
         STORAGE_KEY,
         JSON.stringify(currentPlanning)
@@ -919,7 +985,6 @@
 
 
       finishEditing();
-
 
       renderPlanning();
 
