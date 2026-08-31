@@ -137,6 +137,19 @@
       color: #222;
     }
 
+    /*
+     * Export der aktuellen Planung
+     */
+    
+    #exportButton {
+      background: #1565c0;
+      color: white;
+    }
+    
+    #exportButton:hover {
+      background: #0d47a1;
+    }
+        
     .hidden {
       display: none;
     }
@@ -453,30 +466,44 @@ body.editing .add-row-container {
 
     <div class="toolbar">
 
-      <button
-        id="editButton"
-        type="button"
-      >
-        ✏️ Edit
-      </button>
+  <button
+    id="editButton"
+    type="button"
+  >
+    ✏️ Edit
+  </button>
 
-      <button
-        id="saveButton"
-        class="hidden"
-        type="button"
-      >
-        ✓ Späichern
-      </button>
+  <button
+    id="saveButton"
+    class="hidden"
+    type="button"
+  >
+    ✓ Speichern
+  </button>
 
-      <button
-        id="cancelButton"
-        class="hidden"
-        type="button"
-      >
-        Ofbriechen
-      </button>
+  <button
+    id="cancelButton"
+    class="hidden"
+    type="button"
+  >
+    Abbrechen
+  </button>
 
-    </div>
+
+  <!--
+  ============================================================
+  PLANUNG ALS planning.js EXPORTIEREN
+  ============================================================
+  -->
+
+  <button
+    id="exportButton"
+    type="button"
+  >
+    ⬇️ planning.js exportieren
+  </button>
+
+</div>
 
 
     <div id="saveInfo">
