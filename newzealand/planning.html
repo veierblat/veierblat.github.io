@@ -1524,6 +1524,120 @@ body.editing .add-row-container {
 
   }
 
+/*
+ * ============================================================
+ * PLANNING.JS EXPORTIEREN
+ * ============================================================
+ *
+ * Aus dem aktuellen Stand der Reiseplanung wird eine
+ * vollständige neue planning.js erzeugt.
+ *
+ * Diese Datei kann anschließend die bisherige Datei
+ *
+ *     data/planning.js
+ *
+ * ersetzen.
+ * ============================================================
+ */
+
+function exportPlanning() {
+
+  /*
+   * Falls wir uns gerade im Editiermodus befinden,
+   * zuerst die aktuellen Eingaben übernehmen.
+   */
+
+  if (
+    document.body.classList.contains("editing")
+  ) {
+
+    readChangesFromTable();
+
+  }
+
+
+  /*
+   * JavaScript-Datei erzeugen.
+   *
+   * JSON.stringify(..., null, 2)
+   * sorgt für eine gut lesbare Formatierung.
+   */
+
+  const fileContent =
+
+`/*
+ * ============================================================
+ * NEUSEELAND 2026 – REISEPLANUNG
+ * ============================================================
+ *
+ * Diese Datei wurde aus planning.html exportiert.
+ *
+ * ============================================================
+ */
+
+const planning = ${JSON.stringify(
+  currentPlanning,
+  null,
+  2
+)};
+`;
+
+
+  /*
+   * Aus dem Text eine temporäre Datei erzeugen.
+   */
+
+  const blob =
+    new Blob(
+      [fileContent],
+      {
+        type:
+          "text/javascript;charset=utf-8"
+      }
+    );
+
+
+  /*
+   * Temporäre Download-Adresse erzeugen.
+   */
+
+  const url =
+    URL.createObjectURL(blob);
+
+
+  /*
+   * Unsichtbaren Download-Link erzeugen.
+   */
+
+  const link =
+    document.createElement("a");
+
+
+  link.href = url;
+
+  link.download =
+    "planning.js";
+
+
+  /*
+   * Download starten.
+   */
+
+  document.body.appendChild(link);
+
+  link.click();
+
+  link.remove();
+
+
+  /*
+   * Temporäre Adresse wieder freigeben.
+   */
+
+  URL.revokeObjectURL(url);
+
+}
+  
 
 
   /*
