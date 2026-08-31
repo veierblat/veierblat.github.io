@@ -212,7 +212,7 @@ const activities = [
     type: "Wanderung / Strand / Aussicht",
     duration: "ca. 4–5 h inkl. Fahrt und Aufenthalt",
     note: "Hauptwanderweg zur Cathedral Cove. Vorher aktuellen Track-Status und Wetter prüfen.",
-    url: "https://www.doc.govt.nz/cathedralcove",
+    url: "https://www.newzealand.com/in/feature/cathedral-cove-walk/",
     guidePage: ""
   },
 
@@ -225,7 +225,7 @@ const activities = [
     type: "Strand / Thermalquelle",
     duration: "ca. 2–3 h",
     note: "Nur rund um Ebbe sinnvoll. Ideal etwa 2 Stunden vor bis 2 Stunden nach Niedrigwasser. Mit Cathedral Cove kombinierbar.",
-    url: "https://thecoromandel.com/hot-water-beach/",
+    url: "https://www.hotwaterbeach.org.nz",
     guidePage: ""
   },
 
@@ -278,19 +278,6 @@ const activities = [
     duration: "ganztägig",
     note: "Anspruchsvollerer Tagesausflug mit langer Wanderung. Nur bei gutem Wetter einplanen.",
     url: "https://www.doc.govt.nz/parks-and-recreation/places-to-go/coromandel/places/kauaeranga-valley/things-to-do/tracks/pinnacles-walk/",
-    guidePage: ""
-  },
-
-  {
-    place: "Coromandel",
-    name: "Coromandel Coastal Walkway",
-    date: "",
-    lat: -36.5030,
-    lon: 175.4080,
-    type: "Wanderung / Küste / Aussicht",
-    duration: "ganztägig",
-    note: "Landschaftlich sehr schöne Küstenwanderung im äußersten Norden der Halbinsel. Wegen der langen Anfahrt ab Wyuna Bay nur bei genügend Zeit einplanen.",
-    url: "https://www.doc.govt.nz/parks-and-recreation/places-to-go/coromandel/places/northern-coromandel/things-to-do/coromandel-coastal-walkway/",
     guidePage: ""
   },
   
