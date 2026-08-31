@@ -5,16 +5,12 @@
  *
  * Diese Datei wurde aus planning.html exportiert.
  *
+ * Version 2
+ *
  * ============================================================
  */
-  /*
-   * Versionsnummer dieser Planung.
-   *
-   * Bei jedem Export wird automatisch die nächste
-   * Versionsnummer erzeugt.
-   */
-const PLANNING_VERSION = 1;
 
+const PLANNING_VERSION = 2;
 
 const planning = [
   {
@@ -28,7 +24,7 @@ const planning = [
   {
     "date": "Fri, 6 Nov 2026",
     "item1": "LUX - AKL",
-    "item2": "langweil",
+    "item2": "",
     "item3": "",
     "item4": "",
     "type": "travel"
@@ -244,14 +240,6 @@ const planning = [
   {
     "date": "Wed, 16 Dec 2026",
     "item1": "LUX 22:00",
-    "item2": "",
-    "item3": "",
-    "item4": "",
-    "type": "travel"
-  },
-  {
-    "date": "lenks iwwerschrëft",
-    "item1": "test",
     "item2": "",
     "item3": "",
     "item4": "",
