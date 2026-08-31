@@ -664,205 +664,539 @@ body.editing .add-row-container {
   <script src="./data/planning.js"></script>
 
 
+<script>
 
-  <script>
+  /*
+   * ============================================================
+   * LOKALE DATEN
+   * ============================================================
+   */
 
-    /*
-     * ============================================================
-     * LOKALE DATEN
-     * ============================================================
-     */
-
-    const STORAGE_KEY = "newzealandPlanning2026";
-
-
-    let currentPlanning =
-      JSON.parse(localStorage.getItem(STORAGE_KEY))
-      ||
-      JSON.parse(JSON.stringify(planning));
+  const STORAGE_KEY = "newzealandPlanning2026";
 
 
-    /*
-     * Kopie für "Abbrechen".
-     */
+  /*
+   * Falls bereits Änderungen im Browser gespeichert wurden,
+   * verwenden wir diese.
+   *
+   * Ansonsten werden die Originaldaten aus planning.js benutzt.
+   */
 
-    let planningBeforeEdit = null;
+  let currentPlanning =
+    JSON.parse(localStorage.getItem(STORAGE_KEY))
+    ||
+    JSON.parse(JSON.stringify(planning));
+
+
+  /*
+   * Kopie für die Funktion "Abbrechen".
+   */
+
+  let planningBeforeEdit = null;
 
 
 
-    /*
-     * ============================================================
-     * HILFSFUNKTION
-     * ============================================================
-     */
+  /*
+   * ============================================================
+   * HILFSFUNKTION
+   * ============================================================
+   */
 
-    function escapeHtml(value) {
+  function escapeHtml(value) {
 
-      return String(value ?? "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+    return String(value ?? "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+
+  }
+
+
+
+  /*
+   * ============================================================
+   * LÖSCH-BUTTON
+   * ============================================================
+   */
+
+  function createDeleteButton(index) {
+
+    return `
+
+      <td class="row-actions">
+
+        <button
+          type="button"
+          class="delete-row"
+          data-delete-index="${index}"
+          title="Zeile löschen"
+        >
+          🗑
+        </button>
+
+      </td>
+
+    `;
+
+  }
+
+
+
+  /*
+   * ============================================================
+   * NORMALE REISETAGE
+   * ============================================================
+   *
+   * Für Anreise und Nordinsel werden immer vier
+   * Planungsfelder erzeugt.
+   *
+   * Dadurch können auch leere Felder bearbeitet werden.
+   * ============================================================
+   */
+
+  function createTravelRow(item, index) {
+
+    let details = "";
+
+
+    for (
+      let itemNumber = 1;
+      itemNumber <= 4;
+      itemNumber++
+    ) {
+
+      const field =
+        `item${itemNumber}`;
+
+      const value =
+        item[field] ?? "";
+
+
+      details += `
+
+        <div
+          class="planning-item"
+          data-field="${field}"
+          data-index="${index}"
+        >${escapeHtml(value)}</div>
+
+      `;
 
     }
 
 
+    return `
+
+      <tr>
+
+        <td
+          class="date-column"
+          data-field="date"
+          data-index="${index}"
+        >
+          ${escapeHtml(item.date)}
+        </td>
+
+        <td>
+          ${details}
+        </td>
+
+        ${createDeleteButton(index)}
+
+      </tr>
+
+    `;
+
+  }
+
+
+
+  /*
+   * ============================================================
+   * WOHNMOBIL-ETAPPEN
+   * ============================================================
+   */
+
+  function createMotorhomeRow(item, index) {
+
+    return `
+
+      <tr class="motorhome-row">
+
+        <td
+          class="date-column"
+          data-field="date"
+          data-index="${index}"
+        >
+          ${escapeHtml(item.date)}
+        </td>
+
+        <td
+          data-field="from"
+          data-index="${index}"
+        >
+          ${escapeHtml(item.from)}
+        </td>
+
+        <td
+          data-field="to"
+          data-index="${index}"
+        >
+          ${escapeHtml(item.to)}
+        </td>
+
+        <td
+          class="number-column"
+          data-field="distance"
+          data-index="${index}"
+        >
+          ${escapeHtml(item.distance)}
+        </td>
+
+        <td
+          class="number-column"
+          data-field="nights"
+          data-index="${index}"
+        >
+          ${escapeHtml(item.nights)}
+        </td>
+
+        ${createDeleteButton(index)}
+
+      </tr>
+
+    `;
+
+  }
+
+
+
+  /*
+   * ============================================================
+   * TABELLEN AUFBAUEN
+   * ============================================================
+   */
+
+  function renderPlanning() {
+
+    const arrivalBody =
+      document.getElementById("arrivalBody");
+
+    const motorhomeBody =
+      document.getElementById("motorhomeBody");
+
+    const northIslandBody =
+      document.getElementById("northIslandBody");
+
 
     /*
-     * ============================================================
-     * NORMALE REISETAGE
-     * ============================================================
-     *
-     * WICHTIG:
-     *
-     * item1 bis item4 werden jetzt IMMER erzeugt.
-     *
-     * Dadurch können auch bisher leere Felder
-     * im Editiermodus ausgefüllt werden.
-     * ============================================================
+     * Tabellen zunächst leeren.
      */
 
-    function createTravelRow(item, index) {
-
-      let details = "";
-
-
-      /*
-       * Immer vier Planungsfelder erzeugen.
-       */
-
-      for (let itemNumber = 1; itemNumber <= 4; itemNumber++) {
-
-        const field =
-          `item${itemNumber}`;
-
-        const value =
-          item[field] ?? "";
+    arrivalBody.innerHTML = "";
+    motorhomeBody.innerHTML = "";
+    northIslandBody.innerHTML = "";
 
 
-        details += `
+    /*
+     * Erste und letzte Wohnmobil-Etappe suchen.
+     *
+     * Alles davor gehört zur Anreise.
+     * Alles danach gehört zur Nordinsel/Rückreise.
+     */
 
-          <div
-            class="planning-item"
-            data-field="${field}"
-            data-index="${index}"
-          >${escapeHtml(value)}</div>
+    const firstMotorhome =
+      currentPlanning.findIndex(
+        item => item.type === "motorhome"
+      );
 
-        `;
+    const lastMotorhome =
+      currentPlanning.findLastIndex(
+        item => item.type === "motorhome"
+      );
+
+
+    /*
+     * Alle Daten in die passende Tabelle eintragen.
+     */
+
+    currentPlanning.forEach((item, index) => {
+
+      if (item.type === "motorhome") {
+
+        motorhomeBody.insertAdjacentHTML(
+          "beforeend",
+          createMotorhomeRow(item, index)
+        );
 
       }
 
+      else if (index < firstMotorhome) {
 
-      return `
+        arrivalBody.insertAdjacentHTML(
+          "beforeend",
+          createTravelRow(item, index)
+        );
 
-        <tr>
+      }
 
-          <td
-            class="date-column"
-            data-field="date"
-            data-index="${index}"
-          >
-            ${escapeHtml(item.date)}
-          </td>
+      else if (index > lastMotorhome) {
 
-          <td>
-            ${details}
-          </td>
+        northIslandBody.insertAdjacentHTML(
+          "beforeend",
+          createTravelRow(item, index)
+        );
 
-        </tr>
+      }
 
-      `;
+    });
 
-    }
 
+    updateTotals();
+
+    activateDeleteButtons();
+
+  }
+
+
+
+  /*
+   * ============================================================
+   * SUMMEN BERECHNEN
+   * ============================================================
+   */
+
+  function updateTotals() {
+
+    let totalDistance = 0;
+    let totalNights = 0;
+
+
+    currentPlanning.forEach(item => {
+
+      if (item.type === "motorhome") {
+
+        totalDistance +=
+          Number(item.distance) || 0;
+
+        totalNights +=
+          Number(item.nights) || 0;
+
+      }
+
+    });
+
+
+    document.getElementById(
+      "totalDistance"
+    ).textContent =
+      `${totalDistance} km`;
+
+
+    document.getElementById(
+      "totalNights"
+    ).textContent =
+      totalNights;
+
+  }
+
+
+
+  /*
+   * ============================================================
+   * EDITIERMODUS STARTEN
+   * ============================================================
+   */
+
+  function startEditing() {
+
+    /*
+     * Zustand vor dem Editieren sichern.
+     *
+     * Dadurch können wir bei "Abbrechen" alles wiederherstellen,
+     * auch gelöschte oder neu hinzugefügte Zeilen.
+     */
+
+    planningBeforeEdit =
+      JSON.parse(
+        JSON.stringify(currentPlanning)
+      );
+
+
+    document.body.classList.add("editing");
 
 
     /*
-     * ============================================================
-     * WOHNMOBIL-ETAPPEN
-     * ============================================================
+     * Felder editierbar machen.
      */
 
-    function createMotorhomeRow(item, index) {
-
-      return `
-
-        <tr class="motorhome-row">
-
-          <td
-            class="date-column"
-            data-field="date"
-            data-index="${index}"
-          >
-            ${escapeHtml(item.date)}
-          </td>
-
-          <td
-            data-field="from"
-            data-index="${index}"
-          >
-            ${escapeHtml(item.from)}
-          </td>
-
-          <td
-            data-field="to"
-            data-index="${index}"
-          >
-            ${escapeHtml(item.to)}
-          </td>
-
-          <td
-            class="number-column"
-            data-field="distance"
-            data-index="${index}"
-          >
-            ${escapeHtml(item.distance)}
-          </td>
-
-          <td
-            class="number-column"
-            data-field="nights"
-            data-index="${index}"
-          >
-            ${escapeHtml(item.nights)}
-          </td>
-
-        </tr>
-
-      `;
-
-    }
-
+    makeFieldsEditable();
 
 
     /*
-     * ============================================================
-     * TABELLE AUFBAUEN
-     * ============================================================
+     * Buttons umschalten.
      */
 
-    function renderPlanning() {
+    document
+      .getElementById("editButton")
+      .classList.add("hidden");
 
-      const arrivalBody =
-        document.getElementById("arrivalBody");
+    document
+      .getElementById("saveButton")
+      .classList.remove("hidden");
 
-      const motorhomeBody =
-        document.getElementById("motorhomeBody");
+    document
+      .getElementById("cancelButton")
+      .classList.remove("hidden");
 
-      const northIslandBody =
-        document.getElementById("northIslandBody");
+  }
 
 
-      arrivalBody.innerHTML = "";
-      motorhomeBody.innerHTML = "";
-      northIslandBody.innerHTML = "";
 
+  /*
+   * ============================================================
+   * FELDER EDITIERBAR MACHEN
+   * ============================================================
+   */
+
+  function makeFieldsEditable() {
+
+    document
+      .querySelectorAll("[data-field]")
+      .forEach(element => {
+
+        element.contentEditable = "true";
+
+      });
+
+  }
+
+
+
+  /*
+   * ============================================================
+   * ÄNDERUNGEN AUS DER TABELLE AUSLESEN
+   * ============================================================
+   */
+
+  function readChangesFromTable() {
+
+    document
+      .querySelectorAll("[data-field]")
+      .forEach(element => {
+
+        const index =
+          Number(element.dataset.index);
+
+        const field =
+          element.dataset.field;
+
+        let value =
+          element.innerText.trim();
+
+
+        /*
+         * km und Nächte als Zahlen speichern.
+         */
+
+        if (
+          field === "distance" ||
+          field === "nights"
+        ) {
+
+          value =
+            Number(value.replace(",", "."))
+            || 0;
+
+        }
+
+
+        /*
+         * Prüfen, ob die Zeile noch existiert.
+         */
+
+        if (currentPlanning[index]) {
+
+          currentPlanning[index][field] =
+            value;
+
+        }
+
+      });
+
+  }
+
+
+
+  /*
+   * ============================================================
+   * NEUE ZEILE HINZUFÜGEN
+   * ============================================================
+   */
+
+  function addRow(section) {
+
+    /*
+     * Bereits gemachte Änderungen zuerst übernehmen.
+     *
+     * Das ist wichtig, weil anschließend die Tabelle
+     * neu aufgebaut wird.
+     */
+
+    readChangesFromTable();
+
+
+    /*
+     * ----------------------------------------------------------
+     * ANREISE
+     * ----------------------------------------------------------
+     */
+
+    if (section === "arrival") {
 
       const firstMotorhome =
         currentPlanning.findIndex(
           item => item.type === "motorhome"
         );
+
+
+      const newItem = {
+
+        date: "",
+
+        item1: "",
+        item2: "",
+        item3: "",
+        item4: "",
+
+        type: "travel"
+
+      };
+
+
+      /*
+       * Neue Zeile direkt vor der ersten
+       * Wohnmobil-Etappe einfügen.
+       */
+
+      currentPlanning.splice(
+        firstMotorhome,
+        0,
+        newItem
+      );
+
+    }
+
+
+    /*
+     * ----------------------------------------------------------
+     * WOHNMOBIL
+     * ----------------------------------------------------------
+     */
+
+    else if (section === "motorhome") {
 
       const lastMotorhome =
         currentPlanning.findLastIndex(
@@ -870,338 +1204,366 @@ body.editing .add-row-container {
         );
 
 
-      currentPlanning.forEach((item, index) => {
+      const newItem = {
 
-        if (item.type === "motorhome") {
+        date: "",
 
-          motorhomeBody.insertAdjacentHTML(
-            "beforeend",
-            createMotorhomeRow(item, index)
-          );
+        from: "",
+        to: "",
 
-        }
+        distance: 0,
+        nights: 0,
 
-        else if (index < firstMotorhome) {
+        type: "motorhome"
 
-          arrivalBody.insertAdjacentHTML(
-            "beforeend",
-            createTravelRow(item, index)
-          );
-
-        }
-
-        else if (index > lastMotorhome) {
-
-          northIslandBody.insertAdjacentHTML(
-            "beforeend",
-            createTravelRow(item, index)
-          );
-
-        }
-
-      });
-
-
-      updateTotals();
-
-    }
-
-
-
-    /*
-     * ============================================================
-     * SUMMEN BERECHNEN
-     * ============================================================
-     */
-
-    function updateTotals() {
-
-      let totalDistance = 0;
-      let totalNights = 0;
-
-
-      currentPlanning.forEach(item => {
-
-        if (item.type === "motorhome") {
-
-          totalDistance +=
-            Number(item.distance) || 0;
-
-          totalNights +=
-            Number(item.nights) || 0;
-
-        }
-
-      });
-
-
-      document.getElementById(
-        "totalDistance"
-      ).textContent =
-        `${totalDistance} km`;
-
-
-      document.getElementById(
-        "totalNights"
-      ).textContent =
-        totalNights;
-
-    }
-
-
-
-    /*
-     * ============================================================
-     * EDITIERMODUS
-     * ============================================================
-     */
-
-    function startEditing() {
-
-      /*
-       * Aktuellen Zustand sichern.
-       */
-
-      planningBeforeEdit =
-        JSON.parse(
-          JSON.stringify(currentPlanning)
-        );
-
-
-      document.body.classList.add("editing");
+      };
 
 
       /*
-       * Alle Datenfelder editierbar machen.
-       *
-       * Dazu gehören jetzt auch die leeren
-       * item1-item4-Felder.
+       * Neue Etappe nach der letzten
+       * Wohnmobil-Etappe einfügen.
        */
 
-      document
-        .querySelectorAll("[data-field]")
-        .forEach(element => {
-
-          element.contentEditable = "true";
-
-        });
-
-
-      /*
-       * Buttons umschalten.
-       */
-
-      document
-        .getElementById("editButton")
-        .classList.add("hidden");
-
-      document
-        .getElementById("saveButton")
-        .classList.remove("hidden");
-
-      document
-        .getElementById("cancelButton")
-        .classList.remove("hidden");
-
-    }
-
-
-
-    /*
-     * ============================================================
-     * ÄNDERUNGEN AUS DER TABELLE AUSLESEN
-     * ============================================================
-     */
-
-    function readChangesFromTable() {
-
-      document
-        .querySelectorAll("[data-field]")
-        .forEach(element => {
-
-          const index =
-            Number(element.dataset.index);
-
-          const field =
-            element.dataset.field;
-
-          let value =
-            element.innerText.trim();
-
-
-          /*
-           * Zahlenfelder wieder als Zahlen speichern.
-           */
-
-          if (
-            field === "distance" ||
-            field === "nights"
-          ) {
-
-            value =
-              Number(value.replace(",", "."))
-              || 0;
-
-          }
-
-
-          currentPlanning[index][field] =
-            value;
-
-        });
-
-    }
-
-
-
-    /*
-     * ============================================================
-     * SPEICHERN
-     * ============================================================
-     */
-
-    function savePlanning() {
-
-      readChangesFromTable();
-
-
-      /*
-       * Änderungen im Browser speichern.
-       */
-
-      localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(currentPlanning)
+      currentPlanning.splice(
+        lastMotorhome + 1,
+        0,
+        newItem
       );
 
+    }
 
-      finishEditing();
 
-      renderPlanning();
+    /*
+     * ----------------------------------------------------------
+     * NORDINSEL / RÜCKREISE
+     * ----------------------------------------------------------
+     */
+
+    else if (section === "north") {
+
+      const newItem = {
+
+        date: "",
+
+        item1: "",
+        item2: "",
+        item3: "",
+        item4: "",
+
+        type: "travel"
+
+      };
 
 
       /*
-       * Kurze Speicherbestätigung.
+       * Neue Zeile ans Ende setzen.
        */
 
-      const saveInfo =
-        document.getElementById("saveInfo");
-
-      saveInfo.style.display = "block";
-
-
-      setTimeout(() => {
-
-        saveInfo.style.display = "none";
-
-      }, 3000);
+      currentPlanning.push(
+        newItem
+      );
 
     }
 
 
-
     /*
-     * ============================================================
-     * ABBRECHEN
-     * ============================================================
-     */
-
-    function cancelEditing() {
-
-      if (planningBeforeEdit) {
-
-        currentPlanning =
-          JSON.parse(
-            JSON.stringify(planningBeforeEdit)
-          );
-
-      }
-
-
-      finishEditing();
-
-      renderPlanning();
-
-    }
-
-
-
-    /*
-     * ============================================================
-     * EDITIERMODUS BEENDEN
-     * ============================================================
-     */
-
-    function finishEditing() {
-
-      document.body.classList.remove("editing");
-
-
-      document
-        .querySelectorAll("[data-field]")
-        .forEach(element => {
-
-          element.contentEditable = "false";
-
-        });
-
-
-      document
-        .getElementById("editButton")
-        .classList.remove("hidden");
-
-      document
-        .getElementById("saveButton")
-        .classList.add("hidden");
-
-      document
-        .getElementById("cancelButton")
-        .classList.add("hidden");
-
-    }
-
-
-
-    /*
-     * ============================================================
-     * BUTTONS
-     * ============================================================
-     */
-
-    document
-      .getElementById("editButton")
-      .addEventListener(
-        "click",
-        startEditing
-      );
-
-
-    document
-      .getElementById("saveButton")
-      .addEventListener(
-        "click",
-        savePlanning
-      );
-
-
-    document
-      .getElementById("cancelButton")
-      .addEventListener(
-        "click",
-        cancelEditing
-      );
-
-
-
-    /*
-     * ============================================================
-     * START
-     * ============================================================
+     * Tabellen neu aufbauen.
      */
 
     renderPlanning();
 
-  </script>
+
+    /*
+     * Wir befinden uns weiterhin im Editiermodus.
+     * Deshalb die neuen Felder ebenfalls editierbar machen.
+     */
+
+    makeFieldsEditable();
+
+  }
+
+
+
+  /*
+   * ============================================================
+   * ZEILE LÖSCHEN
+   * ============================================================
+   */
+
+  function deleteRow(index) {
+
+    /*
+     * Noch nicht gespeicherte Änderungen zuerst übernehmen.
+     */
+
+    readChangesFromTable();
+
+
+    /*
+     * Zeile aus den Daten entfernen.
+     */
+
+    currentPlanning.splice(
+      index,
+      1
+    );
+
+
+    /*
+     * Tabellen neu aufbauen.
+     */
+
+    renderPlanning();
+
+
+    /*
+     * Editiermodus beibehalten.
+     */
+
+    makeFieldsEditable();
+
+  }
+
+
+
+  /*
+   * ============================================================
+   * PAPIERKORB-BUTTONS AKTIVIEREN
+   * ============================================================
+   */
+
+  function activateDeleteButtons() {
+
+    document
+      .querySelectorAll("[data-delete-index]")
+      .forEach(button => {
+
+        button.addEventListener(
+          "click",
+          function() {
+
+            const index =
+              Number(
+                this.dataset.deleteIndex
+              );
+
+
+            /*
+             * Vor dem Löschen nachfragen.
+             */
+
+            const confirmed =
+              confirm(
+                "Dës Zeil wierklech läschen?"
+              );
+
+
+            if (confirmed) {
+
+              deleteRow(index);
+
+            }
+
+          }
+        );
+
+      });
+
+  }
+
+
+
+  /*
+   * ============================================================
+   * SPEICHERN
+   * ============================================================
+   */
+
+  function savePlanning() {
+
+    /*
+     * Aktuelle Eingaben auslesen.
+     */
+
+    readChangesFromTable();
+
+
+    /*
+     * Im Browser speichern.
+     */
+
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(currentPlanning)
+    );
+
+
+    finishEditing();
+
+    renderPlanning();
+
+
+    /*
+     * Speicherbestätigung anzeigen.
+     */
+
+    const saveInfo =
+      document.getElementById("saveInfo");
+
+
+    saveInfo.style.display =
+      "block";
+
+
+    setTimeout(() => {
+
+      saveInfo.style.display =
+        "none";
+
+    }, 3000);
+
+  }
+
+
+
+  /*
+   * ============================================================
+   * ABBRECHEN
+   * ============================================================
+   */
+
+  function cancelEditing() {
+
+    /*
+     * Zustand vor dem Editieren wiederherstellen.
+     */
+
+    if (planningBeforeEdit) {
+
+      currentPlanning =
+        JSON.parse(
+          JSON.stringify(planningBeforeEdit)
+        );
+
+    }
+
+
+    finishEditing();
+
+    renderPlanning();
+
+  }
+
+
+
+  /*
+   * ============================================================
+   * EDITIERMODUS BEENDEN
+   * ============================================================
+   */
+
+  function finishEditing() {
+
+    document.body.classList.remove(
+      "editing"
+    );
+
+
+    document
+      .querySelectorAll("[data-field]")
+      .forEach(element => {
+
+        element.contentEditable =
+          "false";
+
+      });
+
+
+    /*
+     * Buttons wieder auf Normalzustand setzen.
+     */
+
+    document
+      .getElementById("editButton")
+      .classList.remove("hidden");
+
+    document
+      .getElementById("saveButton")
+      .classList.add("hidden");
+
+    document
+      .getElementById("cancelButton")
+      .classList.add("hidden");
+
+  }
+
+
+
+  /*
+   * ============================================================
+   * HAUPT-BUTTONS
+   * ============================================================
+   */
+
+  document
+    .getElementById("editButton")
+    .addEventListener(
+      "click",
+      startEditing
+    );
+
+
+  document
+    .getElementById("saveButton")
+    .addEventListener(
+      "click",
+      savePlanning
+    );
+
+
+  document
+    .getElementById("cancelButton")
+    .addEventListener(
+      "click",
+      cancelEditing
+    );
+
+
+
+  /*
+   * ============================================================
+   * HINZUFÜGEN-BUTTONS
+   * ============================================================
+   */
+
+  document
+    .querySelectorAll("[data-add-section]")
+    .forEach(button => {
+
+      button.addEventListener(
+        "click",
+        function() {
+
+          addRow(
+            this.dataset.addSection
+          );
+
+        }
+      );
+
+    });
+
+
+
+  /*
+   * ============================================================
+   * START
+   * ============================================================
+   */
+
+  renderPlanning();
+
+</script>
 
 
 </body>
