@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Neuseeland 2026 – Reiseplanung</title>
+
+
+  <style>
+
+    /*
+     * ============================================================
+     * GRUNDEINSTELLUNGEN
+     * ============================================================
+     */
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+      background: #f5f5f5;
+      color: #222;
+    }
+
+
+    /*
+     * ============================================================
+     * KOPFBEREICH
+     * ============================================================
+     */
+
+    header {
+      background: white;
+      border-bottom: 1px solid #ddd;
+      padding: 18px 20px;
+    }
+
+    .header-inner {
+      max-width: 1300px;
+      margin: auto;
+    }
+
+    h1 {
+      margin: 0 0 14px 0;
+      font-size: 26px;
+    }
+
+
+    /*
+     * Navigation Karte / Planung
+     */
+
+    .navigation {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .navigation a {
+      text-decoration: none;
+      color: #222;
+      background: #eee;
+      padding: 9px 14px;
+      border-radius: 7px;
+      font-weight: 600;
+    }
+
+    .navigation a.active {
+      background: #333;
+      color: white;
+    }
+
+
+    /*
+     * ============================================================
+     * HAUPTBEREICH
+     * ============================================================
+     */
+
+    main {
+      max-width: 1300px;
+      margin: 25px auto;
+      padding: 0 20px 50px 20px;
+    }
+
+
+    /*
+     * ============================================================
+     * WERKZEUGLEISTE
+     * ============================================================
+     */
+
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: 0;
+      border-radius: 7px;
+      padding: 10px 16px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    #editButton {
+      background: #333;
+      color: white;
+    }
+
+    #saveButton {
+      background: #2e7d32;
+      color: white;
+    }
+
+    #cancelButton {
+      background: #ddd;
+      color: #222;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+
+    /*
+     * ============================================================
+     * ABSCHNITTE
+     * ============================================================
+     */
+
+    .section {
+      background: white;
+      border-radius: 10px;
+      margin-bottom: 25px;
+      overflow: hidden;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.08);
+    }
+
+    .section-title {
+      margin: 0;
+      padding: 14px 18px;
+      background: #ececec;
+      font-size: 20px;
+    }
+
+
+    /*
+     * ============================================================
+     * TABELLE
+     * ============================================================
+     */
+
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      text-align: left;
+      background: #fafafa;
+      border-bottom: 2px solid #ddd;
+      padding: 11px 12px;
+      white-space: nowrap;
+    }
+
+    td {
+      border-bottom: 1px solid #e5e5e5;
+      padding: 11px 12px;
+      vertical-align: top;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .date-column {
+      white-space: nowrap;
+      width: 150px;
+    }
+
+    .number-column {
+      text-align: right;
+      white-space: nowrap;
+      width: 90px;
+    }
+
+
+    /*
+     * Wohnmobil-Etappen etwas hervorheben
+     */
+
+    .motorhome-row:hover {
+      background: #fafafa;
+    }
+
+
+    /*
+     * ============================================================
+     * SUMMENZEILE
+     * ============================================================
+     */
+
+    .total-row {
+      font-weight: bold;
+      background: #f3f3f3;
+    }
+
+
+    /*
+     * ============================================================
+     * EDITIERMODUS
+     * ============================================================
+     */
+
+    body.editing td[data-field] {
+      background: #fffde7;
+      outline: 1px dashed #c7a900;
+      outline-offset: -3px;
+      cursor: text;
+    }
+
+    body.editing td[data-field]:focus {
+      background: white;
+      outline: 2px solid #777;
+    }
+
+
+    /*
+     * ============================================================
+     * HINWEIS
+     * ============================================================
+     */
+
+    #saveInfo {
+      margin-bottom: 18px;
+      padding: 10px 12px;
+      border-radius: 7px;
+      background: #e8f5e9;
+      display: none;
+    }
+
+
+    /*
+     * ============================================================
+     * MOBILE DARSTELLUNG
+     * ============================================================
+     */
+
+    @media (max-width: 700px) {
+
+      header {
+        padding: 14px;
+      }
+
+      main {
+        padding: 0 10px 30px 10px;
+        margin-top: 15px;
+      }
+
+      h1 {
+        font-size: 22px;
+      }
+
+      .section-title {
+        font-size: 18px;
+      }
+
+      th,
+      td {
+        padding: 9px;
+        font-size: 14px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- ==========================================================
+       KOPFBEREICH
+       ========================================================== -->
+
+  <header>
+
+    <div class="header-inner">
+
+      <h1>🇳🇿 Neuseeland 2026</h1>
+
+      <div class="navigation">
+
+        <a href="./index.html">
+          🗺 Karte
+        </a>
+
+        <a
+          href="./planning.html"
+          class="active"
+        >
+          📋 Reiseplanung
+        </a>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+
+  <!-- ==========================================================
+       HAUPTBEREICH
+       ========================================================== -->
+
+  <main>
+
+
+    <!-- Werkzeugleiste -->
+
+    <div class="toolbar">
+
+      <button
+        id="editButton"
+        type="button"
+      >
+        ✏️ Edit
+      </button>
+
+      <button
+        id="saveButton"
+        class="hidden"
+        type="button"
+      >
+        ✓ Speichern
+      </button>
+
+      <button
+        id="cancelButton"
+        class="hidden"
+        type="button"
+      >
+        Abbrechen
+      </button>
+
+    </div>
+
+
+    <div id="saveInfo">
+      ✓ Änderungen wurden auf diesem Gerät gespeichert.
+    </div>
+
+
+
+    <!-- ========================================================
+         ANREISE
+         ======================================================== -->
+
+    <section class="section">
+
+      <h2 class="section-title">
+        ✈️ Anreise
+      </h2>
+
+      <div class="table-wrapper">
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>Datum</th>
+              <th>Planung</th>
+            </tr>
+          </thead>
+
+          <tbody id="arrivalBody">
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ========================================================
+         WOHNMOBIL
+         ======================================================== -->
+
+    <section class="section">
+
+      <h2 class="section-title">
+        🚐 Wohnmobil – Südinsel
+      </h2>
+
+      <div class="table-wrapper">
+
+        <table>
+
+          <thead>
+
+            <tr>
+              <th>Datum</th>
+              <th>Von</th>
+              <th>Bis</th>
+              <th class="number-column">km</th>
+              <th class="number-column">Nächte</th>
+            </tr>
+
+          </thead>
+
+
+          <tbody id="motorhomeBody">
+          </tbody>
+
+
+          <tfoot>
+
+            <tr class="total-row">
+
+              <td colspan="3">
+                Gesamt
+              </td>
+
+              <td
+                id="totalDistance"
+                class="number-column"
+              >
+              </td>
+
+              <td
+                id="totalNights"
+                class="number-column"
+              >
+              </td>
+
+            </tr>
+
+          </tfoot>
+
+        </table>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ========================================================
+         NORDINSEL
+         ======================================================== -->
+
+    <section class="section">
+
+      <h2 class="section-title">
+        🏝 Nordinsel & Rückreise
+      </h2>
+
+      <div class="table-wrapper">
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>Datum</th>
+              <th>Planung</th>
+            </tr>
+          </thead>
+
+          <tbody id="northIslandBody">
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+
+  <!-- ==========================================================
+       DATEN
+       ========================================================== -->
+
+  <script src="./data/planning.js"></script>
+
+
+
+  <script>
+
+    /*
+     * ============================================================
+     * LOKALE DATEN
+     * ============================================================
+     *
+     * planning.js enthält die Originaldaten.
+     *
+     * Falls auf diesem Gerät bereits Änderungen gespeichert wurden,
+     * verwenden wir stattdessen die Daten aus localStorage.
+     * ============================================================
+     */
+
+    const STORAGE_KEY = "newzealandPlanning2026";
+
+
+    let currentPlanning =
+      JSON.parse(localStorage.getItem(STORAGE_KEY))
+      ||
+      JSON.parse(JSON.stringify(planning));
+
+
+    /*
+     * Kopie für "Abbrechen".
+     */
+
+    let planningBeforeEdit = null;
+
+
+
+    /*
+     * ============================================================
+     * HILFSFUNKTION
+     * ============================================================
+     */
+
+    function escapeHtml(value) {
+
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+
+    }
+
+
+
+    /*
+     * ============================================================
+     * NORMALE REISETAGE
+     * ============================================================
+     */
+
+    function createTravelRow(item, index) {
+
+      const details = [
+        item.item1,
+        item.item2,
+        item.item3,
+        item.item4
+      ]
+      .filter(value => value)
+      .map((value, itemIndex) => {
+
+        return `
+          <div
+            data-field="item${itemIndex + 1}"
+            data-index="${index}"
+          >
+            ${escapeHtml(value)}
+          </div>
+        `;
+
+      })
+      .join("");
+
+
+      return `
+
+        <tr>
+
+          <td
+            class="date-column"
+            data-field="date"
+            data-index="${index}"
+          >
+            ${escapeHtml(item.date)}
+          </td>
+
+          <td>
+            ${details}
+          </td>
+
+        </tr>
+
+      `;
+
+    }
+
+
+
+    /*
+     * ============================================================
+     * WOHNMOBIL-ETAPPEN
+     * ============================================================
+     */
+
+    function createMotorhomeRow(item, index) {
+
+      return `
+
+        <tr class="motorhome-row">
+
+          <td
+            class="date-column"
+            data-field="date"
+            data-index="${index}"
+          >
+            ${escapeHtml(item.date)}
+          </td>
+
+          <td
+            data-field="from"
+            data-index="${index}"
+          >
+            ${escapeHtml(item.from)}
+          </td>
+
+          <td
+            data-field="to"
+            data-index="${index}"
+          >
+            ${escapeHtml(item.to)}
+          </td>
+
+          <td
+            class="number-column"
+            data-field="distance"
+            data-index="${index}"
+          >
+            ${escapeHtml(item.distance)}
+          </td>
+
+          <td
+            class="number-column"
+            data-field="nights"
+            data-index="${index}"
+          >
+            ${escapeHtml(item.nights)}
+          </td>
+
+        </tr>
+
+      `;
+
+    }
+
+
+
+    /*
+     * ============================================================
+     * TABELLE AUFBAUEN
+     * ============================================================
+     */
+
+    function renderPlanning() {
+
+      const arrivalBody =
+        document.getElementById("arrivalBody");
+
+      const motorhomeBody =
+        document.getElementById("motorhomeBody");
+
+      const northIslandBody =
+        document.getElementById("northIslandBody");
+
+
+      arrivalBody.innerHTML = "";
+      motorhomeBody.innerHTML = "";
+      northIslandBody.innerHTML = "";
+
+
+      /*
+       * Wir benutzen das erste Auftreten einer
+       * Wohnmobil-Etappe als Trennung zwischen
+       * Anreise und Südinsel.
+       */
+
+      const firstMotorhome =
+        currentPlanning.findIndex(
+          item => item.type === "motorhome"
+        );
+
+      const lastMotorhome =
+        currentPlanning.findLastIndex(
+          item => item.type === "motorhome"
+        );
+
+
+      currentPlanning.forEach((item, index) => {
+
+        if (item.type === "motorhome") {
+
+          motorhomeBody.insertAdjacentHTML(
+            "beforeend",
+            createMotorhomeRow(item, index)
+          );
+
+        }
+
+        else if (index < firstMotorhome) {
+
+          arrivalBody.insertAdjacentHTML(
+            "beforeend",
+            createTravelRow(item, index)
+          );
+
+        }
+
+        else if (index > lastMotorhome) {
+
+          northIslandBody.insertAdjacentHTML(
+            "beforeend",
+            createTravelRow(item, index)
+          );
+
+        }
+
+      });
+
+
+      updateTotals();
+
+    }
+
+
+
+    /*
+     * ============================================================
+     * SUMMEN BERECHNEN
+     * ============================================================
+     */
+
+    function updateTotals() {
+
+      let totalDistance = 0;
+      let totalNights = 0;
+
+
+      currentPlanning.forEach(item => {
+
+        if (item.type === "motorhome") {
+
+          totalDistance +=
+            Number(item.distance) || 0;
+
+          totalNights +=
+            Number(item.nights) || 0;
+
+        }
+
+      });
+
+
+      document.getElementById(
+        "totalDistance"
+      ).textContent =
+        `${totalDistance} km`;
+
+
+      document.getElementById(
+        "totalNights"
+      ).textContent =
+        totalNights;
+
+    }
+
+
+
+    /*
+     * ============================================================
+     * EDITIERMODUS
+     * ============================================================
+     */
+
+    function startEditing() {
+
+      /*
+       * Aktuellen Zustand sichern.
+       */
+
+      planningBeforeEdit =
+        JSON.parse(
+          JSON.stringify(currentPlanning)
+        );
+
+
+      document.body.classList.add("editing");
+
+
+      /*
+       * Alle Datenfelder editierbar machen.
+       */
+
+      document
+        .querySelectorAll("[data-field]")
+        .forEach(element => {
+
+          element.contentEditable = "true";
+
+        });
+
+
+      /*
+       * Buttons umschalten.
+       */
+
+      document
+        .getElementById("editButton")
+        .classList.add("hidden");
+
+      document
+        .getElementById("saveButton")
+        .classList.remove("hidden");
+
+      document
+        .getElementById("cancelButton")
+        .classList.remove("hidden");
+
+    }
+
+
+
+    /*
+     * ============================================================
+     * ÄNDERUNGEN AUS DER TABELLE AUSLESEN
+     * ============================================================
+     */
+
+    function readChangesFromTable() {
+
+      document
+        .querySelectorAll("[data-field]")
+        .forEach(element => {
+
+          const index =
+            Number(element.dataset.index);
+
+          const field =
+            element.dataset.field;
+
+          let value =
+            element.innerText.trim();
+
+
+          /*
+           * Zahlenfelder wieder als Zahlen speichern.
+           */
+
+          if (
+            field === "distance" ||
+            field === "nights"
+          ) {
+
+            value =
+              Number(value.replace(",", "."))
+              || 0;
+
+          }
+
+
+          currentPlanning[index][field] =
+            value;
+
+        });
+
+    }
+
+
+
+    /*
+     * ============================================================
+     * SPEICHERN
+     * ============================================================
+     */
+
+    function savePlanning() {
+
+      readChangesFromTable();
+
+
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(currentPlanning)
+      );
+
+
+      finishEditing();
+
+
+      renderPlanning();
+
+
+      /*
+       * Kurze Speicherbestätigung.
+       */
+
+      const saveInfo =
+        document.getElementById("saveInfo");
+
+      saveInfo.style.display = "block";
+
+
+      setTimeout(() => {
+
+        saveInfo.style.display = "none";
+
+      }, 3000);
+
+    }
+
+
+
+    /*
+     * ============================================================
+     * ABBRECHEN
+     * ============================================================
+     */
+
+    function cancelEditing() {
+
+      if (planningBeforeEdit) {
+
+        currentPlanning =
+          JSON.parse(
+            JSON.stringify(planningBeforeEdit)
+          );
+
+      }
+
+
+      finishEditing();
+
+      renderPlanning();
+
+    }
+
+
+
+    /*
+     * ============================================================
+     * EDITIERMODUS BEENDEN
+     * ============================================================
+     */
+
+    function finishEditing() {
+
+      document.body.classList.remove("editing");
+
+
+      document
+        .querySelectorAll("[data-field]")
+        .forEach(element => {
+
+          element.contentEditable = "false";
+
+        });
+
+
+      document
+        .getElementById("editButton")
+        .classList.remove("hidden");
+
+      document
+        .getElementById("saveButton")
+        .classList.add("hidden");
+
+      document
+        .getElementById("cancelButton")
+        .classList.add("hidden");
+
+    }
+
+
+
+    /*
+     * ============================================================
+     * BUTTONS
+     * ============================================================
+     */
+
+    document
+      .getElementById("editButton")
+      .addEventListener(
+        "click",
+        startEditing
+      );
+
+
+    document
+      .getElementById("saveButton")
+      .addEventListener(
+        "click",
+        savePlanning
+      );
+
+
+    document
+      .getElementById("cancelButton")
+      .addEventListener(
+        "click",
+        cancelEditing
+      );
+
+
+
+    /*
+     * ============================================================
+     * START
+     * ============================================================
+     */
+
+    renderPlanning();
+
+  </script>
+
+
+</body>
+
+</html>
