@@ -146,10 +146,34 @@
       color: white;
     }
     
-    #exportButton:hover {
-      background: #0d47a1;
-    }
-        
+      #exportButton:hover {
+        background: #0d47a1;
+      }
+      /*
+   * Website-Version laden
+   */
+  
+  #resetButton {
+    background: #eee;
+    color: #333;
+  }
+  
+  #resetButton:hover {
+    background: #ddd;
+  }
+  
+  
+  /*
+   * Anzeige der aktuell verwendeten Version
+   */
+  
+  #versionInfo {
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    font-size: 14px;
+    color: #666;
+  }    
     .hidden {
       display: none;
     }
@@ -503,6 +527,17 @@ body.editing .add-row-container {
     ⬇️ planning.js exportieren
   </button>
 
+  <button
+    id="resetButton"
+    type="button"
+  >
+    ↩ Website-Version laden
+  </button>
+  
+  <div id="versionInfo">
+  </div>
+
+      
 </div>
 
 
@@ -695,7 +730,21 @@ body.editing .add-row-container {
 
   /*
    * ============================================================
-   * LOKALE DATEN
+   * LOKALE DATEN UND VERSIONSKONTROLLE
+   * ============================================================
+   *
+   * planning.js enthält:
+   *
+   *   PLANNING_VERSION
+   *   planning
+   *
+   * localStorage enthält künftig:
+   *
+   * {
+   *   version: 1,
+   *   data: [...]
+   * }
+   *
    * ============================================================
    */
 
@@ -703,20 +752,134 @@ body.editing .add-row-container {
 
 
   /*
-   * Falls bereits Änderungen im Browser gespeichert wurden,
-   * verwenden wir diese.
-   *
-   * Ansonsten werden die Originaldaten aus planning.js benutzt.
+   * Lokale Daten aus dem Browser lesen.
    */
 
-  let currentPlanning =
-    JSON.parse(localStorage.getItem(STORAGE_KEY))
-    ||
-    JSON.parse(JSON.stringify(planning));
+  let storedPlanning = null;
+
+
+  try {
+
+    storedPlanning =
+      JSON.parse(
+        localStorage.getItem(STORAGE_KEY)
+      );
+
+  }
+
+  catch (error) {
+
+    console.error(
+      "Lokale Planung konnte nicht gelesen werden:",
+      error
+    );
+
+  }
+
 
 
   /*
-   * Kopie für die Funktion "Abbrechen".
+   * ============================================================
+   * ALTES SPEICHERFORMAT ERKENNEN
+   * ============================================================
+   *
+   * Deine bisherige planning.html hat direkt ein Array
+   * gespeichert:
+   *
+   *   [...]
+   *
+   * Die neue Version speichert:
+   *
+   *   {
+   *     version: 1,
+   *     data: [...]
+   *   }
+   *
+   * Falls noch das alte Format vorhanden ist, behandeln wir
+   * es als Version 1. Dadurch gehen deine bisherigen lokalen
+   * Änderungen nicht verloren.
+   * ============================================================
+   */
+
+  if (Array.isArray(storedPlanning)) {
+
+    storedPlanning = {
+
+      version: PLANNING_VERSION,
+
+      data: storedPlanning
+
+    };
+
+
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(storedPlanning)
+    );
+
+  }
+
+
+
+  /*
+   * ============================================================
+   * ENTSCHEIDEN, WELCHE PLANUNG VERWENDET WIRD
+   * ============================================================
+   */
+
+  let currentPlanning;
+
+  let currentVersion;
+
+
+  if (
+    storedPlanning &&
+    storedPlanning.data &&
+    Number(storedPlanning.version) >= PLANNING_VERSION
+  ) {
+
+    /*
+     * Lokale Version ist gleich neu oder neuer.
+     */
+
+    currentPlanning =
+      JSON.parse(
+        JSON.stringify(storedPlanning.data)
+      );
+
+    currentVersion =
+      Number(storedPlanning.version);
+
+  }
+
+  else {
+
+    /*
+     * Website ist neuer oder es existieren
+     * noch keine lokalen Daten.
+     */
+
+    currentPlanning =
+      JSON.parse(
+        JSON.stringify(planning)
+      );
+
+    currentVersion =
+      PLANNING_VERSION;
+
+
+    /*
+     * Website-Version auch lokal übernehmen.
+     */
+
+    saveToLocalStorage();
+
+  }
+
+
+
+  /*
+   * Kopie für "Abbrechen".
    */
 
   let planningBeforeEdit = null;
@@ -725,7 +888,52 @@ body.editing .add-row-container {
 
   /*
    * ============================================================
-   * HILFSFUNKTION
+   * LOKAL SPEICHERN
+   * ============================================================
+   */
+
+  function saveToLocalStorage() {
+
+    const storageObject = {
+
+      version: currentVersion,
+
+      data: currentPlanning
+
+    };
+
+
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(storageObject)
+    );
+
+  }
+
+
+
+  /*
+   * ============================================================
+   * VERSIONSANZEIGE
+   * ============================================================
+   */
+
+  function updateVersionInfo() {
+
+    const info =
+      document.getElementById("versionInfo");
+
+
+    info.textContent =
+      `Version ${currentVersion} · Website ${PLANNING_VERSION}`;
+
+  }
+
+
+
+  /*
+   * ============================================================
+   * HTML SCHÜTZEN
    * ============================================================
    */
 
@@ -774,12 +982,6 @@ body.editing .add-row-container {
   /*
    * ============================================================
    * NORMALE REISETAGE
-   * ============================================================
-   *
-   * Für Anreise und Nordinsel werden immer vier
-   * Planungsfelder erzeugt.
-   *
-   * Dadurch können auch leere Felder bearbeitet werden.
    * ============================================================
    */
 
@@ -918,36 +1120,22 @@ body.editing .add-row-container {
       document.getElementById("northIslandBody");
 
 
-    /*
-     * Tabellen zunächst leeren.
-     */
-
     arrivalBody.innerHTML = "";
     motorhomeBody.innerHTML = "";
     northIslandBody.innerHTML = "";
 
-
-    /*
-     * Erste und letzte Wohnmobil-Etappe suchen.
-     *
-     * Alles davor gehört zur Anreise.
-     * Alles danach gehört zur Nordinsel/Rückreise.
-     */
 
     const firstMotorhome =
       currentPlanning.findIndex(
         item => item.type === "motorhome"
       );
 
+
     const lastMotorhome =
       currentPlanning.findLastIndex(
         item => item.type === "motorhome"
       );
 
-
-    /*
-     * Alle Daten in die passende Tabelle eintragen.
-     */
 
     currentPlanning.forEach((item, index) => {
 
@@ -985,19 +1173,22 @@ body.editing .add-row-container {
 
     activateDeleteButtons();
 
+    updateVersionInfo();
+
   }
 
 
 
   /*
    * ============================================================
-   * SUMMEN BERECHNEN
+   * SUMMEN
    * ============================================================
    */
 
   function updateTotals() {
 
     let totalDistance = 0;
+
     let totalNights = 0;
 
 
@@ -1039,55 +1230,33 @@ body.editing .add-row-container {
 
   function startEditing() {
 
-    /*
-     * Zustand vor dem Editieren sichern.
-     *
-     * Dadurch können wir bei "Abbrechen" alles wiederherstellen,
-     * auch gelöschte oder neu hinzugefügte Zeilen.
-     */
-
     planningBeforeEdit =
       JSON.parse(
         JSON.stringify(currentPlanning)
       );
 
 
-    document.body.classList.add("editing");
+    document.body.classList.add(
+      "editing"
+    );
 
-
-    /*
-     * Felder editierbar machen.
-     */
 
     makeFieldsEditable();
 
-
-    /*
-     * Buttons umschalten.
-     */
 
     document
       .getElementById("editButton")
       .classList.add("hidden");
 
+
     document
       .getElementById("saveButton")
       .classList.remove("hidden");
 
+
     document
       .getElementById("cancelButton")
       .classList.remove("hidden");
-
-    /*
-     * Export-Button
-     */
-    
-    document
-      .getElementById("exportButton")
-      .addEventListener(
-        "click",
-        exportPlanning
-      );
 
   }
 
@@ -1105,7 +1274,8 @@ body.editing .add-row-container {
       .querySelectorAll("[data-field]")
       .forEach(element => {
 
-        element.contentEditable = "true";
+        element.contentEditable =
+          "true";
 
       });
 
@@ -1115,7 +1285,7 @@ body.editing .add-row-container {
 
   /*
    * ============================================================
-   * ÄNDERUNGEN AUS DER TABELLE AUSLESEN
+   * ÄNDERUNGEN AUSLESEN
    * ============================================================
    */
 
@@ -1135,25 +1305,19 @@ body.editing .add-row-container {
           element.innerText.trim();
 
 
-        /*
-         * km und Nächte als Zahlen speichern.
-         */
-
         if (
           field === "distance" ||
           field === "nights"
         ) {
 
           value =
-            Number(value.replace(",", "."))
+            Number(
+              value.replace(",", ".")
+            )
             || 0;
 
         }
 
-
-        /*
-         * Prüfen, ob die Zeile noch existiert.
-         */
 
         if (currentPlanning[index]) {
 
@@ -1170,27 +1334,14 @@ body.editing .add-row-container {
 
   /*
    * ============================================================
-   * NEUE ZEILE HINZUFÜGEN
+   * NEUE ZEILE
    * ============================================================
    */
 
   function addRow(section) {
 
-    /*
-     * Bereits gemachte Änderungen zuerst übernehmen.
-     *
-     * Das ist wichtig, weil anschließend die Tabelle
-     * neu aufgebaut wird.
-     */
-
     readChangesFromTable();
 
-
-    /*
-     * ----------------------------------------------------------
-     * ANREISE
-     * ----------------------------------------------------------
-     */
 
     if (section === "arrival") {
 
@@ -1200,39 +1351,25 @@ body.editing .add-row-container {
         );
 
 
-      const newItem = {
-
-        date: "",
-
-        item1: "",
-        item2: "",
-        item3: "",
-        item4: "",
-
-        type: "travel"
-
-      };
-
-
-      /*
-       * Neue Zeile direkt vor der ersten
-       * Wohnmobil-Etappe einfügen.
-       */
-
       currentPlanning.splice(
+
         firstMotorhome,
+
         0,
-        newItem
+
+        {
+          date: "",
+          item1: "",
+          item2: "",
+          item3: "",
+          item4: "",
+          type: "travel"
+        }
+
       );
 
     }
 
-
-    /*
-     * ----------------------------------------------------------
-     * WOHNMOBIL
-     * ----------------------------------------------------------
-     */
 
     else if (section === "motorhome") {
 
@@ -1242,79 +1379,43 @@ body.editing .add-row-container {
         );
 
 
-      const newItem = {
-
-        date: "",
-
-        from: "",
-        to: "",
-
-        distance: 0,
-        nights: 0,
-
-        type: "motorhome"
-
-      };
-
-
-      /*
-       * Neue Etappe nach der letzten
-       * Wohnmobil-Etappe einfügen.
-       */
-
       currentPlanning.splice(
+
         lastMotorhome + 1,
+
         0,
-        newItem
+
+        {
+          date: "",
+          from: "",
+          to: "",
+          distance: 0,
+          nights: 0,
+          type: "motorhome"
+        }
+
       );
 
     }
 
 
-    /*
-     * ----------------------------------------------------------
-     * NORDINSEL / RÜCKREISE
-     * ----------------------------------------------------------
-     */
-
     else if (section === "north") {
 
-      const newItem = {
+      currentPlanning.push({
 
         date: "",
-
         item1: "",
         item2: "",
         item3: "",
         item4: "",
-
         type: "travel"
 
-      };
-
-
-      /*
-       * Neue Zeile ans Ende setzen.
-       */
-
-      currentPlanning.push(
-        newItem
-      );
+      });
 
     }
 
 
-    /*
-     * Tabellen neu aufbauen.
-     */
-
     renderPlanning();
-
-
-    /*
-     * Wir befinden uns weiterhin im Editiermodus.
-     * Deshalb die neuen Felder ebenfalls editierbar machen.
-     */
 
     makeFieldsEditable();
 
@@ -1330,16 +1431,8 @@ body.editing .add-row-container {
 
   function deleteRow(index) {
 
-    /*
-     * Noch nicht gespeicherte Änderungen zuerst übernehmen.
-     */
-
     readChangesFromTable();
 
-
-    /*
-     * Zeile aus den Daten entfernen.
-     */
 
     currentPlanning.splice(
       index,
@@ -1347,16 +1440,7 @@ body.editing .add-row-container {
     );
 
 
-    /*
-     * Tabellen neu aufbauen.
-     */
-
     renderPlanning();
-
-
-    /*
-     * Editiermodus beibehalten.
-     */
 
     makeFieldsEditable();
 
@@ -1366,14 +1450,16 @@ body.editing .add-row-container {
 
   /*
    * ============================================================
-   * PAPIERKORB-BUTTONS AKTIVIEREN
+   * LÖSCH-BUTTONS
    * ============================================================
    */
 
   function activateDeleteButtons() {
 
     document
-      .querySelectorAll("[data-delete-index]")
+      .querySelectorAll(
+        "[data-delete-index]"
+      )
       .forEach(button => {
 
         button.addEventListener(
@@ -1385,10 +1471,6 @@ body.editing .add-row-container {
                 this.dataset.deleteIndex
               );
 
-
-            /*
-             * Vor dem Löschen nachfragen.
-             */
 
             const confirmed =
               confirm(
@@ -1419,31 +1501,21 @@ body.editing .add-row-container {
 
   function savePlanning() {
 
-    /*
-     * Aktuelle Eingaben auslesen.
-     */
-
     readChangesFromTable();
 
 
     /*
-     * Im Browser speichern.
+     * Die Versionsnummer wird beim normalen
+     * lokalen Speichern NICHT erhöht.
      */
 
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify(currentPlanning)
-    );
+    saveToLocalStorage();
 
 
     finishEditing();
 
     renderPlanning();
 
-
-    /*
-     * Speicherbestätigung anzeigen.
-     */
 
     const saveInfo =
       document.getElementById("saveInfo");
@@ -1471,10 +1543,6 @@ body.editing .add-row-container {
    */
 
   function cancelEditing() {
-
-    /*
-     * Zustand vor dem Editieren wiederherstellen.
-     */
 
     if (planningBeforeEdit) {
 
@@ -1517,17 +1585,15 @@ body.editing .add-row-container {
       });
 
 
-    /*
-     * Buttons wieder auf Normalzustand setzen.
-     */
-
     document
       .getElementById("editButton")
       .classList.remove("hidden");
 
+
     document
       .getElementById("saveButton")
       .classList.add("hidden");
+
 
     document
       .getElementById("cancelButton")
@@ -1535,46 +1601,56 @@ body.editing .add-row-container {
 
   }
 
-/*
- * ============================================================
- * PLANNING.JS EXPORTIEREN
- * ============================================================
- *
- * Aus dem aktuellen Stand der Reiseplanung wird eine
- * vollständige neue planning.js erzeugt.
- *
- * Diese Datei kann anschließend die bisherige Datei
- *
- *     data/planning.js
- *
- * ersetzen.
- * ============================================================
- */
-
-function exportPlanning() {
-
-  /*
-   * Falls wir uns gerade im Editiermodus befinden,
-   * zuerst die aktuellen Eingaben übernehmen.
-   */
-
-  if (
-    document.body.classList.contains("editing")
-  ) {
-
-    readChangesFromTable();
-
-  }
 
 
   /*
-   * JavaScript-Datei erzeugen.
+   * ============================================================
+   * PLANNING.JS EXPORTIEREN
+   * ============================================================
    *
-   * JSON.stringify(..., null, 2)
-   * sorgt für eine gut lesbare Formatierung.
+   * Beim Export wird automatisch eine neue Versionsnummer
+   * erzeugt.
+   *
+   * Beispiel:
+   *
+   * Website Version 1
+   *       ↓
+   * Export Version 2
+   *
+   * Nach dem Hochladen nach GitHub ist die Website
+   * anschließend Version 2.
+   * ============================================================
    */
 
-  const fileContent =
+  function exportPlanning() {
+
+    if (
+      document.body.classList.contains(
+        "editing"
+      )
+    ) {
+
+      readChangesFromTable();
+
+    }
+
+
+    /*
+     * Neue Version bestimmen.
+     */
+
+    const exportVersion =
+      Math.max(
+        currentVersion,
+        PLANNING_VERSION
+      ) + 1;
+
+
+    /*
+     * Inhalt der neuen planning.js
+     */
+
+    const fileContent =
 
 `/*
  * ============================================================
@@ -1583,8 +1659,12 @@ function exportPlanning() {
  *
  * Diese Datei wurde aus planning.html exportiert.
  *
+ * Version ${exportVersion}
+ *
  * ============================================================
  */
+
+const PLANNING_VERSION = ${exportVersion};
 
 const planning = ${JSON.stringify(
   currentPlanning,
@@ -1594,66 +1674,109 @@ const planning = ${JSON.stringify(
 `;
 
 
-  /*
-   * Aus dem Text eine temporäre Datei erzeugen.
-   */
+    /*
+     * Download-Datei erzeugen.
+     */
 
-  const blob =
-    new Blob(
-      [fileContent],
-      {
-        type:
-          "text/javascript;charset=utf-8"
-      }
-    );
-
-
-  /*
-   * Temporäre Download-Adresse erzeugen.
-   */
-
-  const url =
-    URL.createObjectURL(blob);
+    const blob =
+      new Blob(
+        [fileContent],
+        {
+          type:
+            "text/javascript;charset=utf-8"
+        }
+      );
 
 
-  /*
-   * Unsichtbaren Download-Link erzeugen.
-   */
-
-  const link =
-    document.createElement("a");
+    const url =
+      URL.createObjectURL(blob);
 
 
-  link.href = url;
-
-  link.download =
-    "planning.js";
+    const link =
+      document.createElement("a");
 
 
-  /*
-   * Download starten.
-   */
+    link.href = url;
 
-  document.body.appendChild(link);
-
-  link.click();
-
-  link.remove();
+    link.download =
+      "planning.js";
 
 
-  /*
-   * Temporäre Adresse wieder freigeben.
-   */
+    document.body.appendChild(link);
 
-  URL.revokeObjectURL(url);
+    link.click();
 
-}
-  
+    link.remove();
+
+
+    URL.revokeObjectURL(url);
+
+
+    /*
+     * Auch die lokale Arbeitskopie bekommt jetzt
+     * diese Versionsnummer.
+     */
+
+    currentVersion =
+      exportVersion;
+
+
+    saveToLocalStorage();
+
+    updateVersionInfo();
+
+  }
+
 
 
   /*
    * ============================================================
-   * HAUPT-BUTTONS
+   * WEBSITE-VERSION LADEN
+   * ============================================================
+   *
+   * Löscht bewusst die lokale Arbeitskopie und lädt
+   * den Stand aus planning.js.
+   * ============================================================
+   */
+
+  function loadWebsiteVersion() {
+
+    const confirmed =
+      confirm(
+        "Lokal Ännerunge verwerfen an d'Website-Version lueden?"
+      );
+
+
+    if (!confirmed) {
+
+      return;
+
+    }
+
+
+    currentPlanning =
+      JSON.parse(
+        JSON.stringify(planning)
+      );
+
+
+    currentVersion =
+      PLANNING_VERSION;
+
+
+    saveToLocalStorage();
+
+    finishEditing();
+
+    renderPlanning();
+
+  }
+
+
+
+  /*
+   * ============================================================
+   * BUTTONS
    * ============================================================
    */
 
@@ -1681,6 +1804,28 @@ const planning = ${JSON.stringify(
     );
 
 
+  /*
+   * Export wird jetzt EINMAL hier aktiviert.
+   *
+   * Damit ist auch der Fehler der bisherigen Version behoben.
+   */
+
+  document
+    .getElementById("exportButton")
+    .addEventListener(
+      "click",
+      exportPlanning
+    );
+
+
+  document
+    .getElementById("resetButton")
+    .addEventListener(
+      "click",
+      loadWebsiteVersion
+    );
+
+
 
   /*
    * ============================================================
@@ -1689,7 +1834,9 @@ const planning = ${JSON.stringify(
    */
 
   document
-    .querySelectorAll("[data-add-section]")
+    .querySelectorAll(
+      "[data-add-section]"
+    )
     .forEach(button => {
 
       button.addEventListener(
