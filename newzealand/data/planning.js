@@ -5,12 +5,12 @@
  *
  * Diese Datei wurde aus planning.html exportiert.
  *
- * Version 3
+ * Version 4
  *
  * ============================================================
  */
 
-const PLANNING_VERSION = 3;
+const PLANNING_VERSION = 4;
 
 const planning = [
   {
@@ -160,7 +160,7 @@ const planning = [
   {
     "date": "Sun, 6 Dec 2026",
     "item1": "Pullman Airport Hotel check out",
-    "item2": "Auto siche goen (airport)",
+    "item2": "Auto siche goen (airport) 12:00",
     "item3": "fueren op: Wyuna Bay, Coromandel",
     "item4": "Chalet checkin",
     "type": "travel"
@@ -217,7 +217,7 @@ const planning = [
     "date": "Sun, 13 Dec 2026",
     "item1": "Chalet check out",
     "item2": "op AKL fueren",
-    "item3": "Auto ofginn (Airport)",
+    "item3": "Auto ofginn (Airport) 12:00",
     "item4": "De Brett Hotel checkin",
     "type": "travel"
   },
