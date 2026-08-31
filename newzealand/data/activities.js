@@ -199,4 +199,103 @@ const activities = [
     guidePage: 282
   }
 
+const activities = [
+
+  // -------------------------
+  // COROMANDEL – WYUNA BAY
+  // -------------------------
+
+  {
+    place: "Coromandel",
+    name: "Mautohe Cathedral Cove",
+    date: "",
+    lat: -36.8276,
+    lon: 175.7897,
+    type: "Wanderung / Strand / Aussicht",
+    duration: "ca. 4–5 h inkl. Fahrt und Aufenthalt",
+    note: "Hauptwanderweg zur Cathedral Cove. Vorher aktuellen Track-Status und Wetter prüfen.",
+    url: "https://www.doc.govt.nz/cathedralcove",
+    guidePage: ""
+  },
+
+  {
+    place: "Coromandel",
+    name: "Hot Water Beach",
+    date: "",
+    lat: -36.8804,
+    lon: 175.8207,
+    type: "Strand / Thermalquelle",
+    duration: "ca. 2–3 h",
+    note: "Nur rund um Ebbe sinnvoll. Ideal etwa 2 Stunden vor bis 2 Stunden nach Niedrigwasser. Mit Cathedral Cove kombinierbar.",
+    url: "https://thecoromandel.com/hot-water-beach/",
+    guidePage: ""
+  },
+
+  {
+    place: "Coromandel",
+    name: "New Chums Beach",
+    date: "",
+    lat: -36.6970,
+    lon: 175.6078,
+    type: "Wanderung / Strand",
+    duration: "ca. 3–4 h",
+    note: "Von Whangapoua zu Fuß erreichbar. Weg führt über Strand, Felsen und durch Wald. Gezeiten beachten.",
+    url: "https://thecoromandel.com/new-chum-beach/",
+    guidePage: ""
+  },
+
+  {
+    place: "Coromandel",
+    name: "Driving Creek Railway",
+    date: "",
+    lat: -36.7370,
+    lon: 175.5041,
+    type: "Bahnfahrt / Aussicht",
+    duration: "ca. 2 h",
+    note: "Historische Schmalspurbahn durch regenerierenden Regenwald bis zum Aussichtspunkt EyeFull Tower. Von Wyuna Bay sehr gut erreichbar.",
+    url: "https://drivingcreek.nz/activities/driving-creek-railway-tours/",
+    guidePage: ""
+  },
+
+  {
+    place: "Coromandel",
+    name: "Hahei Beach",
+    date: "",
+    lat: -36.8390,
+    lon: 175.8050,
+    type: "Strand",
+    duration: "ca. 1–2 h",
+    note: "Schöner Strand in Hahei. Gut mit Cathedral Cove und/oder Hot Water Beach kombinierbar.",
+    url: "https://thecoromandel.com/explore/hahei/",
+    guidePage: ""
+  },
+
+  {
+    place: "Coromandel",
+    name: "The Pinnacles – Kauaeranga Valley",
+    date: "",
+    lat: -37.0440,
+    lon: 175.7190,
+    type: "Wanderung / Aussicht",
+    duration: "ganztägig",
+    note: "Anspruchsvollerer Tagesausflug mit langer Wanderung. Nur bei gutem Wetter einplanen.",
+    url: "https://www.doc.govt.nz/parks-and-recreation/places-to-go/coromandel/places/kauaeranga-valley/things-to-do/tracks/pinnacles-walk/",
+    guidePage: ""
+  },
+
+  {
+    place: "Coromandel",
+    name: "Coromandel Coastal Walkway",
+    date: "",
+    lat: -36.5030,
+    lon: 175.4080,
+    type: "Wanderung / Küste / Aussicht",
+    duration: "ganztägig",
+    note: "Landschaftlich sehr schöne Küstenwanderung im äußersten Norden der Halbinsel. Wegen der langen Anfahrt ab Wyuna Bay nur bei genügend Zeit einplanen.",
+    url: "https://www.doc.govt.nz/parks-and-recreation/places-to-go/coromandel/places/northern-coromandel/things-to-do/coromandel-coastal-walkway/",
+    guidePage: ""
+  }
+
+];
+  
 ];
