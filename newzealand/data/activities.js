@@ -237,8 +237,8 @@ const activities = [
     lon: 175.6078,
     type: "Wanderung / Strand",
     duration: "ca. 3–4 h",
-    note: "Von Whangapoua zu Fuß erreichbar. Weg führt über Strand, Felsen und durch Wald. Gezeiten beachten.",
-    url: "https://thecoromandel.com/new-chum-beach/",
+    note: "Von Whangapoua zu Fuß erreichbar. Weg führt über Strand, Felsen und durch Wald. Nur rund um Ebbe sinnvoll.",
+    url: "https://seabreezeholidaypark.co.nz/new-chum-beach/",
     guidePage: ""
   },
 
