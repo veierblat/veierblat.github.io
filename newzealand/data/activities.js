@@ -264,7 +264,7 @@ const activities = [
     type: "Strand",
     duration: "70 km",
     note: "Schöner Strand in Hahei. Gut mit Cathedral Cove und/oder Hot Water Beach kombinierbar.",
-    url: "https://thecoromandel.com/explore/hahei/",
+    url: "https://thecoromandel.nz/destinations/hahei-and-cathedral-cove",
     guidePage: ""
   },
 
@@ -289,7 +289,7 @@ const activities = [
     lon: 175.6830,
     type: "Filmset / Führung",
     duration: "160km",
-    note: "Geführte Tour durch das Hobbiton Movie Set mit Hobbit-Höhlen, Bag End, Green Dragon Inn und Innenbesichtigung eines Hobbit-Hauses. Vorausbuchung empfehlenswert.",
+    note: "Geführte Tour durch das Hobbiton Movie Set mit Hobbit-Höhlen, Bag End, Green Dragon Inn und Innenbesichtigung eines Hobbit-Hauses.",
     url: "https://www.hobbitontours.com/",
     guidePage: ""
   }
