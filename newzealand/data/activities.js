@@ -197,9 +197,7 @@ const activities = [
 
     url: "https://aquataxi.co.nz",
     guidePage: 282
-  }
-
-const activities = [
+  },
 
   // -------------------------
   // COROMANDEL – WYUNA BAY
@@ -294,8 +292,18 @@ const activities = [
     note: "Landschaftlich sehr schöne Küstenwanderung im äußersten Norden der Halbinsel. Wegen der langen Anfahrt ab Wyuna Bay nur bei genügend Zeit einplanen.",
     url: "https://www.doc.govt.nz/parks-and-recreation/places-to-go/coromandel/places/northern-coromandel/things-to-do/coromandel-coastal-walkway/",
     guidePage: ""
-  }
-
-];
+  },
   
+  {
+    place: "Matamata",
+    name: "Hobbiton Movie Set",
+    date: "",
+    lat: -37.8721,
+    lon: 175.6830,
+    type: "Filmset / Führung",
+    duration: "ganztägig inkl. Hin- und Rückfahrt",
+    note: "Geführte Tour durch das Hobbiton Movie Set mit Hobbit-Höhlen, Bag End, Green Dragon Inn und Innenbesichtigung eines Hobbit-Hauses. Vorausbuchung empfehlenswert.",
+    url: "https://www.hobbitontours.com/",
+    guidePage: ""
+  }
 ];
