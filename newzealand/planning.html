@@ -1078,6 +1078,17 @@ body.editing .add-row-container {
       .getElementById("cancelButton")
       .classList.remove("hidden");
 
+    /*
+     * Export-Button
+     */
+    
+    document
+      .getElementById("exportButton")
+      .addEventListener(
+        "click",
+        exportPlanning
+      );
+
   }
 
 
