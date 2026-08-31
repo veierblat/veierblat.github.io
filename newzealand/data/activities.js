@@ -210,7 +210,7 @@ const activities = [
     lat: -36.8276,
     lon: 175.7897,
     type: "Wanderung / Strand / Aussicht",
-    duration: "ca. 4–5 h inkl. Fahrt und Aufenthalt",
+    duration: "70 km",
     note: "Hauptwanderweg zur Cathedral Cove. Vorher aktuellen Track-Status und Wetter prüfen.",
     url: "https://www.newzealand.com/in/feature/cathedral-cove-walk/",
     guidePage: ""
@@ -223,7 +223,7 @@ const activities = [
     lat: -36.8804,
     lon: 175.8207,
     type: "Strand / Thermalquelle",
-    duration: "ca. 2–3 h",
+    duration: "150 km",
     note: "Nur rund um Ebbe sinnvoll. Ideal etwa 2 Stunden vor bis 2 Stunden nach Niedrigwasser. Mit Cathedral Cove kombinierbar.",
     url: "https://www.hotwaterbeach.org.nz",
     guidePage: ""
@@ -236,7 +236,7 @@ const activities = [
     lat: -36.6970,
     lon: 175.6078,
     type: "Wanderung / Strand",
-    duration: "ca. 3–4 h",
+    duration: "35 km",
     note: "Von Whangapoua zu Fuß erreichbar. Weg führt über Strand, Felsen und durch Wald. Nur rund um Ebbe sinnvoll.",
     url: "https://seabreezeholidaypark.co.nz/new-chum-beach/",
     guidePage: ""
@@ -249,7 +249,7 @@ const activities = [
     lat: -36.7370,
     lon: 175.5041,
     type: "Bahnfahrt / Aussicht",
-    duration: "ca. 2 h",
+    duration: "10 km",
     note: "Historische Schmalspurbahn durch regenerierenden Regenwald bis zum Aussichtspunkt EyeFull Tower. Von Wyuna Bay sehr gut erreichbar.",
     url: "https://drivingcreek.nz/activities/driving-creek-railway-tours/",
     guidePage: ""
@@ -262,7 +262,7 @@ const activities = [
     lat: -36.8390,
     lon: 175.8050,
     type: "Strand",
-    duration: "ca. 1–2 h",
+    duration: "70 km",
     note: "Schöner Strand in Hahei. Gut mit Cathedral Cove und/oder Hot Water Beach kombinierbar.",
     url: "https://thecoromandel.com/explore/hahei/",
     guidePage: ""
@@ -275,7 +275,7 @@ const activities = [
     lat: -37.0440,
     lon: 175.7190,
     type: "Wanderung / Aussicht",
-    duration: "ganztägig",
+    duration: "85km",
     note: "Anspruchsvollerer Tagesausflug mit langer Wanderung. Nur bei gutem Wetter einplanen.",
     url: "https://www.doc.govt.nz/parks-and-recreation/places-to-go/coromandel/places/kauaeranga-valley/things-to-do/tracks/pinnacles-walk/",
     guidePage: ""
@@ -288,7 +288,7 @@ const activities = [
     lat: -37.8721,
     lon: 175.6830,
     type: "Filmset / Führung",
-    duration: "ganztägig inkl. Hin- und Rückfahrt",
+    duration: "160km",
     note: "Geführte Tour durch das Hobbiton Movie Set mit Hobbit-Höhlen, Bag End, Green Dragon Inn und Innenbesichtigung eines Hobbit-Hauses. Vorausbuchung empfehlenswert.",
     url: "https://www.hobbitontours.com/",
     guidePage: ""
