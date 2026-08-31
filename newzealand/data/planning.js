@@ -5,34 +5,34 @@
  *
  * Diese Datei wurde aus planning.html exportiert.
  *
- * Version 5
+ * Version 6
  *
  * ============================================================
  */
 
-const PLANNING_VERSION = 5;
+const PLANNING_VERSION = 6;
 
 const planning = [
   {
     "date": "Thu, 5 Nov 2026",
     "item1": "LUX - AKL",
-    "item2": "départ: 18:20",
-    "item3": "",
+    "item2": "LUX 18:20 -> KL1714 -> AMS 19:35",
+    "item3": "AMS 21:25 -> KL0887 -> HKG (6. Nov) 16:20",
     "item4": "",
     "type": "travel"
   },
   {
     "date": "Fri, 6 Nov 2026",
-    "item1": "LUX - AKL",
-    "item2": "",
+    "item1": "AMS (5. Nov) 21:25 -> KL0887 -> HKG 16:20",
+    "item2": "HKG  17:50 -> NZ0080 -> AKL (7. Nov) 09:45",
     "item3": "",
     "item4": "",
     "type": "travel"
   },
   {
     "date": "Sat, 7 Nov 2026",
-    "item1": "LUX - AKL",
-    "item2": "Arrivée: 9:40",
+    "item1": "HKG (6. Nov) 17:50 -> NZ0080 -> AKL 09:45",
+    "item2": "Arrivée: 9:45",
     "item3": "Pullman Airport Hotel check in",
     "item4": "",
     "type": "travel"
@@ -233,15 +233,15 @@ const planning = [
     "date": "Tue, 15 Dec 2026",
     "item1": "De Brett Hotel checkout",
     "item2": "AKL",
-    "item3": "AKL - LUX départ 23:55",
+    "item3": "AKL 23:55 -> NZ0289 -> PVG (shanghai) (16. Dez) 07:05",
     "item4": "",
     "type": "travel"
   },
   {
     "date": "Wed, 16 Dec 2026",
-    "item1": "LUX 22:00",
-    "item2": "",
-    "item3": "",
+    "item1": "AKL (15. Dez) 23:55 -> NZ0289 -> PVG 07:05",
+    "item2": "PVG 11:05 -> KL0896 -> AMS 18:25",
+    "item3": "AMS 21:25 -> KL1715 -> LUX 22:20",
     "item4": "",
     "type": "travel"
   }
