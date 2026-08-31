@@ -59,14 +59,44 @@
 
 
     /*
-     * Titel oben links
+     * ============================================================
+     * TITEL UND NAVIGATION
+     * ============================================================
+     *
+     * Die Leiste liegt über der Karte.
+     *
+     * Links:
+     *   Neuseeland Pia a Gil
+     *
+     * Rechts:
+     *   Link zur Reiseplanung
+     *
+     * ============================================================
+     */
+
+    #topbar {
+
+      position: absolute;
+
+      top: 10px;
+      left: 55px;
+
+      z-index: 1000;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+
+    }
+
+
+    /*
+     * Titel
      */
 
     #title {
-      position: absolute;
-      top: 10px;
-      left: 55px;
-      z-index: 1000;
 
       background: white;
 
@@ -79,6 +109,66 @@
 
       box-shadow:
         0 1px 5px rgba(0,0,0,0.35);
+
+    }
+
+
+    /*
+     * Button zur Reiseplanung
+     */
+
+    #planningButton {
+
+      background: white;
+
+      color: #222;
+
+      padding: 8px 14px;
+
+      border-radius: 6px;
+
+      text-decoration: none;
+
+      font-size: 16px;
+      font-weight: bold;
+
+      box-shadow:
+        0 1px 5px rgba(0,0,0,0.35);
+
+    }
+
+
+    /*
+     * Maus über dem Button
+     */
+
+    #planningButton:hover {
+
+      background: #f0f0f0;
+
+    }
+
+
+    /*
+     * Auf kleinen Bildschirmen etwas kompakter
+     */
+
+    @media (max-width: 600px) {
+
+      #topbar {
+        gap: 6px;
+      }
+
+      #title {
+        padding: 7px 9px;
+        font-size: 14px;
+      }
+
+      #planningButton {
+        padding: 7px 9px;
+        font-size: 14px;
+      }
+
     }
 
   </style>
@@ -101,12 +191,34 @@ KARTE
 
 <!--
 ============================================================
-TITEL
+TITEL UND NAVIGATION
 ============================================================
 -->
 
-<div id="title">
-  Neuseeland Pia a Gil
+<div id="topbar">
+
+
+  <!-- Titel -->
+
+  <div id="title">
+
+    Neuseeland Pia a Gil
+
+  </div>
+
+
+  <!-- Link zur Reiseplanung -->
+
+  <a
+    id="planningButton"
+    href="./planning.html"
+  >
+
+    📋 Reiseplanung
+
+  </a>
+
+
 </div>
 
 
@@ -199,6 +311,7 @@ L.tileLayer(
 
 ).addTo(map);
 
+
 /*
  * ============================================================
  * EBENEN-MENÜ
@@ -225,6 +338,7 @@ L.control.layers(
     collapsed: true
   }
 ).addTo(map);
+
 
 /*
  * ============================================================
@@ -429,6 +543,8 @@ const campingIcon =
 
   });
 
+
+
 /*
  * Alle Campingplätze auf die Karte setzen
  */
@@ -473,77 +589,65 @@ campings.forEach(camp => {
 
   `;
 
+
   /*
    * ----------------------------------------------------------
    * WOMO-REISEFÜHRER
    * ----------------------------------------------------------
-   *
-   * guideNumber = Campingnummer im Reiseführer
-   * guidePage   = Seitennummer im Reiseführer
-   *
-   * Beide Angaben sind optional.
-   * ----------------------------------------------------------
    */
-  
+
   if (camp.guideNumber || camp.guidePage) {
-  
+
     popup += `
-  
+
       <div style="
         margin-top:8px;
         padding-top:6px;
         border-top:1px solid #ccc;
       ">
-  
+
         <b>📖 WoMo-Reiseführer</b>
-  
+
     `;
-  
-  
+
+
     if (camp.guideNumber) {
-  
+
       popup += `
-  
+
         <br>
         Camping Nr. ${camp.guideNumber}
-  
+
       `;
-  
+
     }
-  
-  
+
+
     if (camp.guidePage) {
-  
+
       popup += `
-  
+
         <br>
         Seite ${camp.guidePage}
-  
+
       `;
-  
+
     }
-  
-  
+
+
     popup += `
-  
+
       </div>
-  
+
     `;
-  
+
   }
+
+
 
   /*
    * ----------------------------------------------------------
    * TELEFONNUMMER
-   * ----------------------------------------------------------
-   *
-   * Wird nur angezeigt, wenn in campings.js
-   * das Feld "phone" vorhanden ist.
-   *
-   * Durch href="tel:..." kann die Nummer auf
-   * iPhone und anderen Smartphones direkt
-   * angetippt werden.
-   *
    * ----------------------------------------------------------
    */
 
@@ -577,14 +681,6 @@ campings.forEach(camp => {
    * ----------------------------------------------------------
    * WEBSEITE
    * ----------------------------------------------------------
-   *
-   * Wird nur angezeigt, wenn in campings.js
-   * ein "url"-Eintrag vorhanden ist.
-   *
-   * target="_blank"
-   * öffnet die Webseite in einem neuen Tab.
-   *
-   * ----------------------------------------------------------
    */
 
   if (camp.url) {
@@ -611,42 +707,39 @@ campings.forEach(camp => {
 
   }
 
-/*
- * ----------------------------------------------------------
- * CAMPERMATE
- * ----------------------------------------------------------
- *
- * Link zum Campingplatz in CamperMate.
- *
- * Wird nur angezeigt, wenn in campings.js
- * camperMateUrl eingetragen wurde.
- *
- * ----------------------------------------------------------
- */
 
-if (camp.camperMateUrl) {
 
-  popup += `
+  /*
+   * ----------------------------------------------------------
+   * CAMPERMATE
+   * ----------------------------------------------------------
+   */
 
-    <div style="margin-top:6px;">
+  if (camp.camperMateUrl) {
 
-      📍
+    popup += `
 
-      <a
-        href="${camp.camperMateUrl}"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <div style="margin-top:6px;">
 
-        Am CamperMate opmaachen
+        📍
 
-      </a>
+        <a
+          href="${camp.camperMateUrl}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
 
-    </div>
+          Am CamperMate opmaachen
 
-  `;
+        </a>
 
-}
+      </div>
+
+    `;
+
+  }
+
+
 
   /*
    * ----------------------------------------------------------
@@ -708,6 +801,7 @@ if (camp.camperMateUrl) {
 });
 
 
+
 /*
  * ============================================================
  * 5. AKTIVITÄTEN
@@ -717,15 +811,7 @@ if (camp.camperMateUrl) {
  *
  *     data/activities.js
  *
- * Beispiele:
- *
- * - Wanderungen
- * - Aussichtspunkte
- * - Gondelfahrten
- * - Bootsfahrten
- * - Sehenswürdigkeiten
- *
- * Aktivitäten erhalten momentan einen
+ * Aktivitäten erhalten einen
  * orangefarbenen Marker mit ★.
  *
  * ============================================================
@@ -813,9 +899,6 @@ activities.forEach(activity => {
 
   /*
    * Ort
-   *
-   * Wird nur angezeigt,
-   * wenn "place" vorhanden ist.
    */
 
   if (activity.place) {
@@ -852,9 +935,6 @@ activities.forEach(activity => {
 
   /*
    * Art der Aktivität
-   *
-   * z.B. Wanderung, Besichtigung,
-   * Gondel, Tagesausflug ...
    */
 
   if (activity.type) {
@@ -876,12 +956,6 @@ activities.forEach(activity => {
 
   /*
    * Distanz
-   *
-   * Besonders für Wanderungen interessant.
-   *
-   * Wenn in activities.js keine Distanz
-   * angegeben wurde, erscheint diese Zeile
-   * überhaupt nicht.
    */
 
   if (activity.distance) {
@@ -902,7 +976,7 @@ activities.forEach(activity => {
 
 
   /*
-   * Dauer der Aktivität
+   * Dauer
    */
 
   if (activity.duration) {
@@ -920,63 +994,68 @@ activities.forEach(activity => {
 
   }
 
-/*
- * ----------------------------------------------------------
- * REISEFÜHRER
- * ----------------------------------------------------------
- */
 
-if (activity.guidePage) {
-
-  popup += `
-
-    <div style="margin-top:7px;">
-
-      📖 <b>WoMo-Reiseführer:</b>
-      Seite ${activity.guidePage}
-
-    </div>
-
-  `;
-
-}
-
-
-/*
- * ----------------------------------------------------------
- * WEBSEITE DER AKTIVITÄT
- * ----------------------------------------------------------
- */
-
-if (activity.url) {
-
-  popup += `
-
-    <div style="margin-top:7px;">
-
-      🌐
-
-      <a
-        href="${activity.url}"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-
-        Websäit vun der Aktivitéit
-
-      </a>
-
-    </div>
-
-  `;
-
-}
 
   /*
-  * ----------------------------------------------------------
-  * Optionale Bemerkung
-  * ----------------------------------------------------------
-  */
+   * ----------------------------------------------------------
+   * REISEFÜHRER
+   * ----------------------------------------------------------
+   */
+
+  if (activity.guidePage) {
+
+    popup += `
+
+      <div style="margin-top:7px;">
+
+        📖 <b>WoMo-Reiseführer:</b>
+        Seite ${activity.guidePage}
+
+      </div>
+
+    `;
+
+  }
+
+
+
+  /*
+   * ----------------------------------------------------------
+   * WEBSEITE DER AKTIVITÄT
+   * ----------------------------------------------------------
+   */
+
+  if (activity.url) {
+
+    popup += `
+
+      <div style="margin-top:7px;">
+
+        🌐
+
+        <a
+          href="${activity.url}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+
+          Websäit vun der Aktivitéit
+
+        </a>
+
+      </div>
+
+    `;
+
+  }
+
+
+
+  /*
+   * ----------------------------------------------------------
+   * Optionale Bemerkung
+   * ----------------------------------------------------------
+   */
 
   if (activity.note) {
 
@@ -1032,19 +1111,7 @@ if (activity.url) {
  * ============================================================
  * 6. STRASSENROUTE LADEN
  * ============================================================
- *
- * Die tatsächliche Straßenroute liegt in:
- *
- *     data/roadroute.geojson
- *
- * Jede Etappe ist ein eigenes GeoJSON-Feature.
- *
- * Dadurch kann jede Fahrstrecke einzeln
- * angeklickt werden.
- *
- * ============================================================
  */
-
 
 fetch("./data/roadroute.geojson")
 
@@ -1059,16 +1126,6 @@ fetch("./data/roadroute.geojson")
     /*
      * --------------------------------------------------------
      * Hilfsfunktion zur Darstellung einer Zeit
-     * --------------------------------------------------------
-     *
-     * Beispiel:
-     *
-     * 283 Minuten
-     *
-     * wird zu:
-     *
-     * 4 h 43 min
-     *
      * --------------------------------------------------------
      */
 
@@ -1127,18 +1184,9 @@ fetch("./data/roadroute.geojson")
             function(feature, layer) {
 
 
-              /*
-               * Eigenschaften dieser Etappe
-               */
-
               const p =
                 feature.properties;
 
-
-              /*
-               * Geplante Distanz aus unserer
-               * roadroute.geojson
-               */
 
               const distance =
                 p.distance;
@@ -1146,20 +1194,7 @@ fetch("./data/roadroute.geojson")
 
 
               /*
-               * ------------------------------------------------
-               * FAHRZEIT
-               * ------------------------------------------------
-               *
-               * Wir rechnen mit einer durchschnittlichen
-               * Geschwindigkeit von 50 km/h.
-               *
-               * Beispiel:
-               *
-               * 236 km / 50 km/h
-               * = 4,72 Stunden
-               * = ca. 4 h 43 min
-               *
-               * ------------------------------------------------
+               * Fahrzeit bei durchschnittlich 50 km/h
                */
 
               const drivingMinutes =
@@ -1170,25 +1205,8 @@ fetch("./data/roadroute.geojson")
 
 
               /*
-               * ------------------------------------------------
-               * PAUSEN
-               * ------------------------------------------------
-               *
-               * Pro Fahrstunde rechnen wir
-               * 15 Minuten Pause.
-               *
-               * Anschließend wird die Pause auf die
-               * nächsten vollen 15 Minuten aufgerundet.
-               *
-               * Beispiel:
-               *
-               * berechnet: 71 Minuten
-               *
-               * ergibt:
-               *
-               * 75 Minuten = 1 h 15 min
-               *
-               * ------------------------------------------------
+               * 15 Minuten Pause pro Fahrstunde,
+               * auf 15 Minuten aufgerundet.
                */
 
               const rawBreakMinutes =
@@ -1203,9 +1221,7 @@ fetch("./data/roadroute.geojson")
 
 
               /*
-               * Gesamtzeit:
-               *
-               * Fahrzeit + Pausen
+               * Gesamtzeit
                */
 
               const totalMinutes =
@@ -1327,17 +1343,7 @@ fetch("./data/roadroute.geojson")
 
 
               /*
-               * ------------------------------------------------
-               * ROUTE BEIM DARÜBERFAHREN HERVORHEBEN
-               * ------------------------------------------------
-               *
-               * Normal:
-               * Linienbreite 5
-               *
-               * Maus darüber:
-               * Linienbreite 9
-               *
-               * ------------------------------------------------
+               * Route beim Darüberfahren hervorheben
                */
 
               layer.on(
@@ -1403,12 +1409,6 @@ fetch("./data/roadroute.geojson")
    * ==========================================================
    * FEHLER BEIM LADEN DER ROUTE
    * ==========================================================
-   *
-   * Falls roadroute.geojson nicht gefunden oder
-   * beschädigt ist, erscheint der Fehler in der
-   * Browser-Konsole.
-   *
-   * ==========================================================
    */
 
   .catch(error => {
@@ -1430,4 +1430,3 @@ fetch("./data/roadroute.geojson")
 </body>
 
 </html>
-Nott
