@@ -320,7 +320,56 @@
       display: none;
     }
 
+/*
+ * ============================================================
+ * ZEILEN HINZUFÜGEN / LÖSCHEN
+ * ============================================================
+ */
 
+.row-actions {
+  display: none;
+}
+
+body.editing .row-actions {
+  display: table-cell;
+  width: 55px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.delete-row {
+  background: #fbe9e7;
+  color: #b71c1c;
+  padding: 5px 8px;
+  font-size: 15px;
+}
+
+.delete-row:hover {
+  background: #ffcdd2;
+}
+
+.add-row-container {
+  display: none;
+  padding: 10px 12px;
+  border-top: 1px solid #ddd;
+  background: #fafafa;
+}
+
+body.editing .add-row-container {
+  display: block;
+}
+
+.add-row-button {
+  background: #e8f5e9;
+  color: #2e7d32;
+  padding: 8px 12px;
+}
+
+.add-row-button:hover {
+  background: #c8e6c9;
+}
+
+    
     /*
      * ============================================================
      * MOBILE DARSTELLUNG
@@ -440,126 +489,168 @@
          ANREISE
          ======================================================== -->
 
-    <section class="section">
+   <section class="section">
 
-      <h2 class="section-title">
-        ✈️ Anreise
-      </h2>
+  <h2 class="section-title">
+    ✈️ Anreise
+  </h2>
 
-      <div class="table-wrapper">
+  <div class="table-wrapper">
 
-        <table>
+    <table>
 
-          <thead>
-            <tr>
-              <th>Datum</th>
-              <th>Planung</th>
-            </tr>
-          </thead>
+      <thead>
+        <tr>
+          <th>Datum</th>
+          <th>Planung</th>
+        </tr>
+      </thead>
 
-          <tbody id="arrivalBody">
-          </tbody>
+      <tbody id="arrivalBody">
+      </tbody>
 
-        </table>
+    </table>
 
-      </div>
-
-    </section>
+  </div>
 
 
+  <!-- Nur im Editiermodus sichtbar -->
 
-    <!-- ========================================================
-         WOHNMOBIL
-         ======================================================== -->
+  <div class="add-row-container">
 
-    <section class="section">
+    <button
+      class="add-row-button"
+      type="button"
+      data-add-section="arrival"
+    >
+      ＋ Tag hinzufügen
+    </button>
 
-      <h2 class="section-title">
-        🚐 Wohnmobil – Südinsel
-      </h2>
+  </div>
 
-      <div class="table-wrapper">
-
-        <table>
-
-          <thead>
-
-            <tr>
-              <th>Datum</th>
-              <th>Von</th>
-              <th>Bis</th>
-              <th class="number-column">km</th>
-              <th class="number-column">Nächte</th>
-            </tr>
-
-          </thead>
+</section>
 
 
-          <tbody id="motorhomeBody">
-          </tbody>
+<!-- ========================================================
+     WOHNMOBIL
+     ======================================================== -->
+
+<section class="section">
+
+  <h2 class="section-title">
+    🚐 Wohnmobil – Südinsel
+  </h2>
+
+  <div class="table-wrapper">
+
+    <table>
+
+      <thead>
+
+        <tr>
+          <th>Datum</th>
+          <th>Von</th>
+          <th>Bis</th>
+          <th class="number-column">km</th>
+          <th class="number-column">Nächte</th>
+        </tr>
+
+      </thead>
 
 
-          <tfoot>
-
-            <tr class="total-row">
-
-              <td colspan="3">
-                Gesamt
-              </td>
-
-              <td
-                id="totalDistance"
-                class="number-column"
-              >
-              </td>
-
-              <td
-                id="totalNights"
-                class="number-column"
-              >
-              </td>
-
-            </tr>
-
-          </tfoot>
-
-        </table>
-
-      </div>
-
-    </section>
+      <tbody id="motorhomeBody">
+      </tbody>
 
 
+      <tfoot>
 
-    <!-- ========================================================
-         NORDINSEL
-         ======================================================== -->
+        <tr class="total-row">
 
-    <section class="section">
+          <td colspan="3">
+            Gesamt
+          </td>
 
-      <h2 class="section-title">
-        🏝 Nordinsel & Rückreise
-      </h2>
+          <td
+            id="totalDistance"
+            class="number-column"
+          >
+          </td>
 
-      <div class="table-wrapper">
+          <td
+            id="totalNights"
+            class="number-column"
+          >
+          </td>
 
-        <table>
+        </tr>
 
-          <thead>
-            <tr>
-              <th>Datum</th>
-              <th>Planung</th>
-            </tr>
-          </thead>
+      </tfoot>
 
-          <tbody id="northIslandBody">
-          </tbody>
+    </table>
 
-        </table>
+  </div>
 
-      </div>
 
-    </section>
+  <!-- Nur im Editiermodus sichtbar -->
+
+  <div class="add-row-container">
+
+    <button
+      class="add-row-button"
+      type="button"
+      data-add-section="motorhome"
+    >
+      ＋ Etappe hinzufügen
+    </button>
+
+  </div>
+
+</section>
+
+<!-- ========================================================
+     NORDINSEL
+     ======================================================== -->
+
+<section class="section">
+
+  <h2 class="section-title">
+    🏝 Nordinsel & Rückreise
+  </h2>
+
+  <div class="table-wrapper">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Datum</th>
+          <th>Planung</th>
+        </tr>
+      </thead>
+
+      <tbody id="northIslandBody">
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+  <!-- Nur im Editiermodus sichtbar -->
+
+  <div class="add-row-container">
+
+    <button
+      class="add-row-button"
+      type="button"
+      data-add-section="north"
+    >
+      ＋ Tag hinzufügen
+    </button>
+
+  </div>
+
+</section>
 
 
   </main>
