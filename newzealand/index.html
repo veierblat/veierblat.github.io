@@ -117,36 +117,34 @@
      * Button zur Reiseplanung
      */
 
-    #planningButton {
-
+      .topbarButton {
+      display: flex;
+      align-items: center;
+    
       background: white;
-
       color: #222;
-
+    
       padding: 8px 14px;
-
+    
       border-radius: 6px;
-
+    
       text-decoration: none;
-
+    
       font-size: 16px;
       font-weight: bold;
-
+    
       box-shadow:
         0 1px 5px rgba(0,0,0,0.35);
-
+    
+      /*
+       * Alle Buttons bekommen exakt dieselbe Höhe.
+       */
+      min-height: 46px;
     }
 
-
-    /*
-     * Maus über dem Button
-     */
-
-    #planningButton:hover {
-
-      background: #f0f0f0;
-
-    }
+.topbarButton:hover {
+  background: #f0f0f0;
+}
 
 
     /*
@@ -197,28 +195,19 @@ TITEL UND NAVIGATION
 
 <div id="topbar">
 
-
-  <!-- Titel -->
-
   <div id="title">
-
     Neuseeland Pia a Gil
-
   </div>
 
-
-  <!-- Link zur Reiseplanung -->
-
   <a
-    id="planningButton"
+    class="topbarButton"
     href="./planning.html"
   >
-
     📋 Reiseplanung
-
   </a>
 
   <a
+    class="topbarButton"
     href="https://www.icloud.com/iclouddrive/00axAxKMb8ElGk_tsHClBTnoQ#2026_Neuseeland"
     target="_blank"
     rel="noopener noreferrer"
@@ -227,8 +216,6 @@ TITEL UND NAVIGATION
   </a>
 
 </div>
-
-
 
 <!--
 ============================================================
