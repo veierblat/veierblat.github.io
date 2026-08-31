@@ -7,6 +7,14 @@
  *
  * ============================================================
  */
+  /*
+   * Versionsnummer dieser Planung.
+   *
+   * Bei jedem Export wird automatisch die nächste
+   * Versionsnummer erzeugt.
+   */
+const PLANNING_VERSION = 1;
+
 
 const planning = [
   {
