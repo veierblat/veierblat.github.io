@@ -293,28 +293,93 @@ const activities = [
     url: "https://www.hobbitontours.com/",
     guidePage: ""
   },
+    /*
+   * ============================================================
+   * AUCKLAND
+   * ============================================================
+   */
+
+
+  /*
+   * Sonndeg, 13.12.2026
+   *
+   * No der Faart vu Coromandel op Auckland,
+   * der Autosofgab an dem Check-in am Hotel:
+   * gemittleche Spadséiergang laanscht d'Waterfront.
+   */
+
+  {
+    place: "Auckland",
+    name: "Viaduct Harbour & Wynyard Quarter",
+    date: "13.12.2026",
+    lat: -36.8434,
+    lon: 174.7578,
+    type: "Spadséiergang / Hafen",
+    distance: "ca. 3–5 km",
+    duration: "ca. 2–3 Stonnen",
+    note: "Gemittleche Spadséiergang am Nomëtteg oder Owend nom Check-in am DeBrett Hotel. Hafen, Yachten, Restauranten a Waterfront.",
+    url: "https://www.viaduct.co.nz/",
+    guidePage: null
+  },
+
+
+  /*
+   * Méindeg, 14.12.2026
+   *
+   * SEA LIFE Kelly Tarlton's
+   */
+
   {
     place: "Auckland",
     name: "SEA LIFE Kelly Tarlton's Aquarium",
     date: "14.12.2026",
     lat: -36.8485,
     lon: 174.8233,
-    type: "Aquarium / Besichtigung",
-    duration: "ca. 2–3 h",
-    note: "Am besten eher nach dem Mittag besuchen; vormittags ist es oft voller.",
+    type: "Aquarium / Visitt",
+    duration: "ca. 2–3 Stonnen",
+    note: "Visitt am fréien Nomëtteg. Aquarium mat Haien, Pinguinen, Schildkröten an Ënnerwaassertunnellen.",
     url: "https://www.visitsealife.com/auckland/",
     guidePage: null
-  }, 
+  },
+
+
+  /*
+   * Méindeg, 14.12.2026
+   *
+   * Sky Tower am spéiden Nomëtteg / Owend.
+   */
+
   {
     place: "Auckland",
     name: "Auckland Sky Tower",
     date: "14.12.2026",
     lat: -36.8485,
     lon: 174.7622,
-    type: "Aussicht / Besichtigung",
-    duration: "ca. 1–1,5 h",
-    note: "Schöne Aussicht über Auckland. Gut mit dem SEA LIFE Aquarium am selben Tag kombinierbar.",
+    type: "Aussiicht / Visitt",
+    duration: "ca. 1–1,5 Stonnen",
+    note: "Am beschte géint den Owend besichen. Bei guddem Wieder flott Aussiicht iwwer Auckland an den Hauraki Gulf.",
     url: "https://skycityauckland.co.nz/sky-tower/",
     guidePage: null
-}
+  },
+
+
+  /*
+   * Dënschdeg, 15.12.2026
+   *
+   * Leschten Dag zu Auckland.
+   * De Fliger start eréischt um 23:55 Auer.
+   */
+
+  {
+    place: "Auckland",
+    name: "Wētā Workshop Unleashed",
+    date: "15.12.2026",
+    lat: -36.8490,
+    lon: 174.7620,
+    type: "Film / Spezialeffekter",
+    duration: "ca. 1,5–2 Stonnen",
+    note: "Interaktiv Tour duerch Filmkulissen, Kreaturen, Masken a Spezialeffekter. Läit direkt vis-à-vis vum Sky Tower. D'Tour am beschten am Viraus reservéieren.",
+    url: "https://www.wetaworkshop.com/tours/auckland",
+    guidePage: null
+  }
 ];
