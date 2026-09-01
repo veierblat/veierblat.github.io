@@ -381,5 +381,18 @@ const activities = [
     note: "Interaktiv Tour duerch Filmkulissen, Kreaturen, Masken a Spezialeffekter. Läit direkt vis-à-vis vum Sky Tower. D'Tour am beschten am Viraus reservéieren.",
     url: "https://www.wetaworkshop.com/tours/auckland",
     guidePage: null
+  },
+  {
+  place: "Auckland",
+  name: "Karangahape Road (K' Road)",
+  date: "13.12.2026",
+  lat: -36.8572,
+  lon: 174.7600,
+  type: "Shopping / Spadséiergang",
+  distance: "ca. 2–3 km",
+  duration: "ca. 2 Stonnen",
+  note: "Spadséiergang laanscht d'K' Road mat Vintage- a Secondhand-Geschäfter, klenge Boutiquen, Plackegeschäfter, Caféen a Restauranten. Interessant fir méi alternativ an individuell Geschäfter.",
+  url: "https://www.karangahaperoad.com/",
+  guidePage: null
   }
 ];
