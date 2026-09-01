@@ -292,5 +292,17 @@ const activities = [
     note: "Geführte Tour durch das Hobbiton Movie Set mit Hobbit-Höhlen, Bag End, Green Dragon Inn und Innenbesichtigung eines Hobbit-Hauses.",
     url: "https://www.hobbitontours.com/",
     guidePage: ""
-  }
+  },
+  {
+    place: "Auckland",
+    name: "SEA LIFE Kelly Tarlton's Aquarium",
+    date: "14.12.2026",
+    lat: -36.8485,
+    lon: 174.8233,
+    type: "Aquarium / Besichtigung",
+    duration: "ca. 2–3 h",
+    note: "Am besten eher nach dem Mittag besuchen; vormittags ist es oft voller.",
+    url: "https://www.visitsealife.com/auckland/",
+    guidePage: null
+}
 ];
