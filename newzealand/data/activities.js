@@ -304,5 +304,17 @@ const activities = [
     note: "Am besten eher nach dem Mittag besuchen; vormittags ist es oft voller.",
     url: "https://www.visitsealife.com/auckland/",
     guidePage: null
+  }, 
+  {
+    place: "Auckland",
+    name: "Auckland Sky Tower",
+    date: "14.12.2026",
+    lat: -36.8485,
+    lon: 174.7622,
+    type: "Aussicht / Besichtigung",
+    duration: "ca. 1–1,5 h",
+    note: "Schöne Aussicht über Auckland. Gut mit dem SEA LIFE Aquarium am selben Tag kombinierbar.",
+    url: "https://skycityauckland.co.nz/sky-tower/",
+    guidePage: null
 }
 ];
