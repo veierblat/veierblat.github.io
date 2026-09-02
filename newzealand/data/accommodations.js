@@ -53,8 +53,8 @@ const accommodations = [
     from: "06.12.2026",
     to: "13.12.2026",
     nights: 7,
-    lat: -36.76677,
-    lon: 175.46375,
+    lat: -36.76671441946257,
+    lon: 175.46372289991064,
     type: "Haus",
     note: "Relax Basis fir eis Ausflich op der Coromandel Hallefinsel."
   },
