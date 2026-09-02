@@ -15,7 +15,7 @@
 const accommodations = [
 
 {
-  place: "Auckland Airport",
+  place: "Auckland Airport, 37 Tom Pearce Drive",
   name: "Pullman Auckland Airport",
 
   stays: [
@@ -33,8 +33,8 @@ const accommodations = [
     }
   ],
 
-  lat: -37.0073,
-  lon: 174.7840,
+  lat: -37.003650,
+  lon: 174.782413,
 
   type: "Hotel"
 },
@@ -69,7 +69,7 @@ const accommodations = [
    */
 
   {
-    place: "Auckland",
+    place: "Auckland, 2 High Street",
     name: "Hotel DeBrett",
     from: "13.12.2026",
     to: "15.12.2026",
