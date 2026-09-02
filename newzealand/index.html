@@ -256,11 +256,9 @@ activities.js:
 
 <script src="./data/activities.js"></script>
 
-
+<script src="./data/accommodations.js"></script>
 
 <script>
-
-
 /*
  * ============================================================
  * 1. KARTE ERZEUGEN
@@ -294,6 +292,8 @@ const tripStopLayer = L.layerGroup().addTo(map);
 const campingLayer = L.layerGroup().addTo(map);
 
 const activityLayer = L.layerGroup().addTo(map);
+
+const accommodationLayer = L.layerGroup().addTo(map);
 
 
 /*
@@ -329,6 +329,8 @@ const overlays = {
   "📍 Etappenorte": tripStopLayer,
 
   "⛺ Campingplätze": campingLayer,
+
+  "🏠 Ënnerkonften": accommodationLayer,
 
   "★ Aktivitäten": activityLayer
 
@@ -805,6 +807,172 @@ campings.forEach(camp => {
 });
 
 
+/*
+ * ============================================================
+ * ËNNERKONFTEN
+ * ============================================================
+ *
+ * D'Donnéeë kommen aus:
+ *
+ *     data/accommodations.js
+ *
+ * Fest Ënnerkonfte kréien e bloe Marker
+ * mat engem Haus-Symbol.
+ *
+ * ============================================================
+ */
+
+
+/*
+ * Eegent Symbol fir Ënnerkonften
+ */
+
+const accommodationIcon =
+  L.divIcon({
+
+    className: "",
+
+    html: `
+
+      <div style="
+
+        background:#2563eb;
+
+        width:30px;
+        height:30px;
+
+        border-radius:50%;
+
+        border:2px solid white;
+
+        display:flex;
+
+        align-items:center;
+        justify-content:center;
+
+        font-size:17px;
+
+        box-shadow:
+          0 1px 5px rgba(0,0,0,0.5);
+
+      ">
+
+        🏠
+
+      </div>
+
+    `,
+
+    iconSize: [30, 30],
+
+    iconAnchor: [15, 15],
+
+    popupAnchor: [0, -15]
+
+  });
+
+
+
+/*
+ * All Ënnerkonften op d'Kaart setzen
+ */
+
+accommodations.forEach(accommodation => {
+
+
+  let popup = `
+
+    <div style="
+      font-size:17px;
+      font-weight:bold;
+      margin-bottom:7px;
+    ">
+
+      🏠 ${accommodation.name}
+
+    </div>
+
+
+    <div>
+
+      ${accommodation.place}
+
+    </div>
+
+
+    <div style="margin-top:7px;">
+
+      📅 ${accommodation.from}
+      –
+      ${accommodation.to}
+
+    </div>
+
+
+    <div>
+
+      🌙
+      <b>
+        ${accommodation.nights}
+        Nuecht${accommodation.nights === 1 ? "" : "en"}
+      </b>
+
+    </div>
+
+
+    <div style="margin-top:7px;">
+
+      <b>Typ:</b>
+      ${accommodation.type}
+
+    </div>
+
+  `;
+
+
+  if (accommodation.note) {
+
+    popup += `
+
+      <div style="
+        margin-top:7px;
+        padding-top:6px;
+        border-top:1px solid #ccc;
+      ">
+
+        ${accommodation.note}
+
+      </div>
+
+    `;
+
+  }
+
+
+  L.marker(
+
+    [accommodation.lat, accommodation.lon],
+
+    {
+      icon: accommodationIcon
+    }
+
+  )
+
+  .addTo(accommodationLayer)
+
+  .bindPopup(
+
+    popup,
+
+    {
+      maxWidth: 320
+    }
+
+  );
+
+});
+  
 
 /*
  * ============================================================
