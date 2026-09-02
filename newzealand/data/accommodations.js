@@ -14,48 +14,31 @@
 
 const accommodations = [
 
-  /*
-   * ----------------------------------------------------------
-   * PULLMAN AUCKLAND AIRPORT
-   * ----------------------------------------------------------
-   *
-   * Éischt Nuecht an Neuseeland virum Fluch op Christchurch.
-   */
+{
+  place: "Auckland Airport",
+  name: "Pullman Auckland Airport",
 
-  {
-    place: "Auckland Airport",
-    name: "Pullman Auckland Airport",
-    from: "07.11.2026",
-    to: "08.11.2026",
-    nights: 1,
-    lat: -37.0073,
-    lon: 174.7840,
-    type: "Hotel",
-    note: "Éischt Nuecht an Neuseeland. Den 08.11. Fluch vun Auckland op Christchurch."
-  },
+  stays: [
+    {
+      from: "07.11.2026",
+      to: "08.11.2026",
+      nights: 1,
+      note: "Éischt Nuecht an Neuseeland. Den 08.11. Fluch vun Auckland op Christchurch."
+    },
+    {
+      from: "05.12.2026",
+      to: "06.12.2026",
+      nights: 1,
+      note: "Iwwernuechtung nom Fluch vu Christchurch op Auckland. Den 06.12. geet et weider op Coromandel."
+    }
+  ],
 
+  lat: -37.0073,
+  lon: 174.7840,
 
-  /*
-   * ----------------------------------------------------------
-   * PULLMAN AUCKLAND AIRPORT
-   * ----------------------------------------------------------
-   *
-   * No der WoMo-Rees op der Südinsel.
-   */
-
-  {
-    place: "Auckland Airport",
-    name: "Pullman Auckland Airport",
-    from: "05.12.2026",
-    to: "06.12.2026",
-    nights: 1,
-    lat: -37.0073,
-    lon: 174.7840,
-    type: "Hotel",
-    note: "Iwwernuechtung nom Fluch vu Christchurch op Auckland. Den 06.12. geet et weider op Coromandel."
-  },
-
-
+  type: "Hotel"
+},
+  
   /*
    * ----------------------------------------------------------
    * WYUNA BAY
