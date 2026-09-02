@@ -15,7 +15,7 @@
 const accommodations = [
 
 {
-  place: "Auckland Airport, 37 Tom Pearce Drive",
+  place: "Auckland Airport, 37 Tom Pearce Drive. Tel:+64 9 256 7901",
   name: "Pullman Auckland Airport",
 
   stays: [
@@ -69,7 +69,7 @@ const accommodations = [
    */
 
   {
-    place: "Auckland, 2 High Street",
+    place: "Auckland, 2 High Street. Tel: +64 9 925 9000",
     name: "Hotel DeBrett",
     from: "13.12.2026",
     to: "15.12.2026",
