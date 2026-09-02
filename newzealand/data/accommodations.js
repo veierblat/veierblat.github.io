@@ -33,8 +33,8 @@ const accommodations = [
     }
   ],
 
-  lat: -37.003650,
-  lon: 174.782413,
+  lat: -37.00339210383076,
+  lon: 174.7824439251878,
 
   type: "Hotel"
 },
