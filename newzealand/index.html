@@ -880,7 +880,7 @@ const accommodationIcon =
 accommodations.forEach(accommodation => {
 
 
-  let popup = `
+    let popup = `
 
     <div style="
       font-size:17px;
@@ -899,28 +899,128 @@ accommodations.forEach(accommodation => {
 
     </div>
 
-
-    <div style="margin-top:7px;">
-
-      📅 ${accommodation.from}
-      –
-      ${accommodation.to}
-
-    </div>
+  `;
 
 
-    <div>
+  /*
+   * ----------------------------------------------------------
+   * EEN ODER MÉI OPENTHALTER
+   * ----------------------------------------------------------
+   */
 
-      🌙
-      <b>
-        ${accommodation.nights}
-        Nuecht${accommodation.nights === 1 ? "" : "en"}
-      </b>
+  if (accommodation.stays) {
 
-    </div>
+    accommodation.stays.forEach(stay => {
+
+      popup += `
+
+        <div style="
+          margin-top:9px;
+          padding-top:7px;
+          border-top:1px solid #ccc;
+        ">
+
+          📅 ${stay.from} – ${stay.to}
+
+          <br>
+
+          🌙
+          <b>
+            ${stay.nights}
+            Nuecht${stay.nights === 1 ? "" : "en"}
+          </b>
+
+      `;
 
 
-    <div style="margin-top:7px;">
+      if (stay.note) {
+
+        popup += `
+
+          <div style="margin-top:5px;">
+            ${stay.note}
+          </div>
+
+        `;
+
+      }
+
+
+      popup += `
+
+        </div>
+
+      `;
+
+    });
+
+  }
+
+
+  /*
+   * ----------------------------------------------------------
+   * EEN EENZEGEN OPENTHALT
+   * ----------------------------------------------------------
+   */
+
+  else {
+
+    popup += `
+
+      <div style="margin-top:7px;">
+
+        📅 ${accommodation.from}
+        –
+        ${accommodation.to}
+
+      </div>
+
+
+      <div>
+
+        🌙
+        <b>
+          ${accommodation.nights}
+          Nuecht${accommodation.nights === 1 ? "" : "en"}
+        </b>
+
+      </div>
+
+    `;
+
+
+    if (accommodation.note) {
+
+      popup += `
+
+        <div style="
+          margin-top:7px;
+          padding-top:6px;
+          border-top:1px solid #ccc;
+        ">
+
+          ${accommodation.note}
+
+        </div>
+
+      `;
+
+    }
+
+  }
+
+
+  /*
+   * Typ vun der Ënnerkonft
+   */
+
+  popup += `
+
+    <div style="
+      margin-top:9px;
+      padding-top:7px;
+      border-top:1px solid #ccc;
+    ">
 
       <b>Typ:</b>
       ${accommodation.type}
@@ -928,25 +1028,6 @@ accommodations.forEach(accommodation => {
     </div>
 
   `;
-
-
-  if (accommodation.note) {
-
-    popup += `
-
-      <div style="
-        margin-top:7px;
-        padding-top:6px;
-        border-top:1px solid #ccc;
-      ">
-
-        ${accommodation.note}
-
-      </div>
-
-    `;
-
-  }
 
 
   L.marker(
