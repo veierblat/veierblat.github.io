@@ -350,6 +350,43 @@ const campings = [
     }
   },
 
+/*
+ * ----------------------------------------------------------
+ * LAKE HĀWEA – ALTERNATIVE ZU WĀNAKA
+ * ----------------------------------------------------------
+ */
+
+{
+  name: "Camp Lake Hāwea Holiday Park",
+  date: "18.11.–21.11.2026",
+
+  lat: -44.60687125762327,
+  lon: 169.24587966569226,
+
+  facilities: "RES, EL, DS, CW, WM, WC, HS",
+
+  note: "Alternative zu Tasman Holiday Parks – Wānaka.",
+
+  phone: "+6434431767",
+
+  url: "https://thecamp.co.nz/",
+
+  camperMateUrl: "https://campermate.com/en/location/new-zealand/ota/wanaka/paid-campsites/the-camp-lake-hawea/606e07a2-fef0-4f8f-8a8d-04d7194bafb4",
+
+  guideNumber: null,
+  guidePage: null,
+
+  reservation: {
+    status: "noch nicht reserviert",
+    siteType: "",
+    siteName: "",
+    price: "",
+    bookingNumber: "",
+    bookedOn: "",
+    note: ""
+  }
+},
+  
 
   /*
    * ----------------------------------------------------------
