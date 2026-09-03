@@ -145,7 +145,7 @@ const campings = [
     guidePage: 64,
 
     reservation: {
-      status: "noch nicht reserviert",
+      status: "reserviert",
       siteType: "Premium powered site",
       siteName: "",
       price: "176 NZD",
