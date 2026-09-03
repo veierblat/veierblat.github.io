@@ -738,60 +738,47 @@ campings.forEach(camp => {
 
 if (camp.reservation) {
 
-
   /*
    * Status für die Anzeige vorbereiten
    */
 
   let statusText = camp.reservation.status;
-
   let statusIcon = "⚪";
 
 
   if (camp.reservation.status === "reserviert") {
 
     statusIcon = "✅";
-
     statusText = "Reserviert";
 
   }
 
-
   else if (
-    camp.reservation.status ===
-    "noch nicht reserviert"
+    camp.reservation.status === "noch nicht reserviert"
   ) {
 
     statusIcon = "🟡";
-
     statusText = "Noch nicht reserviert";
 
   }
 
-
   else if (
-    camp.reservation.status ===
-    "Anfrage geschickt"
+    camp.reservation.status === "Anfrage geschickt"
   ) {
 
     statusIcon = "📧";
-
     statusText = "Anfrage geschickt";
 
   }
 
-
   else if (
-    camp.reservation.status ===
-    "first come first served"
+    camp.reservation.status === "first come first served"
   ) {
 
     statusIcon = "🔵";
-
     statusText = "First come, first served";
 
   }
-
 
 
   /*
@@ -809,7 +796,6 @@ if (camp.reservation) {
       <b>📅 Reservierung</b>
 
   `;
-
 
 
   /*
@@ -832,7 +818,6 @@ if (camp.reservation) {
   }
 
 
-
   /*
    * Platztyp
    */
@@ -851,7 +836,6 @@ if (camp.reservation) {
     `;
 
   }
-
 
 
   /*
@@ -874,7 +858,6 @@ if (camp.reservation) {
   }
 
 
-
   /*
    * Preis
    */
@@ -893,7 +876,6 @@ if (camp.reservation) {
     `;
 
   }
-
 
 
   /*
@@ -916,7 +898,6 @@ if (camp.reservation) {
   }
 
 
-
   /*
    * Buchungsdatum
    */
@@ -937,73 +918,75 @@ if (camp.reservation) {
   }
 
 
-
   /*
    * Bemerkung zur Reservierung
    */
 
+  if (camp.reservation.note) {
 
-if (camp.reservation.note) {
+    popup += `
+
+      <div style="margin-top:5px;">
+
+        ${camp.reservation.note}
+
+      </div>
+
+    `;
+
+  }
+
+
+  /*
+   * ----------------------------------------------------------
+   * RESERVIERUNGS-PDF
+   * ----------------------------------------------------------
+   *
+   * Wird nur angezeigt, wenn in campings.js
+   * eine reservationPdfUrl eingetragen ist.
+   */
+
+  if (camp.reservationPdfUrl) {
+
+    popup += `
+
+      <div style="
+        margin-top:8px;
+        padding-top:7px;
+        border-top:1px solid #ddd;
+      ">
+
+        📄
+
+        <a
+          href="${camp.reservationPdfUrl}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+
+          Reservierungs-PDF öffnen
+
+        </a>
+
+      </div>
+
+    `;
+
+  }
+
+
+  /*
+   * Reservierungsbereich schließen
+   */
 
   popup += `
-
-    <div style="margin-top:5px;">
-
-      ${camp.reservation.note}
 
     </div>
 
   `;
 
-}
-
-
-/*
- * ----------------------------------------------------------
- * RESERVIERUNGS-PDF
- * ----------------------------------------------------------
- *
- * Wenn in campings.js eine reservationPdfUrl
- * eingetragen ist, erscheint hier ein Link zur
- * Reservierungsbestätigung.
- */
-
-if (camp.reservationPdfUrl) {
-
-  popup += `
-
-    <div style="margin-top:7px;">
-
-      📄
-
-      <a
-        href="${camp.reservationPdfUrl}"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-
-        Reservierungs-PDF öffnen
-
-      </a>
-
-    </div>
-
-  `;
-
-}
-
-
-
-/*
- * Reservierungsbereich schließen
- */
-
-popup += `
-
-  </div>
-
-`;
-
+}   // <-- DIESE KLAMMER HAT IN DEINER DATEI GEFEHLT
+  
   /*
    * ----------------------------------------------------------
    * TELEFONNUMMER
