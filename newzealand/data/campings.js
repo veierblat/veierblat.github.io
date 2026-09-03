@@ -242,7 +242,7 @@ const campings = [
       note: "web bookings. check in 14:00-20:00, check out 12:00"
     },
 
-  reservationPdfUrl: ""
+  reservationPdfUrl: "/Users/gilbert/Library/Mobile\ Documents/com\~apple\~CloudDocs/Documents/Privat/Vakanz/2026\ Vakanz/2026\ Neuseeland/04\ Campinger/3\ mount\ cook\ white\ horse\ hill.pdf"
 
   },
 
