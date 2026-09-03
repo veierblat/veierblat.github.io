@@ -77,7 +77,10 @@ const campings = [
       bookingNumber: "",
       bookedOn: "",
       note: ""
-    }
+    },
+
+  reservationPdfUrl: ""
+
   },
 
 
@@ -114,7 +117,10 @@ const campings = [
       bookingNumber: "",
       bookedOn: "",
       note: ""
-    }
+    },
+
+  reservationPdfUrl: ""
+
   },
 
 
@@ -152,7 +158,9 @@ const campings = [
       bookingNumber: "548239",
       bookedOn: "03/09/2026",
       note: "check in: 13:00, check out 10:00"
-    }
+    },
+    
+      reservationPdfUrl: "/Users/gilbert/Library/Mobile Documents/com~apple~CloudDocs/Documents/Privat/Vakanz/2026 Vakanz/2026 Neuseeland/04 Campinger/2 Tekapo Lakes Edge Holiday Park_28821174.pdf"
   },
 
 
@@ -232,7 +240,10 @@ const campings = [
       bookingNumber: "6434810",
       bookedOn: "03/09/2026",
       note: "web bookings. check in 14:00-20:00, check out 12:00"
-    }
+    },
+
+  reservationPdfUrl: ""
+
   },
 
 
@@ -271,7 +282,10 @@ const campings = [
       bookingNumber: "#80014",
       bookedOn: "03/09/2026",
       note: "check in 14:00, check out: 10:00"
-    }
+    },
+
+  reservationPdfUrl: ""
+
   },
 
 
@@ -309,7 +323,10 @@ const campings = [
       bookingNumber: "176128",
       bookedOn: "03/09/2026",
       note: "check in: 13:00, check out: 10:00"
-    }
+    },
+
+  reservationPdfUrl: ""
+
   },
 
 
@@ -386,7 +403,10 @@ const campings = [
     bookingNumber: "82070076",
     bookedOn: "03/09/2026",
     note: "check in 14:00 - 18:00, check out: 10:00"
-  }
+  },
+
+  reservationPdfUrl: ""
+
 },
   
 
@@ -427,7 +447,10 @@ const campings = [
       bookingNumber: "confirmation 6434829, transaction number 1588442, GST Number 67-809-823",
       bookedOn: "03/09/2026",
       note: "check in ??"
-    }
+    },
+
+  reservationPdfUrl: ""
+
   },
 
 
@@ -580,7 +603,10 @@ const campings = [
       bookingNumber: "",
       bookedOn: "",
       note: ""
-    }
+    },
+
+  reservationPdfUrl: ""
+
   },
 
 
@@ -618,7 +644,10 @@ const campings = [
       bookingNumber: "",
       bookedOn: "",
       note: ""
-    }
+    },
+
+  reservationPdfUrl: ""
+
   },
 
 
@@ -657,7 +686,10 @@ const campings = [
       bookingNumber: "",
       bookedOn: "",
       note: ""
-    }
+    },
+
+  reservationPdfUrl: ""
+
   },
 
 
@@ -694,7 +726,10 @@ const campings = [
       bookingNumber: "",
       bookedOn: "",
       note: ""
-    }
+    },
+
+  reservationPdfUrl: ""
+
   },
 
 
@@ -732,7 +767,10 @@ const campings = [
       bookingNumber: "",
       bookedOn: "",
       note: ""
-    }
+    },
+
+  reservationPdfUrl: ""
+
   },
 
 
@@ -770,7 +808,10 @@ const campings = [
       bookingNumber: "",
       bookedOn: "",
       note: ""
-    }
+    },
+
+  reservationPdfUrl: ""
+
   },
 
 
@@ -807,7 +848,10 @@ const campings = [
       bookingNumber: "",
       bookedOn: "",
       note: ""
-    }
+    },
+
+  reservationPdfUrl: ""
+
   },
 
 
@@ -846,7 +890,10 @@ const campings = [
       bookingNumber: "",
       bookedOn: "",
       note: ""
-    }
+    },
+
+  reservationPdfUrl: ""
+
   }
 
 ];
