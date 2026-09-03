@@ -898,13 +898,13 @@ const campings = [
     guidePage: 40,
 
     reservation: {
-      status: "nach net reservéiert",
-      siteType: "",
+      status: "reservéiert",
+      siteType: "powered",
       siteName: "",
-      price: "",
-      bookingNumber: "",
-      bookedOn: "",
-      note: ""
+      price: "120 NZD",
+      bookingNumber: "#55340",
+      bookedOn: "03/09/2026",
+      note: "check in: 14:00-19:00, check out: 10:00"
     },
 
   reservationPdfUrl: "https://www.icloud.com/iclouddrive/0e1zu7vEcfioHB8XtOX-DDflw#13_Christchurch_south_brighton"
