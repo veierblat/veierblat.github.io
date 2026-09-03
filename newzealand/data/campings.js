@@ -245,7 +245,7 @@ const campings = [
       note: "web bookings. check in 14:00-20:00, check out 12:00"
     },
 
-  reservationPdfUrl: ""
+  reservationPdfUrl: "https://www.icloud.com/iclouddrive/0c9XbGX5n_FIEhXCBLI20ilsw#3_mount_cook_white_horse_hill"
 
   },
 
@@ -287,7 +287,7 @@ const campings = [
       note: "check in 14:00, check out: 10:00"
     },
 
-  reservationPdfUrl: ""
+  reservationPdfUrl: "https://www.icloud.com/iclouddrive/0798nnQtqyr4mJnaUVhCiGDjg#4_Omarama_top_Ten"
 
   },
 
@@ -328,7 +328,7 @@ const campings = [
       note: "check in: 13:00, check out: 10:00"
     },
 
-  reservationPdfUrl: ""
+  reservationPdfUrl: "https://www.icloud.com/iclouddrive/0d6VcLX72pcfswrrZlXnazEdg#5a_Queenstown%5F28821390"
 
   },
 
