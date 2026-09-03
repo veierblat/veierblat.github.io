@@ -620,7 +620,7 @@ const campings = [
       note: "check in: 15:00 - 18:30 , check out: 10:00"
     },
 
-  reservationPdfUrl: ""
+  reservationPdfUrl: "https://www.icloud.com/iclouddrive/096g_nt_BInqZ7UAQHmr8X5PQ#9a_Hokitika_shining_star%5F28821500"
 
   },
 
