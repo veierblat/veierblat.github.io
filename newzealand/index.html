@@ -521,7 +521,7 @@ function createCampingIcon(camp) {
 
   const isReserved =
     camp.reservation &&
-    camp.reservation.status === "reserviert";
+    camp.reservation.status === "reservéiert";
 
 
   return L.divIcon({
@@ -746,28 +746,28 @@ if (camp.reservation) {
   let statusIcon = "⚪";
 
 
-  if (camp.reservation.status === "reserviert") {
+  if (camp.reservation.status === "reservéiert") {
 
     statusIcon = "✅";
-    statusText = "Reserviert";
+    statusText = "Reservéiert";
 
   }
 
   else if (
-    camp.reservation.status === "noch nicht reserviert"
+    camp.reservation.status === "nach net reservéiert"
   ) {
 
     statusIcon = "🟡";
-    statusText = "Noch nicht reserviert";
+    statusText = "Nach net reservéiert";
 
   }
 
   else if (
-    camp.reservation.status === "Anfrage geschickt"
+    camp.reservation.status === "Ufro geschéckt per mail"
   ) {
 
     statusIcon = "📧";
-    statusText = "Anfrage geschickt";
+    statusText = "Ufro geschéckt per mail";
 
   }
 
