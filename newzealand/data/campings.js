@@ -409,7 +409,7 @@ const campings = [
       "DOC-Campsite. Telefon = Tititea/Mount Aspiring " +
       "National Park Visitor Centre.",
 
-    phone: "+64 3 443 7660",
+    phone: "+64 3 443 7660, WhatsApp:	+64 27 269 6871",
 
     url:
       "https://www.doc.govt.nz/parks-and-recreation/places-to-go/otago/places/mount-aspiring-national-park/things-to-do/campsites/cameron-flat-campsite/",
@@ -426,7 +426,7 @@ const campings = [
       price: "30 NZD",
       bookingNumber: "confirmation 6434829, transaction number 1588442, GST Number 67-809-823",
       bookedOn: "03/09/2026",
-      note: ""
+      note: "check in ??"
     }
   },
 
