@@ -9,7 +9,33 @@
  * guidePage     = Seite im WoMo-Reiseführer
  * camperMateUrl = direkter Link zum Camping in CamperMate
  *
- * Alle Angaben sind optional.
+ *
+ * Reservierung:
+ *
+ * reservation.status
+ *   = "reserviert"
+ *   = "noch nicht reserviert"
+ *   = "Anfrage geschickt"
+ *   = "first come first served"
+ *   = ""
+ *
+ * reservation.siteType
+ *   z.B. "Powered Site"
+ *
+ * reservation.siteName
+ *   konkrete Platznummer oder Bezeichnung, falls vorhanden
+ *
+ * reservation.price
+ *   z.B. "NZ$ 120"
+ *
+ * reservation.bookingNumber
+ *   Buchungs- / Bestätigungsnummer
+ *
+ * reservation.bookedOn
+ *   Datum der Reservierung
+ *
+ * reservation.note
+ *   zusätzliche Informationen zur Reservierung
  *
  * ============================================================
  */
@@ -41,7 +67,17 @@ const campings = [
     camperMateUrl: "https://campermate.com/en/location/new-zealand/can/christchurch/paid-campsites/rakaia-gorge-camping-ground/7d726278-33c6-406d-bd48-602193f37a29",
 
     guideNumber: 64,
-    guidePage: 58
+    guidePage: 58,
+
+    reservation: {
+      status: "first come first served",
+      siteType: "",
+      siteName: "",
+      price: "",
+      bookingNumber: "",
+      bookedOn: "",
+      note: ""
+    }
   },
 
 
@@ -68,7 +104,17 @@ const campings = [
     camperMateUrl: "https://campermate.com/en/location/new-zealand/can/timaru/paid-campsites/peel-forest-campground/ab5ecdc5-7c5e-4434-937f-b2d2fe72ab70",
 
     guideNumber: 67,
-    guidePage: 61
+    guidePage: 61,
+
+    reservation: {
+      status: "",
+      siteType: "",
+      siteName: "",
+      price: "",
+      bookingNumber: "",
+      bookedOn: "",
+      note: ""
+    }
   },
 
 
@@ -96,7 +142,17 @@ const campings = [
     camperMateUrl: "https://campermate.com/en/location/new-zealand/can/mackenzie/paid-campsites/lakes-edge-holiday-park/383dd32e-7930-4010-8a70-7409be7d4068",
 
     guideNumber: 71,
-    guidePage: 64
+    guidePage: 64,
+
+    reservation: {
+      status: "noch nicht reserviert",
+      siteType: "",
+      siteName: "",
+      price: "",
+      bookingNumber: "",
+      bookedOn: "",
+      note: ""
+    }
   },
 
 
@@ -125,7 +181,17 @@ const campings = [
     camperMateUrl: "https://campermate.com/en/location/new-zealand/can/mackenzie/paid-campsites/lake-mcgregor-campervan-site/ec147ae6-e6fb-4aed-97a2-06147cf40903",
 
     guideNumber: 72,
-    guidePage: 66
+    guidePage: 66,
+
+    reservation: {
+      status: "",
+      siteType: "",
+      siteName: "",
+      price: "",
+      bookingNumber: "",
+      bookedOn: "",
+      note: ""
+    }
   },
 
 
@@ -156,7 +222,17 @@ const campings = [
     camperMateUrl: "https://campermate.com/en/location/new-zealand/can/mackenzie/low-cost-campground/white-horse-hill-campground/80a15ccc-38e9-49e9-988e-d10600ec82b1",
 
     guideNumber: 76,
-    guidePage: 72
+    guidePage: 72,
+
+    reservation: {
+      status: "",
+      siteType: "",
+      siteName: "",
+      price: "",
+      bookingNumber: "",
+      bookedOn: "",
+      note: ""
+    }
   },
 
 
@@ -185,7 +261,17 @@ const campings = [
     camperMateUrl: "https://campermate.com/en/location/new-zealand/can/waitaki/paid-campsites/omarama-top-10-holiday-park/c86aa4ed-592d-4dcc-8f98-8cd986098794",
 
     guideNumber: 121,
-    guidePage: 101
+    guidePage: 101,
+
+    reservation: {
+      status: "noch nicht reserviert",
+      siteType: "",
+      siteName: "",
+      price: "",
+      bookingNumber: "",
+      bookedOn: "",
+      note: ""
+    }
   },
 
 
@@ -213,7 +299,17 @@ const campings = [
     camperMateUrl: "https://campermate.com/en/location/new-zealand/ota/queenstown/paid-campsites/queenstown-holiday-park-creeksyde/addb6409-ddfd-440f-abeb-d7d6aca4f428",
 
     guideNumber: 244,
-    guidePage: 175
+    guidePage: 175,
+
+    reservation: {
+      status: "noch nicht reserviert",
+      siteType: "",
+      siteName: "",
+      price: "",
+      bookingNumber: "",
+      bookedOn: "",
+      note: ""
+    }
   },
 
 
@@ -241,7 +337,17 @@ const campings = [
 
     camperMateUrl: "https://campermate.com/en/location/new-zealand/ota/wanaka/paid-campsites/tasman-holiday-parks-wanaka/ff0848a2-6142-4dd0-9417-186604222138",
 
-    guidePage: null
+    guidePage: null,
+
+    reservation: {
+      status: "noch nicht reserviert",
+      siteType: "",
+      siteName: "",
+      price: "",
+      bookingNumber: "",
+      bookedOn: "",
+      note: ""
+    }
   },
 
 
@@ -272,7 +378,17 @@ const campings = [
     camperMateUrl: "https://campermate.com/en/location/new-zealand/ota/wanaka/lowcost-campground/cameron-flat-campsite/154ff523-b71b-4cb2-8f7b-4395f6d686d1",
 
     guideNumber: 259,
-    guidePage: 189
+    guidePage: 189,
+
+    reservation: {
+      status: "noch nicht reserviert",
+      siteType: "",
+      siteName: "",
+      price: "",
+      bookingNumber: "",
+      bookedOn: "",
+      note: ""
+    }
   },
 
 
@@ -300,7 +416,17 @@ const campings = [
     camperMateUrl: "https://campermate.com/en/location/new-zealand/s/west-coast/paid-campsites/fox-glacier-top-10-holiday-park/8372f2d8-ef65-4f48-b307-08f8d4cbb1ff",
 
     guideNumber: 273,
-    guidePage: 200
+    guidePage: 200,
+
+    reservation: {
+      status: "noch nicht reserviert",
+      siteType: "",
+      siteName: "",
+      price: "",
+      bookingNumber: "",
+      bookedOn: "",
+      note: ""
+    }
   },
 
 
@@ -328,7 +454,17 @@ const campings = [
     camperMateUrl: "https://campermate.com/en/location/new-zealand/s/west-coast/paid-campsites/rainforest-retreat-holiday-park/57e5279b-a5f0-4053-b9fc-56feb1d08cfd",
 
     guideNumber: 274,
-    guidePage: 203
+    guidePage: 203,
+
+    reservation: {
+      status: "noch nicht reserviert",
+      siteType: "",
+      siteName: "",
+      price: "",
+      bookingNumber: "",
+      bookedOn: "",
+      note: ""
+    }
   },
 
 
@@ -356,7 +492,17 @@ const campings = [
     camperMateUrl: "https://campermate.com/en/location/new-zealand/wtc/west-coast/paid-campsites/shining-star-beachfront-accommodation/af8975e1-c41e-4c63-86d1-bd5be641d57f",
 
     guideNumber: 282,
-    guidePage: 214
+    guidePage: 214,
+
+    reservation: {
+      status: "noch nicht reserviert",
+      siteType: "",
+      siteName: "",
+      price: "",
+      bookingNumber: "",
+      bookedOn: "",
+      note: ""
+    }
   },
 
 
@@ -384,7 +530,17 @@ const campings = [
     camperMateUrl: "https://campermate.com/en/location/new-zealand/s/nelson-tasman/paid-campsites/murchison-motorhome-park/aa2c4ee5-7a8a-472b-b2a7-bce25196ea8e",
 
     guideNumber: 393,
-    guidePage: 270
+    guidePage: 270,
+
+    reservation: {
+      status: "noch nicht reserviert",
+      siteType: "",
+      siteName: "",
+      price: "",
+      bookingNumber: "",
+      bookedOn: "",
+      note: ""
+    }
   },
 
 
@@ -413,7 +569,17 @@ const campings = [
     camperMateUrl: "https://campermate.com/en/location/new-zealand/tas/nelson-tasman/paid-campsites/riverside-holiday-park-murchison/f4d17ff5-044a-487c-b6a2-b1f16f152233",
 
     guideNumber: 392,
-    guidePage: 270
+    guidePage: 270,
+
+    reservation: {
+      status: "noch nicht reserviert",
+      siteType: "",
+      siteName: "",
+      price: "",
+      bookingNumber: "",
+      bookedOn: "",
+      note: ""
+    }
   },
 
 
@@ -440,7 +606,17 @@ const campings = [
 
     camperMateUrl: "https://campermate.com/en/location/new-zealand/tas/nelson-tasman/paid-campsites/bethany-park-holiday-park/eb495f59-1d8f-429c-b320-be458f72c997",
 
-    guidePage: null
+    guidePage: null,
+
+    reservation: {
+      status: "noch nicht reserviert",
+      siteType: "",
+      siteName: "",
+      price: "",
+      bookingNumber: "",
+      bookedOn: "",
+      note: ""
+    }
   },
 
 
@@ -468,7 +644,17 @@ const campings = [
     camperMateUrl: "https://campermate.com/en/location/new-zealand/tas/nelson-tasman/paid-campsites/kaiteriteri-recreation-reserve/225f8fa1-b2e2-4106-8afa-a4bde69b3fef",
 
     guideNumber: 424,
-    guidePage: 280
+    guidePage: 280,
+
+    reservation: {
+      status: "noch nicht reserviert",
+      siteType: "",
+      siteName: "",
+      price: "",
+      bookingNumber: "",
+      bookedOn: "",
+      note: ""
+    }
   },
 
 
@@ -496,7 +682,17 @@ const campings = [
     camperMateUrl: "https://campermate.com/en/location/new-zealand/s/marlborough/paid-campsites/havelock-holiday-park/332d2d6d-f63b-409e-bb4a-ea9bae399079",
 
     guideNumber: 458,
-    guidePage: 308
+    guidePage: 308,
+
+    reservation: {
+      status: "noch nicht reserviert",
+      siteType: "",
+      siteName: "",
+      price: "",
+      bookingNumber: "",
+      bookedOn: "",
+      note: ""
+    }
   },
 
 
@@ -523,7 +719,17 @@ const campings = [
 
     camperMateUrl: "https://campermate.com/en/location/new-zealand/mbh/marlborough/paid-campsites/waves-campsite/c21460fd-9eb2-4964-a2dd-32868c6e7fde",
 
-    guidePage: null
+    guidePage: null,
+
+    reservation: {
+      status: "noch nicht reserviert",
+      siteType: "",
+      siteName: "",
+      price: "",
+      bookingNumber: "",
+      bookedOn: "",
+      note: ""
+    }
   },
 
 
@@ -552,7 +758,17 @@ const campings = [
     camperMateUrl: "https://campermate.com/en/location/new-zealand/s/christchurch/paid-campsites/south-brighton-holiday-park/ab23286f-d081-49a5-9a99-d37eb97719de",
 
     guideNumber: 33,
-    guidePage: 40
+    guidePage: 40,
+
+    reservation: {
+      status: "noch nicht reserviert",
+      siteType: "",
+      siteName: "",
+      price: "",
+      bookingNumber: "",
+      bookedOn: "",
+      note: ""
+    }
   }
 
 ];
