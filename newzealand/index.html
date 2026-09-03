@@ -942,33 +942,67 @@ if (camp.reservation) {
    * Bemerkung zur Reservierung
    */
 
-  if (camp.reservation.note) {
 
-    popup += `
-
-      <div style="margin-top:5px;">
-
-        ${camp.reservation.note}
-
-      </div>
-
-    `;
-
-  }
-
-
-
-  /*
-   * Reservierungsbereich schließen
-   */
+if (camp.reservation.note) {
 
   popup += `
+
+    <div style="margin-top:5px;">
+
+      ${camp.reservation.note}
 
     </div>
 
   `;
 
 }
+
+
+/*
+ * ----------------------------------------------------------
+ * RESERVIERUNGS-PDF
+ * ----------------------------------------------------------
+ *
+ * Wenn in campings.js eine reservationPdfUrl
+ * eingetragen ist, erscheint hier ein Link zur
+ * Reservierungsbestätigung.
+ */
+
+if (camp.reservationPdfUrl) {
+
+  popup += `
+
+    <div style="margin-top:7px;">
+
+      📄
+
+      <a
+        href="${camp.reservationPdfUrl}"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+
+        Reservierungs-PDF öffnen
+
+      </a>
+
+    </div>
+
+  `;
+
+}
+
+
+
+/*
+ * Reservierungsbereich schließen
+ */
+
+popup += `
+
+  </div>
+
+`;
 
   /*
    * ----------------------------------------------------------
