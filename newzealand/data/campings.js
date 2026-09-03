@@ -70,7 +70,7 @@ const campings = [
     guidePage: 58,
 
     reservation: {
-      status: "first come first served",
+      status: "Ufro geschéckt per mail",
       siteType: "",
       siteName: "",
       price: "",
