@@ -160,7 +160,7 @@ const campings = [
       note: "check in: 13:00, check out 10:00"
     },
     
-      reservationPdfUrl: ""
+      reservationPdfUrl: "https://www.icloud.com/iclouddrive/0a1q-V-WzsdhMBzAgO50HdnaQ#2_Tekapo_Lakes_Edge_Holiday_Park%5F28821174"
   },
 
 
