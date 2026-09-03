@@ -88,16 +88,16 @@ const planning = [
   {
     "date": "Wed, 18 Nov 2026",
     "from": "queenstown",
-    "to": "wanaka",
-    "distance": 70,
+    "to": "lake hawea",
+    "distance": 84,
     "nights": 3,
     "type": "motorhome"
   },
   {
     "date": "Sat, 21 Nov 2026",
-    "from": "wanaka",
+    "from": "lake Hawea",
     "to": "blue pools",
-    "distance": 138,
+    "distance": 59,
     "nights": 1,
     "type": "motorhome"
   },
