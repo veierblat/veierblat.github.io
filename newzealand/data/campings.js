@@ -146,11 +146,11 @@ const campings = [
 
     reservation: {
       status: "noch nicht reserviert",
-      siteType: "",
+      siteType: "Premium powered site",
       siteName: "",
-      price: "",
+      price: "176 NZD",
       bookingNumber: "",
-      bookedOn: "",
+      bookedOn: "03/09/2026",
       note: ""
     }
   },
