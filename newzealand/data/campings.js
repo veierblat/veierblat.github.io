@@ -149,9 +149,9 @@ const campings = [
       siteType: "Premium powered site",
       siteName: "",
       price: "176 NZD",
-      bookingNumber: "",
+      bookingNumber: "548239",
       bookedOn: "03/09/2026",
-      note: ""
+      note: "check in: 13:00, check out 10:00"
     }
   },
 
@@ -225,13 +225,13 @@ const campings = [
     guidePage: 72,
 
     reservation: {
-      status: "",
-      siteType: "",
+      status: "reserviert",
+      siteType: "unpowered",
       siteName: "",
-      price: "",
-      bookingNumber: "",
-      bookedOn: "",
-      note: ""
+      price: "120",
+      bookingNumber: "6434810",
+      bookedOn: "03/09/2026",
+      note: "web bookings. check in 14:00-20:00, check out 12:00"
     }
   },
 
@@ -264,13 +264,13 @@ const campings = [
     guidePage: 101,
 
     reservation: {
-      status: "noch nicht reserviert",
-      siteType: "",
+      status: "reserviert",
+      siteType: "powered site",
       siteName: "",
-      price: "",
-      bookingNumber: "",
-      bookedOn: "",
-      note: ""
+      price: "63",
+      bookingNumber: "#80014",
+      bookedOn: "03/09/2026",
+      note: "check in 14:00, check out: 10:00"
     }
   },
 
