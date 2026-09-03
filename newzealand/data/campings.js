@@ -435,7 +435,7 @@ const campings = [
    * ----------------------------------------------------------
    * FOX GLACIER
    * ----------------------------------------------------------
-   */
+   
 
   {
     name: "Fox Glacier TOP 10 Holiday Park",
@@ -473,7 +473,7 @@ const campings = [
    * ----------------------------------------------------------
    * FRANZ JOSEF – ALTERNATIVE
    * ----------------------------------------------------------
-   */
+   
 
   {
     name: "Rainforest Retreat Franz Josef",
@@ -505,7 +505,46 @@ const campings = [
       note: ""
     }
   },
+  */
 
+  /*
+ * ----------------------------------------------------------
+ * FRANZ JOSEF – ORANGE SHEEP
+ * ----------------------------------------------------------
+ */
+
+{
+  name: "Orange Sheep Campervan Park",
+  date: "22.11.–24.11.2026",
+
+  lat: -43.3893,
+  lon: 170.1817,
+
+  facilities: "RES, EL, DS, CW, WM, WC, HS",
+
+  note: "Camping zu Franz Josef. Alternative zum Fox Glacier TOP 10 an zum Rainforest Retreat.",
+
+  phone: "+64 21 154 7891",
+
+  url: "https://www.orangesheep.co.nz/",
+
+  camperMateUrl: "https://campermate.com/en/location/new-zealand/wtc/west-coast/paid-campsites/orange-sheep-campervan-park/703541c3-54b1-4265-b888-729060a2f4a4",
+
+  guideNumber: null,
+  guidePage: null,
+
+  reservation: {
+    status: "noch nicht reserviert",
+    siteType: "",
+    siteName: "",
+    price: "",
+    bookingNumber: "",
+    bookedOn: "03/09/2026",
+    note: ""
+  },
+
+  reservationPdfUrl: ""
+},
 
   /*
    * ----------------------------------------------------------
