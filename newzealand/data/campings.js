@@ -32,7 +32,7 @@ const campings = [
 
     facilities: "CW, WC, HS, DS",
 
-    note: "First come, first served",
+    note: "First come, first served BackUp: Peel forest",
 
     phone: "+64 3 302 9353",
 
