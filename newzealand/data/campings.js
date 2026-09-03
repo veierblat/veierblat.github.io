@@ -817,12 +817,12 @@ const campings = [
 
     reservation: {
       status: "reservéiert",
-      siteType: "",
+      siteType: "Powered Site",
       siteName: "",
-      price: "",
-      bookingNumber: "",
-      bookedOn: "",
-      note: ""
+      price: "226,24 NZD, 114,24 NZD réicht bezuelt",
+      bookingNumber: "1H7B4B",
+      bookedOn: "03/09/2026",
+      note: "check in: 13:00 - 19:00, check out: 10"
     },
 
   reservationPdfUrl: ""
