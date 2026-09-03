@@ -397,7 +397,7 @@ const campings = [
    */
 
   {
-    name: "DOC Cameron Flat Campsite",
+    name: "7 DOC Cameron Flat Campsite",
     date: "21.11.–22.11.2026",
 
     lat: -44.16122,
@@ -420,12 +420,12 @@ const campings = [
     guidePage: 189,
 
     reservation: {
-      status: "noch nicht reserviert",
-      siteType: "",
+      status: "reserviert",
+      siteType: "Unpowered",
       siteName: "",
-      price: "",
-      bookingNumber: "",
-      bookedOn: "",
+      price: "30 NZD",
+      bookingNumber: "confirmation 6434829, transaction number 1588442, GST Number 67-809-823",
+      bookedOn: "03/09/2026",
       note: ""
     }
   },
