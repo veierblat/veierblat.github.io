@@ -505,49 +505,130 @@ tripStops.forEach((stop, index) => {
  * Eigenes Symbol für Campingplätze
  */
 
-const campingIcon =
-  L.divIcon({
+/*
+ * Eigenes Symbol für Campingplätze
+ *
+ * Wenn der Campingplatz reserviert ist,
+ * erscheint rechts oben zusätzlich ein grüner Haken.
+ */
+
+function createCampingIcon(camp) {
+
+
+  /*
+   * Prüfen, ob der Platz reserviert ist
+   */
+
+  const isReserved =
+    camp.reservation &&
+    camp.reservation.status === "reserviert";
+
+
+  return L.divIcon({
 
     className: "",
 
     html: `
 
       <div style="
-
-        background:#238636;
-
-        width:30px;
-        height:30px;
-
-        border-radius:50%;
-
-        border:2px solid white;
-
-        display:flex;
-
-        align-items:center;
-        justify-content:center;
-
-        font-size:17px;
-
-        box-shadow:
-          0 1px 5px rgba(0,0,0,0.5);
-
+        position:relative;
+        width:34px;
+        height:34px;
       ">
 
-        ⛺
+
+        <!-- grüner Camping-Marker -->
+
+        <div style="
+
+          background:#238636;
+
+          width:30px;
+          height:30px;
+
+          border-radius:50%;
+
+          border:2px solid white;
+
+          display:flex;
+
+          align-items:center;
+          justify-content:center;
+
+          font-size:17px;
+
+          box-shadow:
+            0 1px 5px rgba(0,0,0,0.5);
+
+        ">
+
+          ⛺
+
+        </div>
+
+
+        ${
+          isReserved
+
+          ? `
+
+            <!-- Haken für reservierte Plätze -->
+
+            <div style="
+
+              position:absolute;
+
+              top:-6px;
+              right:-6px;
+
+              width:18px;
+              height:18px;
+
+              border-radius:50%;
+
+              background:#20a83a;
+
+              color:white;
+
+              border:2px solid white;
+
+              display:flex;
+
+              align-items:center;
+              justify-content:center;
+
+              font-size:12px;
+
+              font-weight:bold;
+
+              box-shadow:
+                0 1px 4px rgba(0,0,0,0.4);
+
+            ">
+
+              ✓
+
+            </div>
+
+          `
+
+          : ""
+        }
+
 
       </div>
 
     `,
 
-    iconSize: [30, 30],
+    iconSize: [34, 34],
 
-    iconAnchor: [15, 15],
+    iconAnchor: [17, 17],
 
-    popupAnchor: [0, -15]
+    popupAnchor: [0, -17]
 
   });
+
+}
 
 
 
@@ -649,7 +730,245 @@ campings.forEach(camp => {
 
   }
 
+/*
+ * ----------------------------------------------------------
+ * RESERVIERUNG
+ * ----------------------------------------------------------
+ */
 
+if (camp.reservation) {
+
+
+  /*
+   * Status für die Anzeige vorbereiten
+   */
+
+  let statusText = camp.reservation.status;
+
+  let statusIcon = "⚪";
+
+
+  if (camp.reservation.status === "reserviert") {
+
+    statusIcon = "✅";
+
+    statusText = "Reserviert";
+
+  }
+
+
+  else if (
+    camp.reservation.status ===
+    "noch nicht reserviert"
+  ) {
+
+    statusIcon = "🟡";
+
+    statusText = "Noch nicht reserviert";
+
+  }
+
+
+  else if (
+    camp.reservation.status ===
+    "Anfrage geschickt"
+  ) {
+
+    statusIcon = "📧";
+
+    statusText = "Anfrage geschickt";
+
+  }
+
+
+  else if (
+    camp.reservation.status ===
+    "first come first served"
+  ) {
+
+    statusIcon = "🔵";
+
+    statusText = "First come, first served";
+
+  }
+
+
+
+  /*
+   * Reservierungsbereich beginnen
+   */
+
+  popup += `
+
+    <div style="
+      margin-top:9px;
+      padding-top:7px;
+      border-top:1px solid #ccc;
+    ">
+
+      <b>📅 Reservierung</b>
+
+  `;
+
+
+
+  /*
+   * Status
+   */
+
+  if (camp.reservation.status) {
+
+    popup += `
+
+      <div style="margin-top:5px;">
+
+        ${statusIcon}
+        <b>${statusText}</b>
+
+      </div>
+
+    `;
+
+  }
+
+
+
+  /*
+   * Platztyp
+   */
+
+  if (camp.reservation.siteType) {
+
+    popup += `
+
+      <div style="margin-top:4px;">
+
+        <b>Platztyp:</b>
+        ${camp.reservation.siteType}
+
+      </div>
+
+    `;
+
+  }
+
+
+
+  /*
+   * Platznummer / Platzname
+   */
+
+  if (camp.reservation.siteName) {
+
+    popup += `
+
+      <div>
+
+        <b>Platz:</b>
+        ${camp.reservation.siteName}
+
+      </div>
+
+    `;
+
+  }
+
+
+
+  /*
+   * Preis
+   */
+
+  if (camp.reservation.price) {
+
+    popup += `
+
+      <div>
+
+        <b>Preis:</b>
+        ${camp.reservation.price}
+
+      </div>
+
+    `;
+
+  }
+
+
+
+  /*
+   * Buchungsnummer
+   */
+
+  if (camp.reservation.bookingNumber) {
+
+    popup += `
+
+      <div>
+
+        <b>Buchungsnummer:</b>
+        ${camp.reservation.bookingNumber}
+
+      </div>
+
+    `;
+
+  }
+
+
+
+  /*
+   * Buchungsdatum
+   */
+
+  if (camp.reservation.bookedOn) {
+
+    popup += `
+
+      <div>
+
+        <b>Gebucht am:</b>
+        ${camp.reservation.bookedOn}
+
+      </div>
+
+    `;
+
+  }
+
+
+
+  /*
+   * Bemerkung zur Reservierung
+   */
+
+  if (camp.reservation.note) {
+
+    popup += `
+
+      <div style="margin-top:5px;">
+
+        ${camp.reservation.note}
+
+      </div>
+
+    `;
+
+  }
+
+
+
+  /*
+   * Reservierungsbereich schließen
+   */
+
+  popup += `
+
+    </div>
+
+  `;
+
+}
 
   /*
    * ----------------------------------------------------------
@@ -784,13 +1103,13 @@ campings.forEach(camp => {
 
   L.marker(
 
-    [camp.lat, camp.lon],
+  [camp.lat, camp.lon],
 
-    {
-      icon: campingIcon
-    }
+  {
+    icon: createCampingIcon(camp)
+  }
 
-  )
+)
 
   .addTo(campingLayer)
 
