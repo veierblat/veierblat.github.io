@@ -317,7 +317,7 @@ const campings = [
    * ----------------------------------------------------------
    * WĀNAKA
    * ----------------------------------------------------------
-   */
+   
 
   {
     name: "Tasman Holiday Parks – Wānaka",
@@ -349,7 +349,9 @@ const campings = [
       note: ""
     }
   },
+*/
 
+  
 /*
  * ----------------------------------------------------------
  * LAKE HĀWEA – ALTERNATIVE ZU WĀNAKA
@@ -377,13 +379,13 @@ const campings = [
   guidePage: null,
 
   reservation: {
-    status: "noch nicht reserviert",
-    siteType: "",
+    status: "reserviert",
+    siteType: "Powered Site",
     siteName: "",
-    price: "",
-    bookingNumber: "",
-    bookedOn: "",
-    note: ""
+    price: "168,59 NZD",
+    bookingNumber: "82070076",
+    bookedOn: "03/09/2026",
+    note: "check in 14:00 - 18:00, check out: 10:00"
   }
 },
   
