@@ -13,8 +13,8 @@
  * Reservierung:
  *
  * reservation.status
- *   = "reseervéiert"
- *   = "nach net reseervéiert"
+ *   = "reservéiert"
+ *   = "nach net reservéiert"
  *   = "Ufro geschéckt per mail"
  *   = "first come first served"
  *   = ""
@@ -151,7 +151,7 @@ const campings = [
     guidePage: 64,
 
     reservation: {
-      status: "reseervéiert",
+      status: "reservéiert",
       siteType: "Premium powered site",
       siteName: "",
       price: "176 NZD",
@@ -236,7 +236,7 @@ const campings = [
     guidePage: 72,
 
     reservation: {
-      status: "reseervéiert",
+      status: "reservéiert",
       siteType: "unpowered",
       siteName: "",
       price: "120",
@@ -278,7 +278,7 @@ const campings = [
     guidePage: 101,
 
     reservation: {
-      status: "reseervéiert",
+      status: "reservéiert",
       siteType: "powered site",
       siteName: "",
       price: "63",
@@ -319,7 +319,7 @@ const campings = [
     guidePage: 175,
 
     reservation: {
-      status: "reseervéiert",
+      status: "reservéiert",
       siteType: "Campervan Powered Site",
       siteName: "",
       price: "235 NZD",
@@ -360,7 +360,7 @@ const campings = [
     guidePage: null,
 
     reservation: {
-      status: "nach net reseervéiert",
+      status: "nach net reservéiert",
       siteType: "",
       siteName: "",
       price: "",
@@ -403,7 +403,7 @@ const campings = [
   guidePage: null,
 
   reservation: {
-    status: "reseervéiert",
+    status: "reservéiert",
     siteType: "Powered Site",
     siteName: "",
     price: "168,59 NZD",
@@ -447,7 +447,7 @@ const campings = [
     guidePage: 189,
 
     reservation: {
-      status: "reseervéiert",
+      status: "reservéiert",
       siteType: "Unpowered",
       siteName: "",
       price: "30 NZD",
@@ -488,7 +488,7 @@ const campings = [
     guidePage: 200,
 
     reservation: {
-      status: "nach net reseervéiert",
+      status: "nach net reservéiert",
       siteType: "",
       siteName: "",
       price: "",
@@ -530,7 +530,7 @@ const campings = [
     guidePage: 203,
 
     reservation: {
-      status: "nach net reseervéiert",
+      status: "nach net reservéiert",
       siteType: "",
       siteName: "",
       price: "",
@@ -572,7 +572,7 @@ const campings = [
   guidePage: null,
 
   reservation: {
-    status: "reseervéiert",
+    status: "reservéiert",
     siteType: "powered site",
     siteName: "",
     price: "132 NZD",
@@ -611,7 +611,7 @@ const campings = [
     guidePage: 214,
 
     reservation: {
-      status: "reseervéiert",
+      status: "reservéiert",
       siteType: "powered site",
       siteName: "",
       price: "120 NZD",
@@ -652,7 +652,7 @@ const campings = [
     guidePage: 270,
 
     reservation: {
-      status: "reseervéiert",
+      status: "reservéiert",
       siteType: "powered site",
       siteName: "",
       price: "108 NZD",
@@ -694,7 +694,7 @@ const campings = [
     guidePage: 270,
 
     reservation: {
-      status: "nach net reseervéiert",
+      status: "nach net reservéiert",
       siteType: "",
       siteName: "",
       price: "",
@@ -775,7 +775,7 @@ const campings = [
     guidePage: 280,
 
     reservation: {
-      status: "nach net reseervéiert",
+      status: "nach net reservéiert",
       siteType: "",
       siteName: "",
       price: "",
@@ -816,7 +816,7 @@ const campings = [
     guidePage: 308,
 
     reservation: {
-      status: "nach net reseervéiert",
+      status: "reservéiert",
       siteType: "",
       siteName: "",
       price: "",
@@ -856,7 +856,7 @@ const campings = [
     guidePage: null,
 
     reservation: {
-      status: "nach net reseervéiert",
+      status: "nach net reservéiert",
       siteType: "",
       siteName: "",
       price: "",
@@ -898,7 +898,7 @@ const campings = [
     guidePage: 40,
 
     reservation: {
-      status: "nach net reseervéiert",
+      status: "nach net reservéiert",
       siteType: "",
       siteName: "",
       price: "",
