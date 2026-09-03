@@ -653,11 +653,11 @@ const campings = [
 
     reservation: {
       status: "noch nicht reserviert",
-      siteType: "",
+      siteType: "powered site",
       siteName: "",
-      price: "",
-      bookingNumber: "",
-      bookedOn: "",
+      price: "108 NZD",
+      bookingNumber: "12718181",
+      bookedOn: "03/09/2026",
       note: ""
     },
 
@@ -670,7 +670,7 @@ const campings = [
    * ----------------------------------------------------------
    * MURCHISON – OPTION 2
    * ----------------------------------------------------------
-   */
+   
 
   {
     name: "Murchison Riverside Holiday Park",
