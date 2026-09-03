@@ -412,7 +412,7 @@ const campings = [
     note: "check in 14:00 - 18:00, check out: 10:00"
   },
 
-  reservationPdfUrl: ""
+  reservationPdfUrl: "https://www.icloud.com/iclouddrive/0de2DZt4jUqJ1heYqtZ7FMfGA#6_Lake_Hawea"
 
 },
   
@@ -456,7 +456,7 @@ const campings = [
       note: "check in ??"
     },
 
-  reservationPdfUrl: ""
+  reservationPdfUrl: "https://www.icloud.com/iclouddrive/08c0A034XdxlLlEyZ2wh4P-4g#7_Blue_Pools"
 
   },
 
@@ -572,16 +572,16 @@ const campings = [
   guidePage: null,
 
   reservation: {
-    status: "noch nicht reserviert",
-    siteType: "",
+    status: "reserviert",
+    siteType: "powered site",
     siteName: "",
-    price: "",
+    price: "132 NZD",
     bookingNumber: "",
     bookedOn: "03/09/2026",
-    note: ""
+    note: "check in 14:00 - 21:00, check out: 10:00"
   },
 
-  reservationPdfUrl: ""
+  reservationPdfUrl: "https://www.icloud.com/iclouddrive/0c4cf3tElqH8FeVfxMq_SS6gg#8_Orange_Sheep__Booking_Confirmation_Email"
 },
 
   /*
@@ -611,13 +611,13 @@ const campings = [
     guidePage: 214,
 
     reservation: {
-      status: "noch nicht reserviert",
-      siteType: "",
+      status: "reserviert",
+      siteType: "powered site",
       siteName: "",
-      price: "",
-      bookingNumber: "",
-      bookedOn: "",
-      note: ""
+      price: "120 NZD",
+      bookingNumber: "104284",
+      bookedOn: "03/09/2026",
+      note: "check in: 15:00 - 18:30 , check out: 10:00"
     },
 
   reservationPdfUrl: ""
