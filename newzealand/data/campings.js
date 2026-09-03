@@ -160,7 +160,7 @@ const campings = [
       note: "check in: 13:00, check out 10:00"
     },
     
-      reservationPdfUrl: "/Users/gilbert/Library/Mobile Documents/com~apple~CloudDocs/Documents/Privat/Vakanz/2026 Vakanz/2026 Neuseeland/04 Campinger/2 Tekapo Lakes Edge Holiday Park_28821174.pdf"
+      reservationPdfUrl: ""
   },
 
 
@@ -245,7 +245,7 @@ const campings = [
       note: "web bookings. check in 14:00-20:00, check out 12:00"
     },
 
-  reservationPdfUrl: "/Users/gilbert/Library/Mobile\ Documents/com\~apple\~CloudDocs/Documents/Privat/Vakanz/2026\ Vakanz/2026\ Neuseeland/04\ Campinger/3\ mount\ cook\ white\ horse\ hill.pdf"
+  reservationPdfUrl: ""
 
   },
 
