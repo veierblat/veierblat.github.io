@@ -302,13 +302,13 @@ const campings = [
     guidePage: 175,
 
     reservation: {
-      status: "noch nicht reserviert",
-      siteType: "",
+      status: "reserviert",
+      siteType: "Campervan Powered Site",
       siteName: "",
-      price: "",
-      bookingNumber: "",
-      bookedOn: "",
-      note: ""
+      price: "235 NZD",
+      bookingNumber: "176128",
+      bookedOn: "03/09/2026",
+      note: "check in: 13:00, check out: 10:00"
     }
   },
 
