@@ -199,7 +199,10 @@ const campings = [
       bookingNumber: "",
       bookedOn: "",
       note: ""
-    }
+    },
+
+  reservationPdfUrl: ""
+
   },
 
 
@@ -364,7 +367,11 @@ const campings = [
       bookingNumber: "",
       bookedOn: "",
       note: ""
-    }
+    },
+
+  reservationPdfUrl: ""
+
+ 
   },
 */
 
@@ -488,7 +495,11 @@ const campings = [
       bookingNumber: "",
       bookedOn: "",
       note: ""
-    }
+    },
+
+  reservationPdfUrl: ""
+
+ 
   },
 
 
@@ -526,7 +537,11 @@ const campings = [
       bookingNumber: "",
       bookedOn: "",
       note: ""
-    }
+    },
+
+  reservationPdfUrl: ""
+
+ 
   },
   */
 
