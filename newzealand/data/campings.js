@@ -45,12 +45,12 @@ const campings = [
 
   /*
    * ----------------------------------------------------------
-   * RAKAIA GORGE / HIGHBANK
+   * 1 RAKAIA GORGE / HIGHBANK
    * ----------------------------------------------------------
    */
 
   {
-    name: "Rakaia Gorge Camp",
+    name: "1 Rakaia Gorge Camp",
     date: "08.11.–09.11.2026",
 
     lat: -43.519,
@@ -120,12 +120,12 @@ const campings = [
 
   /*
    * ----------------------------------------------------------
-   * LAKE TEKAPO – OPTION 1
+   * 2 LAKE TEKAPO – OPTION 1
    * ----------------------------------------------------------
    */
 
   {
-    name: "Lakes Edge Holiday Park",
+    name: "2 Lakes Edge Holiday Park",
     date: "09.11.–11.11.2026",
 
     lat: -44.00084,
@@ -202,7 +202,7 @@ const campings = [
    */
 
   {
-    name: "DOC White Horse Hill Campsite",
+    name: "3 DOC White Horse Hill Campsite",
     date: "11.11.–14.11.2026",
 
     lat: -43.71819,
@@ -243,7 +243,7 @@ const campings = [
    */
 
   {
-    name: "Omarama TOP 10 Holiday Park",
+    name: "4 Omarama TOP 10 Holiday Park",
     date: "14.11.–15.11.2026",
 
     lat: -44.48776,
@@ -282,7 +282,7 @@ const campings = [
    */
 
   {
-    name: "Queenstown Holiday Park Creeksyde",
+    name: "5 Queenstown Holiday Park Creeksyde",
     date: "15.11.–18.11.2026",
 
     lat: -45.02553,
@@ -359,7 +359,7 @@ const campings = [
  */
 
 {
-  name: "Camp Lake Hāwea Holiday Park",
+  name: "6 Camp Lake Hāwea Holiday Park",
   date: "18.11.–21.11.2026",
 
   lat: -44.60687125762327,
