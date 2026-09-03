@@ -825,7 +825,7 @@ const campings = [
       note: "check in: 13:00 - 19:00, check out: 10"
     },
 
-  reservationPdfUrl: ""
+  reservationPdfUrl: "https://www.icloud.com/iclouddrive/01cIGzMWjDUi2dolnLsi7P5pw#12_Havelock_Holiday_Park_1H7B4B"
 
   },
 
