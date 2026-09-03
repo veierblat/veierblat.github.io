@@ -552,7 +552,7 @@ const campings = [
  */
 
 {
-  name: "Orange Sheep Campervan Park",
+  name: "8 Orange Sheep Campervan Park",
   date: "22.11.–24.11.2026",
 
   lat: -43.3893,
@@ -591,7 +591,7 @@ const campings = [
    */
 
   {
-    name: "Shining Star Beachfront Accommodation",
+    name: "9 Shining Star Beachfront Accommodation",
     date: "24.11.–26.11.2026",
 
     lat: -42.70817,
@@ -632,7 +632,7 @@ const campings = [
    */
 
   {
-    name: "Murchison Motorhome Park",
+    name: "10 Murchison Motorhome Park",
     date: "26.11.–28.11.2026",
 
     lat: -41.75560,
@@ -661,7 +661,7 @@ const campings = [
       note: ""
     },
 
-  reservationPdfUrl: ""
+  reservationPdfUrl: "https://www.icloud.com/iclouddrive/062VP1dN9t4YLj4CjHjMDgocA#10_Murchison_Motorhome_Park_Murchison"
 
   },
 
@@ -715,7 +715,7 @@ const campings = [
    */
 
   {
-    name: "Bethany Park",
+    name: "11 Bethany Park",
     date: "28.11.–01.12.2026",
 
     lat: -41.03774,
@@ -734,7 +734,7 @@ const campings = [
     guidePage: null,
 
     reservation: {
-      status: "noch nicht reserviert",
+      status: "Anfrage geschickt",
       siteType: "",
       siteName: "",
       price: "",
@@ -752,7 +752,7 @@ const campings = [
    * ----------------------------------------------------------
    * KAITERITERI – OPTION 2
    * ----------------------------------------------------------
-   */
+   
 
   {
     name: "Kaiteriteri Recreation Reserve",
@@ -796,7 +796,7 @@ const campings = [
    */
 
   {
-    name: "Havelock Holiday Park",
+    name: "12 Havelock Holiday Park",
     date: "01.12.–03.12.2026",
 
     lat: -41.27765,
@@ -834,7 +834,7 @@ const campings = [
    * ----------------------------------------------------------
    * HAVELOCK – OPTION 2
    * ----------------------------------------------------------
-   */
+   
 
   {
     name: "Waves Campsite",
@@ -877,7 +877,7 @@ const campings = [
    */
 
   {
-    name: "South Brighton Holiday Park",
+    name: "13 South Brighton Holiday Park",
     date: "03.12.–05.12.2026",
 
     lat: -43.53468,
@@ -907,7 +907,7 @@ const campings = [
       note: ""
     },
 
-  reservationPdfUrl: ""
+  reservationPdfUrl: "https://www.icloud.com/iclouddrive/0e1zu7vEcfioHB8XtOX-DDflw#13_Christchurch_south_brighton"
 
   }
 
