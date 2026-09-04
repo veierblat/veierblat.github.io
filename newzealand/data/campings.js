@@ -734,16 +734,16 @@ const campings = [
     guidePage: null,
 
     reservation: {
-      status: "Ufro geschéckt per mail",
-      siteType: "",
-      siteName: "",
-      price: "",
+      status: "Reservéiert",
+      siteType: "powered site",
+      siteName: "Unit: Camp 2: Power Site D 24",
+      price: "180 NZD",
       bookingNumber: "",
-      bookedOn: "",
-      note: ""
+      bookedOn: "03/09/2026",
+      note: "check in: 14:00, check out: 10:00"
     },
 
-  reservationPdfUrl: ""
+  reservationPdfUrl: "https://www.icloud.com/iclouddrive/0d8xxrtgQ100u5FXFSq7CgHTw#11a_Bethany_Park_61350"
 
   },
 
