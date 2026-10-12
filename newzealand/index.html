@@ -503,7 +503,8 @@ tripStops.forEach((stop, index) => {
   .bindPopup(
     popup,
     {
-      maxWidth: 350
+      maxWidth: 350,
+      autoPanPaddingTopLeft: L.point(20, 80)
     }
   );
 
@@ -1163,7 +1164,8 @@ if (camp.reservation) {
     popup,
 
     {
-      maxWidth: 320
+      maxWidth: 320,
+      autoPanPaddingTopLeft: L.point(20, 80)
     }
 
   );
@@ -1413,7 +1415,8 @@ accommodations.forEach(accommodation => {
     popup,
 
     {
-      maxWidth: 320
+      maxWidth: 320,
+      autoPanPaddingTopLeft: L.point(20, 80)
     }
 
   );
@@ -1719,7 +1722,8 @@ activities.forEach(activity => {
     popup,
 
     {
-      maxWidth: 320
+      maxWidth: 320,
+      autoPanPaddingTopLeft: L.point(20, 80)
     }
 
   );
@@ -1982,7 +1986,8 @@ fetch("./data/roadroute.geojson")
                 popup,
 
                 {
-                  maxWidth: 350
+                  maxWidth: 350,
+                  autoPanPaddingTopLeft: L.point(20, 80)
                 }
 
               );
