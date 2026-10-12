@@ -51,8 +51,8 @@
     .popupPhoto img {
       display: block;
       width: 100%;
+      height: 170px;
       max-width: 320px;
-      max-height: 190px;
       object-fit: cover;
       border-radius: 8px;
     }
@@ -109,7 +109,8 @@
       top: 10px;
       left: 55px;
     
-      z-index: 1000;
+      /* Leaflet-Popups (z-index 700) bleiwen iwwer der Navigatioun. */
+      z-index: 650;
     
       display: flex;
       align-items: center;
