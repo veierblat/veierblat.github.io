@@ -130,7 +130,7 @@
 
     return `
       <div class="popupPhoto">
-        <img src="${text(imageURL)}" alt="${text(item.name)}" loading="lazy">
+        <img src="${text(imageURL)}" alt="${text(item.name)}">
         ${attribution ? `<div class="popupPhotoCredit">${attribution}</div>` : ""}
       </div>
     `;
