@@ -44,6 +44,41 @@
       font-family: Arial, Helvetica, sans-serif;
     }
 
+    .popupPhoto {
+      margin: 8px 0 10px;
+    }
+
+    .popupPhoto img {
+      display: block;
+      width: 100%;
+      max-width: 320px;
+      max-height: 190px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .popupPhotoCredit {
+      margin-top: 3px;
+      color: #666;
+      font-size: 10px;
+      line-height: 1.25;
+    }
+
+    .dataError {
+      position: fixed;
+      z-index: 3000;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: min(90vw, 720px);
+      padding: 12px 16px;
+      border-radius: 8px;
+      background: #b42318;
+      color: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      font-weight: bold;
+    }
+
 
     /*
      * Karte über das gesamte Browserfenster
@@ -235,14 +270,9 @@ JAVASCRIPT-DATEIEN LADEN
 Leaflet:
   Bibliothek für die interaktive Karte
 
-route.js:
-  Reiseorte / Übernachtungsorte
-
-campings.js:
-  Campingplätze
-
-activities.js:
-  Wanderungen, Besichtigungen usw.
+trip-data-loader.js:
+  Liest data/trip-data.json aus dem App-Export und bereitet
+  Reiseorte, Campings, Unterkünfte und Aktivitäten auf.
 ============================================================
 -->
 
@@ -250,15 +280,10 @@ activities.js:
   src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
 </script>
 
-<script src="./data/route.js"></script>
-
-<script src="./data/campings.js"></script>
-
-<script src="./data/activities.js"></script>
-
-<script src="./data/accommodations.js"></script>
+<script src="./trip-data-loader.js"></script>
 
 <script>
+window.tripDataReady.then(() => {
 /*
  * ============================================================
  * 1. KARTE ERZEUGEN
@@ -353,7 +378,7 @@ L.control.layers(
  *
  * Die Daten kommen aus:
  *
- *     data/route.js
+ *     data/trip-data.json
  *
  * Für jeden Eintrag in tripStops wird ein normaler
  * Leaflet-Marker erzeugt.
@@ -492,7 +517,7 @@ tripStops.forEach((stop, index) => {
  *
  * Die Campingdaten kommen aus:
  *
- *     data/campings.js
+ *     data/trip-data.json
  *
  * Campingplätze erhalten einen grünen Marker
  * mit einem Zelt-Symbol.
@@ -656,6 +681,8 @@ campings.forEach(camp => {
       ⛺ ${camp.name}
 
     </div>
+
+    ${window.tripPhotoMarkup(camp)}
 
 
     <div>
@@ -1150,7 +1177,7 @@ if (camp.reservation) {
  *
  * D'Donnéeë kommen aus:
  *
- *     data/accommodations.js
+ *     data/trip-data.json
  *
  * Fest Ënnerkonfte kréien e bloe Marker
  * mat engem Haus-Symbol.
@@ -1227,6 +1254,8 @@ accommodations.forEach(accommodation => {
       🏠 ${accommodation.name}
 
     </div>
+
+    ${window.tripPhotoMarkup(accommodation)}
 
 
     <div>
@@ -1398,7 +1427,7 @@ accommodations.forEach(accommodation => {
  *
  * Die Daten kommen aus:
  *
- *     data/activities.js
+ *     data/trip-data.json
  *
  * Aktivitäten erhalten einen
  * orangefarbenen Marker mit ★.
@@ -1481,6 +1510,8 @@ activities.forEach(activity => {
       ★ ${activity.name}
 
     </div>
+
+    ${window.tripPhotoMarkup(activity)}
 
   `;
 
@@ -1742,6 +1773,8 @@ fetch("./data/roadroute.geojson")
      * --------------------------------------------------------
      */
 
+    let routeFeatureIndex = 0;
+
     const roadRoute =
       L.geoJSON(
 
@@ -1776,9 +1809,18 @@ fetch("./data/roadroute.geojson")
               const p =
                 feature.properties;
 
+              const route =
+                window.tripRoutes[routeFeatureIndex++] || {};
+
 
               const distance =
-                p.distance;
+                route.distanceKilometres ?? p.distance;
+
+              const averageSpeed =
+                Math.max(route.averageSpeedKilometresPerHour ?? 50, 1);
+
+              const breakMinutesPerHour =
+                Math.max(route.breakMinutesPerDrivingHour ?? 15, 0);
 
 
 
@@ -1788,7 +1830,7 @@ fetch("./data/roadroute.geojson")
 
               const drivingMinutes =
                 Math.round(
-                  distance / 50 * 60
+                  distance / averageSpeed * 60
                 );
 
 
@@ -1799,7 +1841,7 @@ fetch("./data/roadroute.geojson")
                */
 
               const rawBreakMinutes =
-                drivingMinutes / 4;
+                drivingMinutes / 60 * breakMinutesPerHour;
 
 
               const breakMinutes =
@@ -1834,7 +1876,7 @@ fetch("./data/roadroute.geojson")
                   margin-bottom:8px;
                 ">
 
-                  ${p.from} → ${p.to}
+                  ${route.origin || p.from} → ${route.destination || p.to}
 
                 </div>
 
@@ -1845,7 +1887,7 @@ fetch("./data/roadroute.geojson")
                   font-weight:bold;
                 ">
 
-                  Wéini? Den ${p.date}
+                  Wéini? Den ${route.dateText || p.date}
 
                 </div>
 
@@ -1855,13 +1897,13 @@ fetch("./data/roadroute.geojson")
                   margin-bottom:8px;
                 ">
 
-                  ${p.fromCamping}
+                  ${route.originCamping || p.fromCamping}
                   <br>
 
                   ↓
                   <br>
 
-                  ${p.toCamping}
+                  ${route.destinationCamping || p.toCamping}
 
                 </div>
 
@@ -1878,7 +1920,7 @@ fetch("./data/roadroute.geojson")
 
                 <div>
 
-                  Dauer bei 50 km/h:
+                  Dauer bei ${averageSpeed} km/h:
                   <b>
                     ${formatTime(drivingMinutes)}
                   </b>
@@ -1889,7 +1931,7 @@ fetch("./data/roadroute.geojson")
 
                 <div>
 
-                  Pausen (pro Stonn 15 min Paus):
+                  Pausen (pro Stonn ${breakMinutesPerHour} min Paus):
                   <b>
                     ${formatTime(breakMinutes)}
                   </b>
@@ -1910,6 +1952,21 @@ fetch("./data/roadroute.geojson")
                   </b>
 
                 </div>
+
+                ${
+                  route.information
+                    ? `
+                      <div style="
+                        margin-top:8px;
+                        padding-top:7px;
+                        border-top:1px solid #aaa;
+                      ">
+                        <b>Informatiounen</b><br>
+                        ${String(route.information).replaceAll("\n", "<br>")}
+                      </div>
+                    `
+                    : ""
+                }
 
               `;
 
@@ -2011,6 +2068,8 @@ fetch("./data/roadroute.geojson")
     );
 
   });
+
+}).catch(window.showTripDataError);
 
 
 </script>
