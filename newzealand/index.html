@@ -55,6 +55,7 @@
       max-width: 320px;
       object-fit: cover;
       border-radius: 8px;
+      cursor: zoom-in;
     }
 
     .popupPhotoCredit {
@@ -307,6 +308,7 @@
     .collectionThumb {
       display: block;
       object-fit: cover;
+      cursor: zoom-in;
     }
 
     .collectionThumbFallback {
@@ -372,6 +374,57 @@
       padding: 44px 20px;
       color: #666;
       text-align: center;
+    }
+
+    /* Grouss Bildusiicht fir Fotoen aus de Lëschten a Kaart-Popups. */
+
+    #photoViewer[hidden] {
+      display: none;
+    }
+
+    #photoViewer {
+      position: fixed;
+      z-index: 5000;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      box-sizing: border-box;
+      padding: 28px;
+      background: rgba(5, 8, 12, 0.92);
+      cursor: zoom-out;
+    }
+
+    #photoViewerImage {
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: 96vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow: 0 20px 70px rgba(0,0,0,0.58);
+      cursor: default;
+    }
+
+    .photoViewerClose {
+      position: fixed;
+      z-index: 1;
+      top: max(18px, env(safe-area-inset-top));
+      right: max(18px, env(safe-area-inset-right));
+      width: 48px;
+      height: 48px;
+      border: 0;
+      border-radius: 50%;
+      color: white;
+      background: rgba(38, 42, 48, 0.88);
+      box-shadow: 0 3px 14px rgba(0,0,0,0.38);
+      cursor: pointer;
+      font-size: 32px;
+      line-height: 1;
+    }
+
+    .photoViewerClose:hover {
+      background: rgba(72, 78, 88, 0.96);
     }
 
     /*
@@ -518,6 +571,11 @@ TITEL UND NAVIGATION
     </header>
     <div id="collectionList"></div>
   </section>
+</div>
+
+<div id="photoViewer" role="dialog" aria-modal="true" aria-label="Bild grouss uweisen" hidden>
+  <button class="photoViewerClose" type="button" aria-label="Bild zoumaachen">×</button>
+  <img id="photoViewerImage" alt="">
 </div>
 
 <!--
@@ -2036,7 +2094,30 @@ const collectionTitle = document.getElementById("collectionTitle");
 const collectionList = document.getElementById("collectionList");
 const collectionClose = document.querySelector(".collectionClose");
 const collectionTabs = Array.from(document.querySelectorAll(".collectionTab"));
+const photoViewer = document.getElementById("photoViewer");
+const photoViewerImage = document.getElementById("photoViewerImage");
+const photoViewerClose = document.querySelector(".photoViewerClose");
 let activeCollectionTab = null;
+let lastPhotoTrigger = null;
+
+function openPhotoViewer(source, alternativeText, trigger) {
+  if (!source) return;
+  lastPhotoTrigger = trigger || null;
+  photoViewerImage.src = source;
+  photoViewerImage.alt = alternativeText || "Reesfoto";
+  photoViewer.hidden = false;
+  photoViewerClose.focus();
+}
+
+function closePhotoViewer() {
+  if (photoViewer.hidden) return;
+  photoViewer.hidden = true;
+  photoViewerImage.removeAttribute("src");
+  if (lastPhotoTrigger && document.contains(lastPhotoTrigger)) {
+    lastPhotoTrigger.focus({ preventScroll: true });
+  }
+  lastPhotoTrigger = null;
+}
 
 const collectionDefinitions = {
   activity: {
@@ -2120,6 +2201,11 @@ function makeCollectionRow(item, kind, definition) {
     image.src = item.photo;
     image.alt = `Foto vun ${item.name}`;
     image.loading = "lazy";
+    image.addEventListener("click", event => {
+      event.preventDefault();
+      event.stopPropagation();
+      openPhotoViewer(image.currentSrc || image.src, image.alt, image);
+    });
     row.appendChild(image);
   } else {
     const fallback = document.createElement("div");
@@ -2219,7 +2305,31 @@ collectionClose.addEventListener("click", closeCollectionPanel);
 collectionPanel.addEventListener("click", event => {
   if (event.target === collectionPanel) closeCollectionPanel();
 });
+
+photoViewerClose.addEventListener("click", closePhotoViewer);
+photoViewer.addEventListener("click", event => {
+  if (event.target === photoViewer) closePhotoViewer();
+});
+
+/* Popup-Biller gi réischt dynamesch vu Leaflet an d'Dokument gesat. */
+document.addEventListener("click", event => {
+  if (!(event.target instanceof Element)) return;
+  const popupImage = event.target.closest(".popupPhoto img");
+  if (!popupImage) return;
+  event.preventDefault();
+  event.stopPropagation();
+  openPhotoViewer(
+    popupImage.currentSrc || popupImage.src,
+    popupImage.alt,
+    popupImage
+  );
+});
+
 document.addEventListener("keydown", event => {
+  if (event.key === "Escape" && !photoViewer.hidden) {
+    closePhotoViewer();
+    return;
+  }
   if (event.key === "Escape" && !collectionPanel.hidden) {
     closeCollectionPanel();
   }
