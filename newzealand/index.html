@@ -114,8 +114,15 @@
     
       display: flex;
       align-items: center;
-    
+      max-width: calc(100vw - 70px);
+      overflow-x: auto;
+      padding: 0 0 8px;
       gap: 12px;
+      scrollbar-width: none;
+    }
+
+    #topbar::-webkit-scrollbar {
+      display: none;
     }
     
     
@@ -167,9 +174,11 @@
     
     .topbarButton {
       color: #222;
-    
+      border: 0;
+      cursor: pointer;
+      flex: 0 0 auto;
+      font-family: inherit;
       font-size: 16px;
-    
       text-decoration: none;
     }
     
@@ -181,8 +190,190 @@
     .topbarButton:hover {
       background: #f0f0f0;
     }
+
+    .topbarButton[aria-pressed="true"] {
+      color: #0a66d8;
+      background: #eaf3ff;
+      box-shadow:
+        0 0 0 2px rgba(10, 102, 216, 0.28),
+        0 1px 5px rgba(0,0,0,0.25);
+    }
     
     
+    /* Lëschten zu den dräi Kaart-Tabs */
+
+    #collectionPanel[hidden] {
+      display: none;
+    }
+
+    #collectionPanel {
+      position: fixed;
+      z-index: 2500;
+      inset: 0;
+      display: grid;
+      place-items: start center;
+      padding: 76px 18px 24px;
+      box-sizing: border-box;
+      background: rgba(22, 29, 37, 0.36);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+    }
+
+    .collectionSheet {
+      display: flex;
+      flex-direction: column;
+      width: min(920px, 100%);
+      min-width: 0;
+      max-height: calc(100vh - 100px);
+      box-sizing: border-box;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 22px;
+      background: rgba(247, 248, 251, 0.98);
+      box-shadow: 0 18px 60px rgba(0,0,0,0.32);
+    }
+
+    .collectionHeader {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 20px 22px 14px;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .collectionHeader h2 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    .collectionClose {
+      width: 38px;
+      height: 38px;
+      border: 0;
+      border-radius: 50%;
+      color: #333;
+      background: #e6e8ec;
+      cursor: pointer;
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    .collectionClose:hover {
+      background: #d9dce1;
+    }
+
+    #collectionList {
+      overflow-y: auto;
+      padding: 10px 16px 18px;
+    }
+
+    .collectionRow {
+      display: grid;
+      grid-template-columns: 128px minmax(0, 1fr) 20px;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+      padding: 12px;
+      box-sizing: border-box;
+      border: 0;
+      border-bottom: 1px solid #e2e4e8;
+      background: transparent;
+      color: #17191c;
+      cursor: pointer;
+      font-family: inherit;
+      text-align: left;
+    }
+
+    .collectionRow:last-child {
+      border-bottom: 0;
+    }
+
+    .collectionRow:hover,
+    .collectionRow:focus-visible {
+      border-radius: 14px;
+      outline: none;
+      background: white;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.08);
+    }
+
+    .collectionThumb,
+    .collectionThumbFallback {
+      width: 128px;
+      height: 88px;
+      border-radius: 12px;
+    }
+
+    .collectionThumb {
+      display: block;
+      object-fit: cover;
+    }
+
+    .collectionThumbFallback {
+      display: grid;
+      place-items: center;
+      color: white;
+      background: #6b7280;
+      font-size: 34px;
+    }
+
+    .collectionRow[data-kind="activity"] .collectionThumbFallback {
+      background: #e67e22;
+    }
+
+    .collectionRow[data-kind="camping"] .collectionThumbFallback {
+      background: #238636;
+    }
+
+    .collectionRow[data-kind="accommodation"] .collectionThumbFallback {
+      background: #2563eb;
+    }
+
+    .collectionText {
+      min-width: 0;
+    }
+
+    .collectionName {
+      margin-bottom: 4px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .collectionPlace,
+    .collectionMeta,
+    .collectionNote {
+      overflow-wrap: anywhere;
+      color: #646971;
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    .collectionMeta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px 14px;
+      margin-top: 5px;
+    }
+
+    .collectionNote {
+      display: -webkit-box;
+      margin-top: 5px;
+      overflow: hidden;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+
+    .collectionChevron {
+      color: #a0a4aa;
+      font-size: 24px;
+    }
+
+    .collectionEmpty {
+      padding: 44px 20px;
+      color: #666;
+      text-align: center;
+    }
+
     /*
      * ============================================================
      * KLEINE BILDSCHIRME
@@ -211,6 +402,50 @@
     
       .topbarButton {
         font-size: 14px;
+      }
+
+      #collectionPanel {
+        padding: 58px 8px 8px;
+      }
+
+      .collectionSheet {
+        max-height: calc(100vh - 66px);
+        border-radius: 18px;
+      }
+
+      .collectionHeader {
+        padding: 15px 16px 11px;
+      }
+
+      .collectionHeader h2 {
+        font-size: 23px;
+      }
+
+      #collectionList {
+        padding: 6px 9px 12px;
+      }
+
+      .collectionRow {
+        grid-template-columns: 92px minmax(0, 1fr) 14px;
+        gap: 10px;
+        padding: 10px 6px;
+      }
+
+      .collectionThumb,
+      .collectionThumbFallback {
+        width: 92px;
+        height: 70px;
+        border-radius: 10px;
+      }
+
+      .collectionName {
+        font-size: 16px;
+      }
+
+      .collectionPlace,
+      .collectionMeta,
+      .collectionNote {
+        font-size: 12px;
       }
     
     }              
@@ -252,6 +487,18 @@ TITEL UND NAVIGATION
     📋 Reiseplanung
   </a>
 
+  <button class="topbarButton collectionTab" type="button" data-collection="activity" aria-pressed="false">
+    ★ Aktivitéiten
+  </button>
+
+  <button class="topbarButton collectionTab" type="button" data-collection="camping" aria-pressed="false">
+    ⛺ Campingen
+  </button>
+
+  <button class="topbarButton collectionTab" type="button" data-collection="accommodation" aria-pressed="false">
+    🏠 Ënnerkonften
+  </button>
+
   <a
     class="topbarButton"
     href="https://www.icloud.com/iclouddrive/00axAxKMb8ElGk_tsHClBTnoQ#2026_Neuseeland"
@@ -261,6 +508,16 @@ TITEL UND NAVIGATION
     📁 Dokumenter
   </a>
 
+</div>
+
+<div id="collectionPanel" hidden>
+  <section class="collectionSheet" role="dialog" aria-modal="true" aria-labelledby="collectionTitle">
+    <header class="collectionHeader">
+      <h2 id="collectionTitle"></h2>
+      <button class="collectionClose" type="button" aria-label="Fënster zoumaachen">×</button>
+    </header>
+    <div id="collectionList"></div>
+  </section>
 </div>
 
 <!--
@@ -320,6 +577,11 @@ const campingLayer = L.layerGroup().addTo(map);
 const activityLayer = L.layerGroup().addTo(map);
 
 const accommodationLayer = L.layerGroup().addTo(map);
+
+/* Marker ginn och per ID gehalen, fir vun de Lëschten aus drop ze sprangen. */
+const campingMarkers = new Map();
+const activityMarkers = new Map();
+const accommodationMarkers = new Map();
 
 
 /*
@@ -1147,7 +1409,7 @@ if (camp.reservation) {
    * ----------------------------------------------------------
    */
 
-  L.marker(
+  const marker = L.marker(
 
   [camp.lat, camp.lon],
 
@@ -1169,6 +1431,8 @@ if (camp.reservation) {
     }
 
   );
+
+  campingMarkers.set(camp.id, marker);
 
 });
 
@@ -1398,7 +1662,30 @@ accommodations.forEach(accommodation => {
   `;
 
 
-  L.marker(
+  if (accommodation.url) {
+
+    popup += `
+
+      <div style="margin-top:7px;">
+
+        🌐
+
+        <a
+          href="${accommodation.url}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Websäit vun der Ënnerkonft
+        </a>
+
+      </div>
+
+    `;
+
+  }
+
+
+  const marker = L.marker(
 
     [accommodation.lat, accommodation.lon],
 
@@ -1420,6 +1707,10 @@ accommodations.forEach(accommodation => {
     }
 
   );
+
+  (accommodation.ids || [accommodation.id]).forEach(id => {
+    accommodationMarkers.set(id, marker);
+  });
 
 });
   
@@ -1705,7 +1996,7 @@ activities.forEach(activity => {
    * Aktivitätsmarker erzeugen
    */
 
-  L.marker(
+  const marker = L.marker(
 
     [activity.lat, activity.lon],
 
@@ -1728,6 +2019,208 @@ activities.forEach(activity => {
 
   );
 
+  activityMarkers.set(activity.id, marker);
+
+});
+
+
+/*
+ * ============================================================
+ * LËSCHTEN: AKTIVITÉITEN, CAMPINGEN AN ËNNERKONFTEN
+ * ============================================================
+ */
+
+const collectionPanel = document.getElementById("collectionPanel");
+const collectionTitle = document.getElementById("collectionTitle");
+const collectionList = document.getElementById("collectionList");
+const collectionClose = document.querySelector(".collectionClose");
+const collectionTabs = Array.from(document.querySelectorAll(".collectionTab"));
+let activeCollectionTab = null;
+
+const collectionDefinitions = {
+  activity: {
+    title: "Aktivitéiten",
+    icon: "★",
+    items: activities,
+    markers: activityMarkers,
+    layer: activityLayer
+  },
+  camping: {
+    title: "Campingen",
+    icon: "⛺",
+    items: campings,
+    markers: campingMarkers,
+    layer: campingLayer
+  },
+  accommodation: {
+    title: "Ënnerkonften",
+    icon: "🏠",
+    items: window.accommodationEntries || [],
+    markers: accommodationMarkers,
+    layer: accommodationLayer
+  }
+};
+
+function firstDateValue(value) {
+  const match = String(value || "").match(/(\d{2})\.(\d{2})\.(\d{4})/);
+  return match ? `${match[3]}-${match[2]}-${match[1]}` : "9999-99-99";
+}
+
+function sortedCollectionItems(items) {
+  return [...items].sort((left, right) => {
+    const dateOrder = firstDateValue(left.date).localeCompare(firstDateValue(right.date));
+    return dateOrder || String(left.name).localeCompare(String(right.name), "lb");
+  });
+}
+
+function addCollectionText(parent, className, value) {
+  if (!value) return;
+  const element = document.createElement("div");
+  element.className = className;
+  element.textContent = value;
+  parent.appendChild(element);
+}
+
+function collectionMetadata(item, kind) {
+  const values = [];
+  if (item.date) values.push(`📅 ${item.date}`);
+
+  if (kind === "activity") {
+    if (item.type) values.push(item.type);
+    if (item.duration) values.push(`⏱ ${item.duration}`);
+    if (item.distance) values.push(`↔ ${item.distance}`);
+  }
+
+  if (kind === "camping") {
+    if (item.reservationStatus) values.push(item.reservationStatus);
+    if (item.siteType) values.push(item.siteType);
+  }
+
+  if (kind === "accommodation") {
+    if (item.nights > 0) {
+      values.push(`🌙 ${item.nights} Nuecht${item.nights === 1 ? "" : "en"}`);
+    }
+    if (item.type) values.push(item.type);
+  }
+
+  return values;
+}
+
+function makeCollectionRow(item, kind, definition) {
+  const row = document.createElement("button");
+  row.type = "button";
+  row.className = "collectionRow";
+  row.dataset.kind = kind;
+
+  if (item.photo) {
+    const image = document.createElement("img");
+    image.className = "collectionThumb";
+    image.src = item.photo;
+    image.alt = `Foto vun ${item.name}`;
+    image.loading = "lazy";
+    row.appendChild(image);
+  } else {
+    const fallback = document.createElement("div");
+    fallback.className = "collectionThumbFallback";
+    fallback.textContent = definition.icon;
+    row.appendChild(fallback);
+  }
+
+  const content = document.createElement("div");
+  content.className = "collectionText";
+  addCollectionText(content, "collectionName", item.name);
+  addCollectionText(content, "collectionPlace", item.place);
+
+  const metadata = collectionMetadata(item, kind);
+  if (metadata.length) {
+    const meta = document.createElement("div");
+    meta.className = "collectionMeta";
+    metadata.forEach(value => {
+      const part = document.createElement("span");
+      part.textContent = value;
+      meta.appendChild(part);
+    });
+    content.appendChild(meta);
+  }
+
+  addCollectionText(content, "collectionNote", item.note || item.facilities);
+  row.appendChild(content);
+
+  const chevron = document.createElement("span");
+  chevron.className = "collectionChevron";
+  chevron.setAttribute("aria-hidden", "true");
+  chevron.textContent = "›";
+  row.appendChild(chevron);
+
+  row.addEventListener("click", () => {
+    const marker = definition.markers.get(item.id);
+    closeCollectionPanel();
+    if (!marker) return;
+
+    if (!map.hasLayer(definition.layer)) {
+      definition.layer.addTo(map);
+    }
+
+    map.setView([item.lat, item.lon], Math.max(map.getZoom(), 12), {
+      animate: true
+    });
+    window.setTimeout(() => marker.openPopup(), 350);
+  });
+
+  return row;
+}
+
+function openCollectionPanel(kind, tab) {
+  const definition = collectionDefinitions[kind];
+  if (!definition) return;
+
+  activeCollectionTab = tab;
+  collectionTabs.forEach(button => {
+    button.setAttribute("aria-pressed", button === tab ? "true" : "false");
+  });
+
+  collectionTitle.textContent = definition.title;
+  collectionList.replaceChildren();
+
+  const items = sortedCollectionItems(definition.items);
+  if (!items.length) {
+    const empty = document.createElement("div");
+    empty.className = "collectionEmpty";
+    empty.textContent = "Nach keng Entréeën.";
+    collectionList.appendChild(empty);
+  } else {
+    items.forEach(item => {
+      collectionList.appendChild(makeCollectionRow(item, kind, definition));
+    });
+  }
+
+  collectionPanel.hidden = false;
+  collectionClose.focus();
+}
+
+function closeCollectionPanel() {
+  collectionPanel.hidden = true;
+  collectionTabs.forEach(button => button.setAttribute("aria-pressed", "false"));
+  if (activeCollectionTab) {
+    activeCollectionTab.focus();
+  }
+  activeCollectionTab = null;
+}
+
+collectionTabs.forEach(tab => {
+  tab.addEventListener("click", () => {
+    openCollectionPanel(tab.dataset.collection, tab);
+  });
+});
+
+collectionClose.addEventListener("click", closeCollectionPanel);
+collectionPanel.addEventListener("click", event => {
+  if (event.target === collectionPanel) closeCollectionPanel();
+});
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape" && !collectionPanel.hidden) {
+    closeCollectionPanel();
+  }
 });
 
 
