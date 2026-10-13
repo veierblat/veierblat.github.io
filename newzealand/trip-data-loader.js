@@ -46,6 +46,10 @@
       phone: place.phone ?? "",
       url: place.website ?? "",
       camperMateUrl: place.secondaryWebsite ?? "",
+      reservationStatus: place.reservationStatus ?? "",
+      siteType: place.siteType ?? "",
+      siteName: place.siteName ?? "",
+      price: place.price ?? "",
       guideNumber: place.guideNumber ?? null,
       guidePage: place.guidePage ?? null,
       nights: Number(place.nights ?? 0),
@@ -71,9 +75,11 @@
       if (!groups.has(key)) {
         groups.set(key, {
           ...mapped,
+          ids: [mapped.id],
           stays: [stay]
         });
       } else {
+        groups.get(key).ids.push(mapped.id);
         groups.get(key).stays.push(stay);
       }
     });
@@ -178,6 +184,9 @@
         .map(place => mapPlace(place, credits));
       window.campings = places
         .filter(place => place.kind === "camping")
+        .map(place => mapPlace(place, credits));
+      window.accommodationEntries = places
+        .filter(place => place.kind === "accommodation")
         .map(place => mapPlace(place, credits));
       window.accommodations = mapAccommodations(
         places.filter(place => place.kind === "accommodation"),
