@@ -538,7 +538,8 @@ trip-data-loader.js:
   src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
 </script>
 
-<script src="./trip-data-loader.js"></script>
+<!-- Versionsparameter: verhënnert datt Safari eng al Dateilëscht aus dem Cache hëlt. -->
+<script src="./trip-data-loader.js?v=20261013-2"></script>
 
 <script>
 window.tripDataReady.then(() => {
@@ -2055,7 +2056,8 @@ const collectionDefinitions = {
   accommodation: {
     title: "Ënnerkonften",
     icon: "🏠",
-    items: window.accommodationEntries || [],
+    /* Fallback fir Browser, déi nach déi al Loader-Datei am Cache hunn. */
+    items: window.accommodationEntries || window.accommodations || [],
     markers: accommodationMarkers,
     layer: accommodationLayer
   }
