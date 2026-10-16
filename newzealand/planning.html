@@ -270,6 +270,70 @@
       background: #fafafa;
     }
 
+    .motorhome-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 16px 18px;
+      padding: 14px 16px;
+      border: 1px solid #d8e4ef;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #f2f8fc, #eef5f0);
+    }
+
+    .motorhome-card-icon {
+      flex: 0 0 auto;
+      font-size: 34px;
+    }
+
+    .motorhome-card-text {
+      min-width: 0;
+      flex: 1 1 auto;
+    }
+
+    .motorhome-card-title {
+      display: block;
+      margin-bottom: 2px;
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .motorhome-card-model {
+      color: #5d6670;
+      font-size: 15px;
+    }
+
+    .motorhome-link,
+    .pickup-motorhome-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: #075ea8;
+      font-weight: 650;
+      text-decoration: none;
+    }
+
+    .motorhome-link {
+      flex: 0 0 auto;
+      padding: 9px 12px;
+      border-radius: 8px;
+      color: white;
+      background: #075ea8;
+    }
+
+    .motorhome-link:hover {
+      background: #064d89;
+    }
+
+    .pickup-motorhome-link {
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
+    .pickup-motorhome-link:hover {
+      text-decoration: underline;
+    }
+
 
     /*
      * ============================================================
@@ -453,6 +517,17 @@ body.editing .add-row-container {
         font-size: 14px;
       }
 
+      .motorhome-card {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        margin: 12px;
+      }
+
+      .motorhome-link {
+        width: 100%;
+        justify-content: center;
+      }
+
     }
 
   </style>
@@ -625,6 +700,22 @@ body.editing .add-row-container {
   <h2 class="section-title">
     🚐 WoMo – Südinsel
   </h2>
+
+  <div class="motorhome-card">
+    <div class="motorhome-card-icon" aria-hidden="true">🚐</div>
+    <div class="motorhome-card-text">
+      <span class="motorhome-card-title">Eise WoMo</span>
+      <span class="motorhome-card-model">Wilderness Twin King 2 Slim</span>
+    </div>
+    <a
+      class="motorhome-link"
+      href="https://www.wilderness.co.nz/motorhome-hire-nz/twin-king-2-slim"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Beschreiwung opmaachen ↗
+    </a>
+  </div>
 
   <div class="table-wrapper">
 
@@ -1039,6 +1130,23 @@ window.tripDataReady.then(() => {
 
     }
 
+    const hasMotorhomePickup =
+      [item.item1, item.item2, item.item3, item.item4]
+        .some(value => /womo\s+siche/i.test(String(value ?? "")));
+
+    const motorhomePickupLink = hasMotorhomePickup
+      ? `
+        <a
+          class="pickup-motorhome-link"
+          href="https://www.wilderness.co.nz/motorhome-hire-nz/twin-king-2-slim"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          🚐 Wilderness Twin King 2 Slim uweisen ↗
+        </a>
+      `
+      : "";
+
 
     return `
 
@@ -1054,6 +1162,7 @@ window.tripDataReady.then(() => {
 
         <td>
           ${details}
+          ${motorhomePickupLink}
         </td>
 
         ${createDeleteButton(index)}
