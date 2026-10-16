@@ -65,6 +65,24 @@
       line-height: 1.25;
     }
 
+    .routeMotorhomeLink {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin: 2px 0 10px;
+      padding: 7px 10px;
+      border-radius: 8px;
+      color: white !important;
+      background: #075ea8;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none !important;
+    }
+
+    .routeMotorhomeLink:hover {
+      background: #064d89;
+    }
+
     .dataError {
       position: fixed;
       z-index: 3000;
@@ -2477,6 +2495,19 @@ fetch("./data/roadroute.geojson")
                * ------------------------------------------------
                */
 
+              const motorhomeLink = route.id === "route-0"
+                ? `
+                  <a
+                    class="routeMotorhomeLink"
+                    href="https://www.wilderness.co.nz/motorhome-hire-nz/twin-king-2-slim"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    🚐 Wilderness Twin King 2 Slim uweisen ↗
+                  </a>
+                `
+                : "";
+
               const popup = `
 
 
@@ -2516,6 +2547,8 @@ fetch("./data/roadroute.geojson")
                   ${route.destinationCamping || p.toCamping}
 
                 </div>
+
+                ${motorhomeLink}
 
 
 
